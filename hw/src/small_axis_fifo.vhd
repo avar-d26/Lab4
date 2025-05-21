@@ -13,7 +13,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity small_axis_fifo is
 	generic (
 		DATA_WIDTH	: integer	:= 8;
-		FIFO_DEPTH	: integer	:= 1024
+		FIFO_DEPTH	: integer	:= 4096
 	);
 	port (
 	

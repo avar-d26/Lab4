@@ -80,14 +80,8 @@ entity axis_i2s_wrapper is
 		m00_axis_tdata    : out std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
 		m00_axis_tstrb    : out std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
 		m00_axis_tlast    : out std_logic;
-		m00_axis_tready   : in std_logic;
-		
+		m00_axis_tready   : in std_logic
 
-		m01_axis_tvalid   : out std_logic;
-		m01_axis_tdata    : out std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
-		m01_axis_tstrb    : out std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
-		m01_axis_tlast    : out std_logic;
-		m01_axis_tready   : in std_logic
 		
 		
 --		----------------------------------------------------------------------------
@@ -441,10 +435,6 @@ m00_axis_tlast <= m00_axis_tlast_sig;
 m00_axis_tstrb <= m00_axis_tstrb_sig;
 m00_axis_tvalid <= m00_axis_tvalid_sig;
 
-m01_axis_tvalid <= m00_axis_tvalid_sig;
-m01_axis_tstrb <= m00_axis_tstrb_sig;
-m01_axis_tlast <= m00_axis_tlast_sig;
-m01_axis_tdata <= m00_axis_tdata_sig;
 
 m00_axis_tready_sig <= m00_axis_tready;
 

@@ -81,7 +81,7 @@ set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir /home/bzhao30/ENGS128/Lab4/hw/hw.cache/wt [current_project]
 set_property parent.project_path /home/bzhao30/ENGS128/Lab4/hw/hw.xpr [current_project]
-set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
+set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part_repo_paths {/home/bzhao30/ENGS128/Lab4/hw/hw.board} [current_project]

@@ -2,7 +2,7 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
-// Date        : Tue May 20 17:28:53 2025
+// Date        : Wed May 21 15:13:40 2025
 // Host        : brad69 running 64-bit Linux Mint 21.3
 // Command     : write_verilog -force -mode synth_stub
 //               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/xfft_0/xfft_0_stub.v
@@ -17,11 +17,11 @@
 (* x_core_info = "xfft_v9_1_9,Vivado 2023.1" *)
 module xfft_0(aclk, s_axis_config_tdata, 
   s_axis_config_tvalid, s_axis_config_tready, s_axis_data_tdata, s_axis_data_tvalid, 
-  s_axis_data_tready, s_axis_data_tlast, m_axis_data_tdata, m_axis_data_tvalid, 
-  m_axis_data_tready, m_axis_data_tlast, event_frame_started, event_tlast_unexpected, 
-  event_tlast_missing, event_status_channel_halt, event_data_in_channel_halt, 
-  event_data_out_channel_halt)
-/* synthesis syn_black_box black_box_pad_pin="s_axis_config_tdata[15:0],s_axis_config_tvalid,s_axis_config_tready,s_axis_data_tdata[47:0],s_axis_data_tvalid,s_axis_data_tready,s_axis_data_tlast,m_axis_data_tdata[47:0],m_axis_data_tvalid,m_axis_data_tready,m_axis_data_tlast,event_frame_started,event_tlast_unexpected,event_tlast_missing,event_status_channel_halt,event_data_in_channel_halt,event_data_out_channel_halt" */
+  s_axis_data_tready, s_axis_data_tlast, m_axis_data_tdata, m_axis_data_tuser, 
+  m_axis_data_tvalid, m_axis_data_tready, m_axis_data_tlast, event_frame_started, 
+  event_tlast_unexpected, event_tlast_missing, event_status_channel_halt, 
+  event_data_in_channel_halt, event_data_out_channel_halt)
+/* synthesis syn_black_box black_box_pad_pin="s_axis_config_tdata[15:0],s_axis_config_tvalid,s_axis_config_tready,s_axis_data_tdata[47:0],s_axis_data_tvalid,s_axis_data_tready,s_axis_data_tlast,m_axis_data_tdata[47:0],m_axis_data_tuser[15:0],m_axis_data_tvalid,m_axis_data_tready,m_axis_data_tlast,event_frame_started,event_tlast_unexpected,event_tlast_missing,event_status_channel_halt,event_data_in_channel_halt,event_data_out_channel_halt" */
 /* synthesis syn_force_seq_prim="aclk" */;
   input aclk /* synthesis syn_isclock = 1 */;
   input [15:0]s_axis_config_tdata;
@@ -32,6 +32,7 @@ module xfft_0(aclk, s_axis_config_tdata,
   output s_axis_data_tready;
   input s_axis_data_tlast;
   output [47:0]m_axis_data_tdata;
+  output [15:0]m_axis_data_tuser;
   output m_axis_data_tvalid;
   input m_axis_data_tready;
   output m_axis_data_tlast;

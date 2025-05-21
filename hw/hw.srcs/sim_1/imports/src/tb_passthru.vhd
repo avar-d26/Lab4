@@ -4,62 +4,20 @@
 --  ENGS 128 Spring 2025
 --	Author: Brandon Zhao
 ----------------------------------------------------------------------------
---	Description: DDS -> AXIS Tx -> FIFO -> FIR -> FIFO -> AXIS Rx -> I2S Tx TESTBENCH
+--	Testbench Description: I2S ADC -> FIFO0 (loopback) + FIFO1 -> FFT -> 8-bit FIFO2
 ----------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use IEEE.MATH_REAL.ALL;
 
-entity tb_passthru is
-end tb_passthru;
+entity tb_fft_processing is
+end tb_fft_processing;
 
-architecture testbench of tb_passthru is
-----------------------------------------------------------------------------
--- Constants
-constant AXI_DATA_WIDTH : integer := 32;        -- 32-bit AXI data bus
-constant AXI_FIFO_DEPTH : integer := 12;        -- AXI stream FIFO depth
-constant CLOCK_PERIOD   : time := 10ns;          -- 100 MHz clock
-constant AUDIO_DATA_WIDTH : integer := 24;      -- I2S data width
-constant SINE_FREQ      : real := 1000.0;       -- Test sine wave frequency
-constant SINE_AMPL      : real := 8388607.0;    -- 24-bit amplitude
-constant SAMPLING_FREQ  : real := 48000.00;     -- 48 kHz sampling rate
-constant T_SAMPLE : real := 1.0/SAMPLING_FREQ;
+architecture testbench of tb_fft_processing is
 
-----------------------------------------------------------------------------
--- Signals
-signal clk, axi_reset_n : std_logic := '0';
-signal mclk, bclk, lrclk, lrclk_unbuff : std_logic := '0';
-signal ac_adc_data_i, ac_dac_data_o : std_logic := '0';
-signal ac_mute_en, ac_mute_en_o : std_logic := '0';
 
--- AXI Stream FIFO 0 Signals
-signal fifo0_s00_tready, fifo0_m00_tvalid : std_logic := '0';
-signal fifo0_m00_tdata : std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
-signal fifo0_m00_tstrb, fifo0_m00_tlast : std_logic := '0';
 
--- AXI Stream FIFO 1 Signals
-signal fifo1_s00_tready, fifo1_m00_tvalid : std_logic := '0';
-signal fifo1_m00_tdata : std_logic_vector(AXI_DATA_WIDTH-1 downto 0) := (others => '0');
-signal fifo1_m00_tstrb, fifo1_m00_tlast : std_logic := '0';
-
--- I2S Wrapper AXI Stream Signals
-signal i2s_s00_tready, i2s_m00_tvalid : std_logic := '0';
-signal i2s_m00_tdata : std_logic_vector(AXI_DATA_WIDTH-1 downto 0) := (others => '0');
-
--- FIR Wrapper Signals
-signal fir_s00_tready, fir_m00_tvalid : std_logic := '0';
-signal fir_m00_tdata : std_logic_vector(AXI_DATA_WIDTH-1 downto 0) := (others => '0');
-signal fir_m00_tstrb, fir_m00_tlast : std_logic := '0';
-signal ch_select_sig : std_logic_vector(1 downto 0) := "00";
-signal enable_fir_sig : std_logic := '1';
-
--- Testbench Signals
-signal sine_data, sine_data_tx : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
-signal bit_count : integer := 0;
-
-----------------------------------------------------------------------------
--- Component Declarations
 component axis_fifo is
   generic (
     DATA_WIDTH  : integer := AXI_DATA_WIDTH;
@@ -83,32 +41,88 @@ component axis_fifo is
   );
 end component;
 
+component small_axis_fifo is
+	generic (
+		DATA_WIDTH	: integer	:= 8;
+		FIFO_DEPTH	: integer	:= 4096
+	);
+	port (
+	
+		-- Ports of Axi Responder Bus Interface S00_AXIS -- Receiver
+		s00_axis_aclk     :  in std_logic; --
+		s00_axis_aresetn  :  in std_logic; --
+		s00_axis_tready   : out std_logic; --
+		s00_axis_tdata	  :  in std_logic_vector(DATA_WIDTH-1 downto 0); -- our data
+		s00_axis_tstrb    :  in std_logic; -- dont care
+		s00_axis_tlast    :  in std_logic;
+		s00_axis_tvalid   :  in std_logic;
+
+		-- Ports of Axi Controller Bus Interface M00_AXIS -- Transmitter
+		m00_axis_aclk     :  in std_logic; -- dont care
+		m00_axis_aresetn  :  in std_logic; -- dont care
+		m00_axis_tvalid   : out std_logic; 
+		m00_axis_tdata    : out std_logic_vector(DATA_WIDTH-1 downto 0); -- our data
+		m00_axis_tstrb    : out std_logic; -- dont care
+		m00_axis_tlast    : out std_logic;
+		m00_axis_tready   :  in std_logic
+	);
+end component;
+
 component axis_i2s_wrapper is
 	generic (
+		-- Parameters of Axi Stream Bus Interface S00_AXIS, M00_AXIS
 		C_AXI_STREAM_DATA_WIDTH	: integer	:= 32;
 		AC_DATA_WIDTH : integer := 24;
-		DDS_DATA_WIDTH : integer := 24;         
-        DDS_PHASE_DATA_WIDTH : integer := 12   
-	);
+	    ----------------------------------------------------------------------------
+		-- Users to add parameters here
+		DDS_DATA_WIDTH : integer := 24;         -- DDS data width
+        DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
+        ----------------------------------------------------------------------------
+
+		-- User parameters ends
+		-- Do not modify the parameters beyond this line
+
+		-- Parameters of Axi Slave Bus Interface S00_AXI
+		C_S00_AXI_DATA_WIDTH	: integer	:= 32;
+		C_S00_AXI_ADDR_WIDTH	: integer	:= 4);
     Port ( 
-        sysclk_i          : in std_logic;	
-		--ac_mute_en_i      : in std_logic;
-		audio_input_sel_i : in std_logic;
-		ac_bclk_o         : out std_logic;
-        ac_mclk_o         : out std_logic;
-        ac_mute_n_o       : out std_logic;    
-        ac_dac_data_o     : out std_logic;
-        ac_dac_lrclk_o    : out std_logic;            
-        ac_adc_data_i     : in std_logic;
-        ac_adc_lrclk_o    : out std_logic;    
-        lrclk_unbuff_o    : out std_logic;          
-        s00_axis_aclk     : in std_logic;
+        ----------------------------------------------------------------------------
+        -- Fabric clock from Zynq PS
+		sysclk_i : in std_logic;	
+		
+        ----------------------------------------------------------------------------
+        -- I2S audio codec ports		
+		-- User controls
+		--ac_mute_en_i : in STD_LOGIC; -- FOR TASK 2
+		--audio_input_sel_i : in STD_LOGIC;
+		
+		-- Audio Codec I2S controls
+        ac_bclk_o : out STD_LOGIC;
+        ac_mclk_o : out STD_LOGIC;
+        ac_mute_n_o : out STD_LOGIC;	-- Active Low
+        
+        -- Audio Codec DAC (audio out)
+        ac_dac_data_o : out STD_LOGIC;
+        ac_dac_lrclk_o : out STD_LOGIC;
+        
+        -- Audio Codec ADC (audio in)
+        ac_adc_data_i : in STD_LOGIC;
+        ac_adc_lrclk_o : out STD_LOGIC;
+        lrclk_unbuff_o : out STD_LOGIC;
+
+        ----------------------------------------------------------------------------
+        -- AXI Stream Interface (Receiver/Responder)
+    	-- Ports of Axi Responder Bus Interface S00_AXIS
+		s00_axis_aclk     : in std_logic;
 		s00_axis_aresetn  : in std_logic;
 		s00_axis_tready   : out std_logic;
 		s00_axis_tdata	  : in std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
 		s00_axis_tstrb    : in std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
 		s00_axis_tlast    : in std_logic;
 		s00_axis_tvalid   : in std_logic;
+		
+        -- AXI Stream Interface (Tranmitter/Controller)
+		-- Ports of Axi Controller Bus Interface M00_AXIS
 		m00_axis_aclk     : in std_logic;
 		m00_axis_aresetn  : in std_logic;
 		m00_axis_tvalid   : out std_logic;
@@ -116,54 +130,81 @@ component axis_i2s_wrapper is
 		m00_axis_tstrb    : out std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
 		m00_axis_tlast    : out std_logic;
 		m00_axis_tready   : in std_logic;
-		left_dds_phase_inc_dbg_o : out std_logic_vector(DDS_PHASE_DATA_WIDTH-1 downto 0);   
-		right_dds_phase_inc_dbg_o : out std_logic_vector(DDS_PHASE_DATA_WIDTH-1 downto 0);   
-		s00_axi_aclk	: in std_logic;
-		s00_axi_aresetn	: in std_logic;
-		s00_axi_awaddr	: in std_logic_vector(3 downto 0);
-		s00_axi_awprot	: in std_logic_vector(2 downto 0);
-		s00_axi_awvalid	: in std_logic;
-		s00_axi_awready	: out std_logic;
-		s00_axi_wdata	: in std_logic_vector(31 downto 0);
-		s00_axi_wstrb	: in std_logic_vector(3 downto 0);
-		s00_axi_wvalid	: in std_logic;
-		s00_axi_wready	: out std_logic;
-		s00_axi_bresp	: out std_logic_vector(1 downto 0);
-		s00_axi_bvalid	: out std_logic;
-		s00_axi_bready	: in std_logic;
-		s00_axi_araddr	: in std_logic_vector(3 downto 0);
-		s00_axi_arprot	: in std_logic_vector(2 downto 0);
-		s00_axi_arvalid	: in std_logic;
-		s00_axi_arready	: out std_logic;
-		s00_axi_rdata	: out std_logic_vector(31 downto 0);
-		s00_axi_rresp	: out std_logic_vector(1 downto 0);
-		s00_axi_rvalid	: out std_logic;
-		s00_axi_rready	: in std_logic);
+		
+
+		m01_axis_tvalid   : out std_logic;
+		m01_axis_tdata    : out std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
+		m01_axis_tstrb    : out std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
+		m01_axis_tlast    : out std_logic;
+		m01_axis_tready   : in std_logic
+		
+		);
 end component;
 
-component axi_stream_fir_wrapper is
-generic (
-    C_AXI_STREAM_DATA_WIDTH : integer := 32;
-    AC_DATA_WIDTH : integer := 24
-);
-Port (
-    lrclk_i : in STD_LOGIC;
-    ch_select_i : in std_logic_vector (1 downto 0);
-    enable_fir_i : in std_logic;
-    aresetn_i  : in std_logic;
-    s00_axis_aclk     : in std_logic;
-    s00_axis_tready   : out std_logic;
-    s00_axis_tdata  : in std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
-    s00_axis_tstrb    : in std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
-    s00_axis_tlast    : in std_logic;
-    s00_axis_tvalid   : in std_logic;
-    m00_axis_aclk     : in std_logic;
-    m00_axis_tvalid   : out std_logic;
-    m00_axis_tdata    : out std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
-    m00_axis_tstrb    : out std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
+component FFT_wrapper is 
+	generic (
+		INPUT_DATA_WIDTH	: integer	:= 32;
+		OUTPUT_DATA_WIDTH   : integer   := 8
+	);
+    PORT (
+    s00_axis_aclk     :  in std_logic; --
+    s00_axis_aresetn  :  in std_logic; --
+    s00_axis_tready   : out std_logic; --
+    s00_axis_tdata	  :  in std_logic_vector(INPUT_DATA_WIDTH-1 downto 0); -- our data
+    s00_axis_tstrb    :  in std_logic_vector((INPUT_DATA_WIDTH/8)-1 downto 0); -- dont care
+    s00_axis_tlast    :  in std_logic;
+    s00_axis_tvalid   :  in std_logic;
+
+    m00_axis_aclk     :  in std_logic; -- dont care
+    m00_axis_aresetn  :  in std_logic; -- dont care
+    m00_axis_tvalid   : out std_logic; 
+    m00_axis_tdata    : out std_logic_vector(OUTPUT_DATA_WIDTH-1 downto 0); -- our data
+    m00_axis_tstrb    : out std_logic; -- dont carestd_logic; -- dont care
     m00_axis_tlast    : out std_logic;
-    m00_axis_tready   : in std_logic);
+    m00_axis_tready   :  in std_logic
+    );
 end component;
+
+
+
+
+
+
+
+----------------------------------------------------------------------------
+-- Constants
+constant AXI_DATA_WIDTH  : integer := 32;       -- Main AXI data width
+constant FFT_DATA_WIDTH  : integer := 8;        -- FFT output width
+constant CLOCK_PERIOD    : time := 10ns;        -- 100 MHz clock
+constant AUDIO_DATA_WIDTH: integer := 24;       -- I2S data width
+constant SINE_FREQ1      : real := 1000.0;     -- First test frequency
+constant SINE_FREQ2      : real := 3000.0;     -- Second test frequency
+constant SINE_AMPL       : real := 8388607.0;  -- 24-bit amplitude
+constant SAMPLING_FREQ   : real := 48000.0;    -- 48 kHz sampling rate
+
+----------------------------------------------------------------------------
+-- Signals
+signal clk, axi_reset_n : std_logic := '0';
+signal mclk, bclk, lrclk, lrclk_unbuff : std_logic := '0';
+signal ac_adc_data_i, ac_dac_data_o : std_logic := '0';
+signal ac_mute_en_o : std_logic := '0';
+
+-- I2S to FIFO0 (loopback) Signals
+signal fifo0_s_tready, fifo0_m_tvalid : std_logic := '0';
+signal fifo0_m_tdata : std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+
+-- I2S to FIFO1 (FFT input) Signals
+signal fifo1_s_tready, fifo1_m_tvalid : std_logic := '0';
+signal fifo1_m_tdata : std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+
+-- FFT to FIFO2 (8-bit) Signals
+signal fifo2_s_tready, fifo2_m_tvalid : std_logic := '0';
+signal fifo2_m_tdata : std_logic_vector(FFT_DATA_WIDTH-1 downto 0);
+
+-- Testbench Signals
+signal sine_data : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
+signal bit_count : integer := 0;
+signal lrclk_prev : std_logic := '0';
 
 begin
 ----------------------------------------------------------------------------
@@ -172,160 +213,138 @@ clk <= not clk after CLOCK_PERIOD/2;
 
 ----------------------------------------------------------------------------
 -- Component Instantiations
--- FIFO0: I2S(master) → FIFO0(slave)
-fifo0: axis_fifo
-  port map (
-    s00_axis_aclk     => clk,
-    s00_axis_aresetn  => axi_reset_n,
-    s00_axis_tready   => fifo0_s00_tready,
-    s00_axis_tdata    => i2s_m00_tdata,
-    s00_axis_tstrb    => (others => '1'),
-    s00_axis_tlast    => '0',
-    s00_axis_tvalid   => i2s_m00_tvalid,
-    m00_axis_aclk     => clk,
-    m00_axis_aresetn  => axi_reset_n,
-    m00_axis_tvalid   => fifo0_m00_tvalid,
-    m00_axis_tdata    => fifo0_m00_tdata,
-    m00_axis_tstrb    => open,
-    m00_axis_tlast    => open,
-    m00_axis_tready   => fir_s00_tready
-  );
 
--- FIR: FIFO0(master) → FIR(slave)
-fir_inst: axi_stream_fir_wrapper
+-- FIFO0: I2S m00 -> FIFO0 -> I2S s00 (loopback)
+fifo0: axis_fifo
   generic map (
-    C_AXI_STREAM_DATA_WIDTH => AXI_DATA_WIDTH,
-    AC_DATA_WIDTH => AUDIO_DATA_WIDTH
+    DATA_WIDTH => AXI_DATA_WIDTH,
+    FIFO_DEPTH => 1024
   )
   port map (
-    lrclk_i => lrclk_unbuff,
-    ch_select_i => ch_select_sig,
-    enable_fir_i => enable_fir_sig,
-    aresetn_i => axi_reset_n,
-    s00_axis_aclk => clk,
-    s00_axis_tready => fir_s00_tready,
-    s00_axis_tdata => fifo0_m00_tdata,
-    s00_axis_tstrb => (others => '1'),
-    s00_axis_tlast => '0',
-    s00_axis_tvalid => fifo0_m00_tvalid,
-    m00_axis_aclk => clk,
-    m00_axis_tvalid => fir_m00_tvalid,
-    m00_axis_tdata => fir_m00_tdata,
-    m00_axis_tstrb => open,
-    m00_axis_tlast => open,
-    m00_axis_tready => fifo1_s00_tready
+    s00_axis_aclk     => clk,
+    s00_axis_aresetn  => axi_reset_n,
+    s00_axis_tready   => fifo0_s_tready,
+    s00_axis_tdata    => open,  -- Connected to I2S m00
+    s00_axis_tvalid   => '0',   -- Handled by I2S
+    m00_axis_aclk     => clk,
+    m00_axis_aresetn  => axi_reset_n,
+    m00_axis_tvalid   => fifo0_m_tvalid,
+    m00_axis_tdata    => fifo0_m_tdata,
+    m00_axis_tready   => '1'    -- Always ready for loopback
   );
 
--- FIFO1: FIR(master) → FIFO1(slave)
+-- FIFO1: I2S m01 -> FIFO1 -> FFT
 fifo1: axis_fifo
+  generic map (
+    DATA_WIDTH => AXI_DATA_WIDTH,
+    FIFO_DEPTH => 1024
+  )
   port map (
     s00_axis_aclk     => clk,
     s00_axis_aresetn  => axi_reset_n,
-    s00_axis_tready   => fifo1_s00_tready,
-    s00_axis_tdata    => fir_m00_tdata,
-    s00_axis_tstrb    => (others => '1'),
-    s00_axis_tlast    => '0',
-    s00_axis_tvalid   => fir_m00_tvalid,
+    s00_axis_tready   => fifo1_s_tready,
+    s00_axis_tdata    => open,  -- Connected to I2S m01
+    s00_axis_tvalid   => '0',   -- Handled by I2S
     m00_axis_aclk     => clk,
     m00_axis_aresetn  => axi_reset_n,
-    m00_axis_tvalid   => fifo1_m00_tvalid,
-    m00_axis_tdata    => fifo1_m00_tdata,
-    m00_axis_tstrb    => open,
-    m00_axis_tlast    => open,
-    m00_axis_tready   => i2s_s00_tready
+    m00_axis_tvalid   => fifo1_m_tvalid,
+    m00_axis_tdata    => fifo1_m_tdata,
+    m00_axis_tready   => fft_s_tready
   );
 
--- I2S Wrapper: FIFO1(master) → I2S(slave)
-i2s_wrapper: axis_i2s_wrapper
+-- FFT Wrapper
+fft_wrapper: FFT_wrapper
+  port map (
+    s00_axis_aclk     => clk,
+    s00_axis_aresetn  => axi_reset_n,
+    s00_axis_tready   => fft_s_tready,
+    s00_axis_tdata    => fifo1_m_tdata,
+    s00_axis_tvalid   => fifo1_m_tvalid,
+    m00_axis_aclk     => clk,
+    m00_axis_aresetn  => axi_reset_n,
+    m00_axis_tvalid   => fifo2_m_tvalid,
+    m00_axis_tdata    => fifo2_m_tdata,
+    m00_axis_tready   => fifo2_s_tready
+  );
+
+-- FIFO2: FFT -> 8-bit FIFO
+fifo2: entity small_axis_fifo
+  generic map (
+    DATA_WIDTH => 8,
+    FIFO_DEPTH => 4096
+  )
+  port map (
+    s00_axis_aclk     => clk,
+    s00_axis_aresetn  => axi_reset_n,
+    s00_axis_tready   => fifo2_s_tready,
+    s00_axis_tdata    => fifo2_m_tdata,
+    s00_axis_tvalid   => fifo2_m_tvalid,
+    m00_axis_aclk     => clk,
+    m00_axis_aresetn  => axi_reset_n,
+    m00_axis_tvalid   => open,  -- Connect to your output handler
+    m00_axis_tdata    => open,  -- Connect to your output handler
+    m00_axis_tready   => '1'    -- Always ready for this test
+  );
+
+-- I2S Wrapper
+i2s_wrapper: i2s_wrapper
   port map (
     sysclk_i          => clk,
-    --ac_mute_en_i      => ac_mute_en,
-    audio_input_sel_i => '0', -- Test DDS
+    audio_input_sel_i => '1',    -- Use ADC input
     ac_bclk_o         => bclk,
     ac_mclk_o         => mclk,
     ac_mute_n_o       => ac_mute_en_o,
     ac_dac_data_o     => ac_dac_data_o,
     ac_dac_lrclk_o    => lrclk,
     ac_adc_data_i     => ac_adc_data_i,
-    ac_adc_lrclk_o    => open,
     lrclk_unbuff_o    => lrclk_unbuff,
-    s00_axis_aclk     => clk,
-    s00_axis_aresetn  => axi_reset_n,
-    s00_axis_tready   => i2s_s00_tready,
-    s00_axis_tdata    => fifo1_m00_tdata,
-    s00_axis_tstrb    => (others => '1'),
-    s00_axis_tlast    => '0',
-    s00_axis_tvalid   => fifo1_m00_tvalid,
-    m00_axis_aclk     => clk,
-    m00_axis_aresetn  => axi_reset_n,
-    m00_axis_tvalid   => i2s_m00_tvalid,
-    m00_axis_tdata    => i2s_m00_tdata,
-    m00_axis_tstrb    => open,
-    m00_axis_tlast    => open,
-    m00_axis_tready   => fifo0_s00_tready,
-    left_dds_phase_inc_dbg_o => open,
-    right_dds_phase_inc_dbg_o => open,
-    s00_axi_aclk      => clk,
-    s00_axi_aresetn   => axi_reset_n,
-    s00_axi_awaddr    => (others => '0'),
-    s00_axi_awprot    => (others => '0'),
-    s00_axi_awvalid   => '0',
-    s00_axi_awready   => open,
-    s00_axi_wdata     => (others => '0'),
-    s00_axi_wstrb     => (others => '0'),
-    s00_axi_wvalid    => '0',
-    s00_axi_wready    => open,
-    s00_axi_bresp     => open,
-    s00_axi_bvalid    => open,
-    s00_axi_bready    => '1',
-    s00_axi_araddr    => (others => '0'),
-    s00_axi_arprot    => (others => '0'),
-    s00_axi_arvalid   => '0',
-    s00_axi_arready   => open,
-    s00_axi_rdata     => open,
-    s00_axi_rresp     => open,
-    s00_axi_rvalid    => open,
-    s00_axi_rready    => '1'
+    -- FIFO0 Connections (loopback)
+    m00_axis_tvalid   => open,   -- Connected to FIFO0
+    m00_axis_tdata    => open,   -- Connected to FIFO0
+    m00_axis_tready   => fifo0_s_tready,
+    -- FIFO1 Connections (FFT path)
+    m01_axis_tvalid   => open,   -- Connected to FIFO1
+    m01_axis_tdata    => open,   -- Connected to FIFO1
+    m01_axis_tready   => fifo1_s_tready,
+    -- Other required ports
+    s00_axis_tdata    => fifo0_m_tdata,  -- Loopback data
+    s00_axis_tvalid   => fifo0_m_tvalid
   );
 
-
+----------------------------------------------------------------------------
+-- Test Process: Dual-Tone Sine Wave Generation
+process
+    variable time_var : real := 0.0;
+    variable sample_real : real;
+begin
+    wait until rising_edge(bclk);
+    
+    -- Generate dual-tone sine wave
+    sample_real := SINE_AMPL * (sin(2.0*MATH_PI*SINE_FREQ1*time_var) + 
+                                sin(2.0*MATH_PI*SINE_FREQ2*time_var))/2.0;
+    sine_data <= std_logic_vector(to_signed(integer(sample_real), AUDIO_DATA_WIDTH);
+    
+    -- Serialize data on falling edge of bclk
+    wait until falling_edge(bclk);
+    if lrclk /= lrclk_prev then
+        bit_count <= AUDIO_DATA_WIDTH-1;
+        lrclk_prev <= lrclk;
+    else
+        ac_adc_data_i <= sine_data(bit_count);
+        bit_count <= bit_count - 1 when bit_count > 0 else AUDIO_DATA_WIDTH-1;
+    end if;
+    
+    time_var := time_var + 1.0/SAMPLING_FREQ;
+end process;
 
 ----------------------------------------------------------------------------
--- Test Sequence
-stim_proc: process
+-- Reset Process
+process
 begin
-  -- Initialize
-  axi_reset_n <= '0';
-  ac_mute_en <= '0';
-  ch_select_sig <= "00";  -- Default to both channels
-  enable_fir_sig <= '1';  -- Enable FIR by default
-  wait for 50 ns;
-  
-  -- Release reset
-  axi_reset_n <= '1';
-
-  -- Run simulation with different channel selections
-  ac_mute_en <= '1';
-  
-  -- Test both channels
-  ch_select_sig <= "00";
-  wait for 700 us;
-  
-  -- Test left channel only
-  ch_select_sig <= "01";
-  wait for 500 us;
-  
-  -- Test right channel only
-  ch_select_sig <= "10";
-  wait for 500 us;
-  
-  ch_select_sig <= "11";
-  wait for 500 us;
-  -- Test FIR bypass (both channels)
-  ch_select_sig <= "00";
-  enable_fir_sig <= '0';
-  wait for 500 us;
-  
+    axi_reset_n <= '0';
+    wait for 100ns;
+    axi_reset_n <= '1';
+    wait;
 end process;
 
 end testbench;
