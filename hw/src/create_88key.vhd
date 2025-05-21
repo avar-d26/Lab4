@@ -38,7 +38,7 @@ load_count: process(clkb_i) begin
 if rising_edge(clkb_i) then
     if (rst = '1') then
         address_counter <= (others => '0');
-    elsif (count_en = '1') then
+    elsif (count_en = '1' and address_counter <= (to_unsigned(2047, 11)) then
         address_counter <= address_counter + 1;
     end if;
 end if;
