@@ -1,0 +1,2 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/sim_1/imports/src/tb_passthru.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'tb_passthru'

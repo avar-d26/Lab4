@@ -1,0 +1,3 @@
+Time resolution is 1 ps
+Block Memory Generator module tb_passthru.bram_inst.bram_inst.inst.\native_mem_module.blk_mem_gen_v8_4_6_inst  is using a behavioral model for simulation which will not precisely model memory collision behavior.
+INFO: xsimkernel Simulation Memory Usage: 164368 KB (Peak: 214584 KB), Simulation CPU Usage: 374100 ms

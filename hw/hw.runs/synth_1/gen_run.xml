@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1688648621">
   <File Type="RDS-DCP" Name="design_1_wrapper.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="design_1_wrapper_utilization_synth.pb"/>
+  <File Type="RDS-UTIL-PB" Name="create_88key_utilization_synth.pb"/>
   <File Type="PA-TCL" Name="design_1_wrapper.tcl"/>
-  <File Type="RDS-UTIL" Name="design_1_wrapper_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL" Name="create_88key_utilization_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="design_1_wrapper_reports.tcl"/>
   <File Type="RDS-RDS" Name="design_1_wrapper.vds"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
@@ -55,26 +55,26 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_axi_dynclk_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_m00_regslice_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_axis_subset_converter_out_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_v_tc_out_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_auto_pc_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_proc_sys_reset_fclk1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_v_axi4s_vid_out_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_proc_sys_reset_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_axi_gpio_video_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_dvi2rgb_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_axi_vdma_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_s01_regslice_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_rgb2dvi_1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_v_tc_in_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_proc_sys_reset_fclk0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_s00_regslice_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_v_tc_in_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_axi_dynclk_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_xbar_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_auto_pc_1"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_v_vid_in_axi4s_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_auto_pc_1"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_processing_system7_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_axis_subset_converter_in_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_xbar_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_rgb2dvi_1_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_s01_regslice_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_axi_vdma_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_dvi2rgb_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_axi_gpio_video_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_proc_sys_reset_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_v_axi4s_vid_out_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_proc_sys_reset_fclk1_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_auto_pc_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_v_tc_out_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_axis_subset_converter_out_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_m00_regslice_0"/>
 </GenRun>

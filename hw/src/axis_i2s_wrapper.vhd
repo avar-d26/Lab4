@@ -418,8 +418,8 @@ axis_trans : axis_transmitter_interface PORT MAP(
 ac_mute_n_o <= '1'; -- TASK 2, always unmuted
 
 
-left_audio_trans_in <= left_audio_data_sig;
-right_audio_trans_in <= right_audio_data_sig;
+--left_audio_trans_in <= left_audio_data_sig;
+--right_audio_trans_in <= right_audio_data_sig;
     
 
 
