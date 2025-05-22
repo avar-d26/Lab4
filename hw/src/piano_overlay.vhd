@@ -28,17 +28,17 @@ entity piano_overlay is
     hblank_i         : in  std_logic;
 
     -- Key frame input
-    key_state_i      : in  std_logic_vector(87 downto 0);
+    key_state_i      : in  std_logic_vector(KEY_NUM-1 downto 0);
 
     -- AXI-Stream video slave
-    s_axis_tdata_i   : in  std_logic_vector(23 downto 0);
+    s_axis_tdata_i   : in  std_logic_vector(DATA_WIDTH-1 downto 0);
     s_axis_tvalid_i  : in  std_logic;
     s_axis_tuser_i   : in  std_logic;
     s_axis_tlast_i   : in  std_logic;
     s_axis_tready_i  : out std_logic;
 
     -- AXI-Stream video master
-    m_axis_tdata_o   : out std_logic_vector(23 downto 0);
+    m_axis_tdata_o   : out std_logic_vector(DATA_WIDTH-1 downto 0);
     m_axis_tvalid_o  : out std_logic;
     m_axis_tuser_o   : out std_logic;
     m_axis_tlast_o   : out std_logic;
@@ -54,13 +54,97 @@ signal current_keys  : std_logic_vector(KEY_NUM - 1 downto 0);
 signal horizontal_pos: integer := 0; -- horizontal position counter
 
 signal column_index  : integer range 0 to KEY_NUM - 1;
-signal override_rgb  : std_logic_vector(DATA_WIDTH downto 0) := x"FF0000"; -- red
+signal key_length : unsigned(COLUMN_WIDTH-1 downto 0) := (others => '0');
+signal key_counter_tc : std_logic := '0';
+signal m_axis_tdata_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
+
+-- FSM signals
+type statetype is (Idle, Blank1, ActiveRow, IncrKey, Blank2);
+signal curr_state, next_state : statetype := Idle;
 
 begin
 
 
+----------------------------------------------------------------------------
+-- State machine
+----------------------------------------------------------------------------
+  
+-- FSM Next State Logic (asynchronous, no clock)
+-- Include all state change triggering signals in the sensitivity list
+-- The only signal getting assigned in this process should be next_state
+next_state_logic : process(curr_state, lrclk_main)
+-- ++++ Add necessary signals to the sensitivity list above ++++
+-- ++++ Modify next state logic to match your paper design ++++
+begin
+
+	-- Default conditions
+	next_state <= curr_state; 	-- default is to stay in the same state
+
+	-- Use a case statement to switch between states
+	case curr_state is	
+        when Idle =>
+            if (vsynch_i = '1') then     -- wait until start of new frame
+                next_state <= Blank1;
+            end if;
+        when Blank1 =>
+            if (active_video_i = '1') then     -- wait until video is active
+                next_state <= ActiveRow;
+            end if;
+        when ActiveRow =>    
+            if (active_video_i = '0') then     -- wait until start of new frame
+                next_state <= Blank2;
+            elsif (column_tc = '1') then
+                next_state <= IncrKey;
+            end if;
+        when IncrKey =>
+            next_state <= ActiveRow;
+        when Blank2 =>
+            if (hsynch_i = '1') then     -- wait until start of new frame
+                next_state <= Blank1;
+            end if; 
+        when others => -- this is like the "else" part of an if/else statement, but shouldn't reached
+            next_state <= Idle;
+	end case;					-- end of case statement
+end process next_state_logic;
+
+----------------------------------------------------------------------------
+-- FSM Output Logic Process (asynchronous, no clock)
+-- Only the current state signal (curr_state) should be in the sensitivity list
+-- FSM "outputs" are simply signals or ports that are assigned by the FSM state logic
+fsm_output_logic : process(curr_state, s00_axis_tdata_i) 
+begin
+
+incr_col_index <= '0';
+output_en <= '0';
+
+case curr_state is	
+        when Idle => output_en <= '0';
+  
+        when Blank1 => output_en <= '0';
+           
+        when ActiveRow =>    
+            output_en <= '1';
+        when IncrKey =>
+            incr_col_index <= '1';
+        when Blank2 => output_en <= '0';
+
+        when others => output_en <= '0';
+	end case;					-- end of case statement
+
+end process fsm_output_logic;
+
+----------------------------------------------------------------------------
+-- FSM State Update Process (synchronous, clocked)
+state_update : process (clk_i)
+begin
+	if (rising_edge(clk_i)) then
+		curr_state <= next_state; 		-- update current state on rising edge of the clock
+	end if;
+end process state_update;
+
+
 -- Latch key_state on vsync
-key_update : process(clk_i)
+current_keys_reg : process(clk_i)
 begin
   if rising_edge(clk_i) then
     if reset_i = '1' then
@@ -69,20 +153,47 @@ begin
       current_keys <= key_state_i;
     end if;
   end if;
-end process key_update;
+end process current_keys_reg;
 
--- Horizontal Position Counter
-hor_pos_counter : process(clk_i)
+-- Column Index Counter
+column_index_counter : process(clk_i)
 begin
   if rising_edge(clk_i) then
     if reset_i = '1' then
-      horizontal_pos <= 0;
-    elsif active_video_i = '1' then
-      horizontal_pos <= horizontal_pos + 1;
-    elsif hblank_i = '1' then
-      horizontal_pos <= 0;
+      column_index <= 0;   -- reset
+    elsif incr_column_index = '1' then
+      column_index <= column_index + 1; -- increment
     end if;
   end if;
-end process hor_pos_counter;
-    
+end process column_index_counter;
+
+-- Key Length Counter
+key_length_counter : process(clk_i)
+begin
+  if rising_edge(clk_i) then
+    if reset_i = '1' then
+      key_length <= (others => '0');   -- reset
+    elsif key_counter_tc = '1' then
+      key_length <= (others => '0');   -- set back to 0 after done counting
+    elsif incr_column_index = '1' then
+      key_length <= key_length + 1; -- increment
+    end if;
+  end if;
+end process key_length_counter;
+
+key_counter_tc <='1' when key_length = COLUMN_WIDTH else '0';
+
+-- Key Override Process to output red instead of default key color (black or white)
+key_override : process (s_axis_tdata_i, current_keys, output_en)
+begin
+  if output_en = '1'then
+    if current_keys(column_index) = '1' then
+      m_axis_tdata_sig <= x"FF0000";  -- Pure red (R=255, G=0, B=0)
+    else m_axis_tdata_sig <= s_axis_tdata_i;
+    end if;
+  else m_axis_tdata_sig <= s_axis_tdata_i;
+  end if;
+end process key_override;
+
+m_axis_tdata_o <= m_axis_tdata_sig;    
 end Behavioral;
