@@ -21,7 +21,7 @@ entity axis_i2s_wrapper is
 	    ----------------------------------------------------------------------------
 		-- Users to add parameters here
 		DDS_DATA_WIDTH : integer := 24;         -- DDS data width
-        DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
+        	DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
         ----------------------------------------------------------------------------
 
 		-- User parameters ends
@@ -130,7 +130,7 @@ signal m00_axis_tstrb_sig : std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downt
 
 
 signal left_audio_data_valid_o_sig, right_audio_data_valid_o_sig : std_logic := '0';
-signal left_audio_trans_in, right_audio_trans_in : std_logic_vector(AC_DATA_WIDTH - 1 downto 0) := (others => '0');
+
 ----------------------------------------------------------------------------
 -- Component declarations
 ----------------------------------------------------------------------------
@@ -174,6 +174,7 @@ component i2s_receiver is
 		adc_serial_data_i     : in std_logic);  
 end component; 
 
+-- Keeping for testing
 ---- DDS AXI
 --component engs128_axi_dds is 
 --	generic (
@@ -278,30 +279,30 @@ end component;
 ---------------------------------------------------------------------------- 
 -- AXI stream receiver
 
-component axis_receiver_interface is
-Generic (
-    FIFO_DEPTH : integer := 1024;
-    I2S_DATA_WIDTH : integer := 24;
-    DATA_WIDTH : integer := 32);
-Port ( 
+--component axis_receiver_interface is
+--Generic (
+--    FIFO_DEPTH : integer := 1024;
+--    I2S_DATA_WIDTH : integer := 24;
+--    DATA_WIDTH : integer := 32);
+--Port ( 
     -- i2s LRCLK signal
-    lrclk_i       : in std_logic;
+--    lrclk_i       : in std_logic;
     
     -- Ports of Axi Controller Bus Interface M00_AXIS
-    s00_axis_aclk_i     : in std_logic;
-    s00_axis_aresetn_i     : in std_logic;
-    s00_axis_tdata_i    : in std_logic_vector(DATA_WIDTH-1 downto 0);
-    s00_axis_tlast_i    : in std_logic;
-    s00_axis_tsrb_i    : in std_logic_vector(3 downto 0);
-    s00_axis_tvalid_i    : in std_logic;
+--    s00_axis_aclk_i     : in std_logic;
+--    s00_axis_aresetn_i     : in std_logic;
+--    s00_axis_tdata_i    : in std_logic_vector(DATA_WIDTH-1 downto 0);
+--    s00_axis_tlast_i    : in std_logic;
+--    s00_axis_tsrb_i    : in std_logic_vector(3 downto 0);
+--    s00_axis_tvalid_i    : in std_logic;
     
     -- I2S transmitter signals
-    left_audio_data_o : out std_logic_vector(I2S_DATA_WIDTH-1 downto 0);
-    right_audio_data_o : out std_logic_vector(I2S_DATA_WIDTH-1 downto 0);
-    left_audio_data_valid_o : out std_logic;
-    right_audio_data_valid_o : out std_logic;   
-    s00_axis_tready_o : out std_logic);
-end component;
+--    left_audio_data_o : out std_logic_vector(I2S_DATA_WIDTH-1 downto 0);
+--    right_audio_data_o : out std_logic_vector(I2S_DATA_WIDTH-1 downto 0);
+--    left_audio_data_valid_o : out std_logic;
+--    right_audio_data_valid_o : out std_logic;   
+--    s00_axis_tready_o : out std_logic);
+--end component;
 ----------------------------------------------------------------------------
 begin
 ----------------------------------------------------------------------------
@@ -324,8 +325,8 @@ the_i2s_receiver : i2s_receiver PORT MAP(
     mclk_i => mclk,
     bclk_i => bclk,
     lrclk_i => lrclk_unbuff, 
-    left_audio_data_o => LADS_rx,
-    right_audio_data_o => RADS_rx,
+    left_audio_data_o => left_audio_data_sig,
+    right_audio_data_o => right_audio_data_sig,
     adc_serial_data_i => ac_adc_data_i);
 ---------------------------------------------------------------------------- 
 -- I2S transmitter
@@ -382,8 +383,8 @@ the_i2s_transmitter : i2s_transmitter PORT MAP(
 ---------------------------------------------------------------------------- 
 -- AXI stream transmitter
 axis_trans : axis_transmitter_interface PORT MAP(
-    left_audio_data_i => left_audio_trans_in,  -- 
-    right_audio_data_i => right_audio_trans_in, -- 
+    left_audio_data_i => left_audio_data_sig,  -- 
+    right_audio_data_i => right_audio_data_sig, -- 
     lrclk_i => lrclk,
     m00_axis_aclk_i => m00_axis_aclk,
     m00_axis_aresetn_i => m00_axis_aresetn,
@@ -395,20 +396,20 @@ axis_trans : axis_transmitter_interface PORT MAP(
 
 ---------------------------------------------------------------------------- 
 -- AXI stream receiver
-axis_receiver : axis_receiver_interface PORT MAP(
-    lrclk_i => lrclk,
-    s00_axis_aclk_i => s00_axis_aclk,
-    s00_axis_aresetn_i => s00_axis_aresetn,
-    s00_axis_tdata_i => s00_axis_tdata,
-    s00_axis_tlast_i => s00_axis_tlast,
-    s00_axis_tsrb_i => s00_axis_tstrb,
-    s00_axis_tvalid_i => s00_axis_tvalid,
+--axis_receiver : axis_receiver_interface PORT MAP(
+--    lrclk_i => lrclk,
+--    s00_axis_aclk_i => s00_axis_aclk,
+--    s00_axis_aresetn_i => s00_axis_aresetn,
+--    s00_axis_tdata_i => s00_axis_tdata,
+--    s00_axis_tlast_i => s00_axis_tlast,
+--    s00_axis_tsrb_i => s00_axis_tstrb,
+--    s00_axis_tvalid_i => s00_axis_tvalid,
     
-    left_audio_data_o => left_audio_data_sig,
-    right_audio_data_o => right_audio_data_sig,
-    left_audio_data_valid_o => left_audio_data_valid_o_sig,
-    right_audio_data_valid_o => right_audio_data_valid_o_sig,
-    s00_axis_tready_o => s00_axis_tready_sig);
+--    left_audio_data_o => left_audio_data_sig,
+--    right_audio_data_o => right_audio_data_sig,
+--    left_audio_data_valid_o => left_audio_data_valid_o_sig,
+--    right_audio_data_valid_o => right_audio_data_valid_o_sig,
+--    s00_axis_tready_o => s00_axis_tready_sig);
 
 ---------------------------------------------------------------------------- 
 -- Logic
@@ -417,17 +418,16 @@ axis_receiver : axis_receiver_interface PORT MAP(
 ac_mute_n_o <= '1'; -- TASK 2, always unmuted
 
 
-left_audio_trans_in <= LADS_rx;
-right_audio_trans_in <= RADS_rx;
+left_audio_trans_in <= left_audio_data_sig;
+right_audio_trans_in <= right_audio_data_sig;
     
 
 
 ---------------------------------------------------------------------------
 -- Debug Ports
---dbg_left_audio_rx_o <= LADS_rx;
---dbg_right_audio_rx_o <= RADS_rx;
---dbg_right_audio_tx_o <= right_audio_data_sig;
---dbg_left_audio_tx_o <= left_audio_data_sig;
+--dbg_left_audio_rx_o <= left_audio_data_sig;
+--dbg_right_audio_rx_o <= right_audio_data_sig;
+
 ----------------------------------------------------------------------------
 --wire signals to outputs
 m00_axis_tdata <= m00_axis_tdata_sig;
