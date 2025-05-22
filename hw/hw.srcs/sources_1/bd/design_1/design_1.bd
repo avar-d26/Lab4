@@ -3686,7 +3686,7 @@
           },
           "bin_addr_o": {
             "direction": "O",
-            "left": "10",
+            "left": "11",
             "right": "0"
           }
         }
@@ -3713,7 +3713,7 @@
           },
           "r_addr_o": {
             "direction": "O",
-            "left": "10",
+            "left": "11",
             "right": "0"
           },
           "paino_data_o": {
