@@ -125,7 +125,7 @@ architecture tb of tb_xfft_0 is
 
   -- Config slave channel alias signals
   signal s_axis_config_tdata_fwd_inv      : std_logic                    := '0';              -- forward or inverse
-  signal s_axis_config_tdata_scale_sch    : std_logic_vector(11 downto 0) := (others => '0');  -- scaling schedule
+  signal s_axis_config_tdata_scale_sch    : std_logic_vector(13 downto 0) := (others => '0');  -- scaling schedule
 
   -- Data slave channel alias signals
   signal s_axis_data_tdata_re             : std_logic_vector(23 downto 0) := (others => '0');  -- real data
@@ -134,14 +134,14 @@ architecture tb of tb_xfft_0 is
   -- Data master channel alias signals
   signal m_axis_data_tdata_re             : std_logic_vector(23 downto 0) := (others => '0');  -- real data
   signal m_axis_data_tdata_im             : std_logic_vector(23 downto 0) := (others => '0');  -- imaginary data
-  signal m_axis_data_tuser_xk_index       : std_logic_vector(11 downto 0) := (others => '0');  -- sample index
+  signal m_axis_data_tuser_xk_index       : std_logic_vector(12 downto 0) := (others => '0');  -- sample index
 
   -----------------------------------------------------------------------
   -- Constants, types and functions to create input data
   -----------------------------------------------------------------------
 
   constant IP_WIDTH    : integer := 24;
-  constant MAX_SAMPLES : integer := 2**12;  -- maximum number of samples in a frame
+  constant MAX_SAMPLES : integer := 2**13;  -- maximum number of samples in a frame
   type T_IP_SAMPLE is record
     re : std_logic_vector(IP_WIDTH-1 downto 0);
     im : std_logic_vector(IP_WIDTH-1 downto 0);
@@ -445,7 +445,7 @@ begin
   -----------------------------------------------------------------------
 
   config_stimuli : process
-    variable scale_sch : std_logic_vector(11 downto 0);
+    variable scale_sch : std_logic_vector(13 downto 0);
   begin
 
     -- Drive a configuration when requested by data_stimuli process
@@ -479,8 +479,9 @@ begin
       for s in 2 to 6 loop
         scale_sch(s*2-1 downto s*2-2) := "10";  -- less scaling at later stages
       end loop;
+      scale_sch(13 downto 12) := "01";  -- least scaling at last stage
     end if;
-    s_axis_config_tdata(12 downto 1) <= scale_sch;
+    s_axis_config_tdata(14 downto 1) <= scale_sch;
 
     -- Drive the transaction on the config slave channel
     s_axis_config_tvalid <= '1';
@@ -508,7 +509,7 @@ begin
       if m_axis_data_tvalid = '1' and m_axis_data_tready = '1' then
         -- Record output data such that it can be used as input data
         -- Output sample index is given by xk_index field of m_axis_data_tuser
-        index := to_integer(unsigned(m_axis_data_tuser(11 downto 0)));
+        index := to_integer(unsigned(m_axis_data_tuser(12 downto 0)));
         op_data(index).re <= m_axis_data_tdata(23 downto 0);
         op_data(index).im <= m_axis_data_tdata(47 downto 24);
         -- Track the number of output frames
@@ -584,7 +585,7 @@ begin
 
   -- Config slave channel alias signals
   s_axis_config_tdata_fwd_inv    <= s_axis_config_tdata(0);
-  s_axis_config_tdata_scale_sch  <= s_axis_config_tdata(12 downto 1);
+  s_axis_config_tdata_scale_sch  <= s_axis_config_tdata(14 downto 1);
 
   -- Data slave channel alias signals
   s_axis_data_tdata_re           <= s_axis_data_tdata(23 downto 0);
@@ -593,7 +594,7 @@ begin
   -- Data master channel alias signals
   m_axis_data_tdata_re           <= m_axis_data_tdata(23 downto 0);
   m_axis_data_tdata_im           <= m_axis_data_tdata(47 downto 24);
-  m_axis_data_tuser_xk_index     <= m_axis_data_tuser(11 downto 0);
+  m_axis_data_tuser_xk_index     <= m_axis_data_tuser(12 downto 0);
 
 end tb;
 

@@ -52,8 +52,8 @@
       "axis_fifo_3": "",
       "axis_i2s_wrapper_0": "",
       "blk_mem_gen_0": "",
-      "create_88key_0": "",
-      "FFT_wrapper_0": ""
+      "FFT_wrapper_0": "",
+      "create_88key_0": ""
     },
     "interface_ports": {
       "DDR": {
@@ -3563,48 +3563,13 @@
             "value": "True_Dual_Port_RAM"
           },
           "Write_Depth_A": {
-            "value": "2048"
+            "value": "4096"
           },
           "Write_Width_A": {
             "value": "1"
           },
           "use_bram_block": {
             "value": "Stand_Alone"
-          }
-        }
-      },
-      "create_88key_0": {
-        "vlnv": "xilinx.com:module_ref:create_88key:1.0",
-        "xci_name": "design_1_create_88key_0_0",
-        "xci_path": "ip/design_1_create_88key_0_0/design_1_create_88key_0_0.xci",
-        "inst_hier_path": "create_88key_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "create_88key",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clkb_i": {
-            "direction": "I"
-          },
-          "data_i": {
-            "direction": "I"
-          },
-          "en_i": {
-            "direction": "I"
-          },
-          "r_addr_o": {
-            "direction": "O",
-            "left": "10",
-            "right": "0"
-          },
-          "paino_data_o": {
-            "direction": "O",
-            "left": "87",
-            "right": "0"
-          },
-          "paino_done_o": {
-            "direction": "O"
           }
         }
       },
@@ -3723,6 +3688,41 @@
             "direction": "O",
             "left": "10",
             "right": "0"
+          }
+        }
+      },
+      "create_88key_0": {
+        "vlnv": "xilinx.com:module_ref:create_88key:1.0",
+        "xci_name": "design_1_create_88key_0_0",
+        "xci_path": "ip/design_1_create_88key_0_0/design_1_create_88key_0_0.xci",
+        "inst_hier_path": "create_88key_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "create_88key",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clkb_i": {
+            "direction": "I"
+          },
+          "data_i": {
+            "direction": "I"
+          },
+          "en_i": {
+            "direction": "I"
+          },
+          "r_addr_o": {
+            "direction": "O",
+            "left": "10",
+            "right": "0"
+          },
+          "paino_data_o": {
+            "direction": "O",
+            "left": "87",
+            "right": "0"
+          },
+          "paino_done_o": {
+            "direction": "O"
           }
         }
       }

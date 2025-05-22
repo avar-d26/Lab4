@@ -37,7 +37,6 @@ vlog -work xilinx_vip  -sv2k12 "+incdir+/opt/xilinx/Vivado/2023.1/data/xilinx_vi
 
 vlog -work xpm  -sv2k12 "+incdir+/opt/xilinx/Vivado/2023.1/data/xilinx_vip/include" -l xilinx_vip -l xpm -l xbip_utils_v3_0_10 -l axi_utils_v2_0_6 -l c_reg_fd_v12_0_6 -l xbip_dsp48_wrapper_v3_0_4 -l xbip_pipe_v3_0_6 -l xbip_dsp48_addsub_v3_0_6 -l xbip_addsub_v3_0_6 -l c_addsub_v12_0_15 -l c_mux_bit_v12_0_6 -l c_shift_ram_v12_0_14 -l xbip_bram18k_v3_0_6 -l mult_gen_v12_0_18 -l cmpy_v6_0_21 -l floating_point_v7_0_20 -l xfft_v9_1_9 -l xil_defaultlib \
 "/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
-"/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv" \
 "/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
 
 vcom -work xpm -93  \

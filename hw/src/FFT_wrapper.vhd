@@ -42,7 +42,7 @@ entity FFT_wrapper is
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
     fft_done_o        : out std_logic;
-    bin_addr_o        : out std_logic_vector(10 downto 0)
+    bin_addr_o        : out std_logic_vector(11 downto 0)
     );
 end FFT_wrapper;
 
@@ -80,7 +80,7 @@ signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := 
 signal re_32bit, im_32bit : unsigned(31 downto 0);  -- Converted to unsigned
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
-signal output_counter : unsigned(11 downto 0) := (others => '0');
+signal output_counter : unsigned(12 downto 0) := (others => '0');
 
 type statetype is (init, count_outputs, waiting, done);
 signal cs, ns : statetype := init;
@@ -138,8 +138,8 @@ uut : xfft_0 PORT MAP(
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
     fft_data_o <= fft_data_o_sig;    
-    tvalid_sig <= tvalid_sig_1;
-    bin_addr_o <= bin_addr_o_sig(10 downto 0); -- 11 bits for 0 to 2047
+    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(12)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
+    bin_addr_o <= bin_addr_o_sig(11 downto 0); -- 12 bits for 0 to 4095
 end if;
 end process;
 
@@ -164,12 +164,12 @@ case cs is
         ns <= count_outputs;
         cnt_rst <= '1';
     when count_outputs =>
-        if (output_counter = to_unsigned(2050, 12)) then -- give it a few clock cycles
+        if (output_counter = to_unsigned(4100, 13)) then -- give it a few clock cycles
             ns <= waiting;
         end if;
     when waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
-        if (output_counter = to_unsigned(4095, 12)) then
+        if (output_counter = to_unsigned(8191, 13)) then
             ns <= init;
         end if;
     when others => ns <= init;

@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.55869",
-   "Default View_TopLeft":"1409,1224",
+   "Default View_TopLeft":"1335,1224",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
@@ -41,11 +41,15 @@ preplace inst v_vid_in_axi4s_0 -pg 1 -lvl 3 -x 970 -y 1190 -defaultsOSRD
 preplace inst axis_fifo_3 -pg 1 -lvl 4 -x 1450 -y 1940 -defaultsOSRD
 preplace inst axis_i2s_wrapper_0 -pg 1 -lvl 3 -x 970 -y 2130 -defaultsOSRD
 preplace inst blk_mem_gen_0 -pg 1 -lvl 6 -x 2310 -y 1910 -defaultsOSRD
-preplace inst create_88key_0 -pg 1 -lvl 7 -x 2730 -y 1930 -defaultsOSRD
 preplace inst FFT_wrapper_0 -pg 1 -lvl 5 -x 1890 -y 1910 -defaultsOSRD
-preplace netloc ACLK_1 1 0 9 -210 660 160 910 750 740 1210 910 1700 1030 2160 1030 2530 830 3430 630 N
-preplace netloc ACLK_2 1 0 10 -210 870 150J 920 720 1040 1280 920 1690 1020 2180 870 2490 870 3460 820 NJ 820 4290J
+preplace inst create_88key_0 -pg 1 -lvl 7 -x 2730 -y 1930 -defaultsOSRD
+preplace netloc ACLK_1 1 0 9 -210 660 160 910 750 740 1210 910 1700 1030 2180 1030 2530 830 3430 630 N
+preplace netloc ACLK_2 1 0 10 -210 870 150J 920 720 1040 1280 920 1690 1020 2200 870 2490 870 3460 820 NJ 820 4290J
 preplace netloc ARESETN_1 1 1 4 150 940 630J 690 NJ 690 1620
+preplace netloc FFT_wrapper_0_bin_addr_o 1 5 1 2190 1850n
+preplace netloc FFT_wrapper_0_fft_data_o 1 5 1 2200 1890n
+preplace netloc FFT_wrapper_0_fft_done_o 1 5 2 2060J 2050 2500
+preplace netloc FFT_wrapper_0_tvalid_o 1 5 1 2060 1880n
 preplace netloc Net 1 0 4 -220 860 180 870 680J 750 1200
 preplace netloc ac_adc_data_i_0_1 1 0 3 NJ 2100 NJ 2100 660J
 preplace netloc axi_dynclk_0_LOCKED_O 1 7 3 2960 390 NJ 390 4300J
@@ -60,6 +64,8 @@ preplace netloc axis_i2s_wrapper_0_ac_dac_data_o 1 3 8 NJ 2140 NJ 2140 NJ 2140 2
 preplace netloc axis_i2s_wrapper_0_ac_dac_lrclk_o 1 3 8 NJ 2160 NJ 2160 NJ 2160 2440 2220 NJ 2220 NJ 2220 NJ 2220 4700J
 preplace netloc axis_i2s_wrapper_0_ac_mclk_o 1 3 8 NJ 2100 NJ 2100 NJ 2100 2490 2190 NJ 2190 NJ 2190 NJ 2190 4720J
 preplace netloc axis_i2s_wrapper_0_ac_mute_n_o 1 3 8 NJ 2120 NJ 2120 NJ 2120 2480 2200 NJ 2200 NJ 2200 NJ 2200 NJ
+preplace netloc blk_mem_gen_0_doutb 1 5 2 2200 2060 2420J
+preplace netloc create_88key_0_r_addr_o 1 5 3 2190 2070 NJ 2070 2920
 preplace netloc dvi2rgb_0_PixelClk 1 1 6 250 560 660 330 NJ 330 N 330 NJ 330 2430
 preplace netloc dvi2rgb_0_aPixelClkLckd 1 1 10 190 1540 730 1430 1290J 1410 N 1410 NJ 1410 N 1410 NJ 1410 NJ 1410 NJ 1410 4710
 preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 5 610 340 NJ 340 N 340 NJ 340 2440
@@ -73,12 +79,6 @@ preplace netloc v_axi4s_vid_out_0_vtg_ce 1 7 3 3480 1030 NJ 1030 4260
 preplace netloc v_tc_0_irq 1 1 8 200 1060 NJ 1060 NJ 1060 N 1060 NJ 1060 N 1060 NJ 1060 3800
 preplace netloc v_tc_in_irq 1 1 7 250 350 NJ 350 NJ 350 N 350 NJ 350 N 350 2920
 preplace netloc xlconcat_0_dout 1 2 1 710 210n
-preplace netloc FFT_wrapper_0_bin_addr_o 1 5 1 2170 1830n
-preplace netloc FFT_wrapper_0_fft_data_o 1 5 1 2180 1870n
-preplace netloc FFT_wrapper_0_tvalid_o 1 5 1 2060 1880n
-preplace netloc blk_mem_gen_0_doutb 1 5 2 2200 1750 2420J
-preplace netloc FFT_wrapper_0_fft_done_o 1 5 2 2060J 2070 2500
-preplace netloc create_88key_0_r_addr_o 1 5 3 2190 1740 NJ 1740 2920
 preplace netloc S00_AXI_1 1 3 2 1220 460 N
 preplace netloc axi_gpio_0_GPIO 1 10 1 4710J 690n
 preplace netloc axi_interconnect_0_M00_AXI 1 2 1 640 710n
