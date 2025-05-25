@@ -22,8 +22,8 @@ signal paino : std_logic_vector(87 downto 0) := (others => '0');
 
 type statetype is (init, count_address, create_paino, send_paino);
 signal cs, ns : statetype := init;
-signal count_en, count_tc, create_paino_en, rst : std_logic := '0';
-
+signal count_en, count_tc, counttc_delay1, count_tc_delayed, create_paino_en, rst : std_logic := '0';
+signal shift_reg : std_logic_vector(4095 downto 0) := (others => '0');
 begin
 
 -- double flop synchronizer
@@ -39,12 +39,14 @@ delayer : process(clkb_i) begin
 if rising_edge(clkb_i) then
     counterdelay1 <= address_counter;
     address_counter_delayed <= counterdelay1;
+    counttc_delay1 <= count_tc;
+    count_tc_delayed <= counttc_delay1;
 end if;
 end process;
 
 -- USE DELAYED ADDRESS COUNTER TO INDEX THE PIANO VECTOR
-counter_tc : process(address_counter_delayed) begin
-    if (address_counter_delayed = to_unsigned(4095, 12)) then
+counter_tc : process(address_counter) begin
+    if (address_counter = to_unsigned(4095, 12)) then
         count_tc <= '1';
     else
         count_tc <= '0';
@@ -53,7 +55,7 @@ end process;
 
 load_count: process(clkb_i) begin
 if rising_edge(clkb_i) then
-    if (rst = '1') then
+    if (rst = '1' or address_counter = to_unsigned(4095, 12)) then
         address_counter <= (others => '0');
     elsif (count_en = '1' and address_counter <= (to_unsigned(4095, 12))) then
         address_counter <= address_counter + 1;
@@ -75,7 +77,7 @@ begin
     if rising_edge(clkb_i) then
         if (rst = '1') then
             paino <= (others => '0');
-        else
+        elsif (count_en = '1') then
             -- Default: keep previous state
             paino <= paino;
                     
@@ -238,7 +240,7 @@ begin
                 paino(86) <= paino(86) or data_i;
               when 695 to 768 => -- Key 88 (C8 4186.0Hz)
                 paino(87) <= paino(87) or data_i;
-              when others => null;
+              when others => paino <= paino;
             end case;
 
         end if;
@@ -275,6 +277,7 @@ case cs is
         end if;
     when create_paino => 
         create_paino_en <= '1';
+        ns <= send_paino;
     when send_paino => 
         paino_done_o <= '1';
         if (load_enable = '0') then

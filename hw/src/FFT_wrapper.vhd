@@ -77,10 +77,9 @@ END COMPONENT;
 
 signal fft_data_in, fft_data_out : std_logic_vector(47 downto 0) := (others => '0');
 signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := (others => '0');
-signal re_32bit, im_32bit : unsigned(31 downto 0);  -- Converted to unsigned
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
-signal output_counter : unsigned(12 downto 0) := (others => '0');
+signal output_counter : unsigned(13 downto 0) := (others => '0');
 
 type statetype is (init, count_outputs, waiting, done);
 signal cs, ns : statetype := init;
@@ -94,7 +93,7 @@ fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
 process(fft_data_out)
     variable re_mag : signed(23 downto 0);
     variable im_mag : signed(23 downto 0);
-    constant THRESHOLD : signed(23 downto 0) := to_signed(2, 24); -- Example threshold
+    constant THRESHOLD : signed(23 downto 0) := to_signed(12000, 24); -- Example threshold
 begin
     re_mag := abs(signed(fft_data_out(47 downto 24)));
     im_mag := abs(signed(fft_data_out(23 downto 0)));
@@ -164,12 +163,12 @@ case cs is
         ns <= count_outputs;
         cnt_rst <= '1';
     when count_outputs =>
-        if (output_counter = to_unsigned(4100, 13)) then -- give it a few clock cycles
+        if (output_counter = to_unsigned(4100, 14)) then -- give it a few clock cycles
             ns <= waiting;
         end if;
     when waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
-        if (output_counter = to_unsigned(8191, 13)) then
+        if (output_counter = to_unsigned(8192, 14)) then
             ns <= init;
         end if;
     when others => ns <= init;
@@ -178,9 +177,10 @@ end process;
 
 counter : process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then
-    if (cnt_rst <= '1') then
+    if (cnt_rst = '1') then
         output_counter <= (others => '0');
-    elsif (tvalid_sig = '1') then
+        -- Potential ISSUE with tvalid_sig  = 1 only going up to 4095, changed to tvalid_sig_1
+    elsif (tvalid_sig_1 = '1') then
         output_counter <= output_counter + 1;
     end if;
 end if;

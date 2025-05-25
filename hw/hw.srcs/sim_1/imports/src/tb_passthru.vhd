@@ -280,7 +280,7 @@ stim_proc : process
   constant f1_mid  : real := 174.61;
   constant f2_mid  : real := 185.00;
   constant f3_mid  : real := 196.00;
-  constant DURATION : time := 10 ms;
+  constant DURATION : time := 150 ms;
 
   variable adc_bit_cnt : integer range 0 to 23 := 23;
   variable current_sample : std_logic_vector(23 downto 0) := (others => '0');
@@ -309,7 +309,7 @@ begin
     end if;
   end loop;
 
-  wait for 1 ms;
+  wait for 100 ms;
 
   -----------------------------------------------------------------------------
   -- TEST 2: Mid-adjacent keys (key 43, 44, 45)
