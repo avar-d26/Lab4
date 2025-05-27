@@ -54,7 +54,7 @@ signal current_keys  : std_logic_vector(KEY_NUM - 1 downto 0);
 signal horizontal_pos: integer := 0; -- horizontal position counter
 
 signal column_index  : integer range 0 to KEY_NUM - 1;
-signal key_length : unsigned(COLUMN_WIDTH-1 downto 0) := (others => '0');
+signal key_length : unsigned(3 downto 0) := (others => '0');
 signal key_counter_tc : std_logic := '0';
 signal m_axis_tdata_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
 
@@ -183,7 +183,7 @@ begin
   end if;
 end process key_length_counter;
 
-key_counter_tc <='1' when key_length = COLUMN_WIDTH else '0';
+key_counter_tc <='1' when key_length = COLUMN_WIDTH - 1 else '0';
 
 -- Key Override Process to output red instead of default key color (black or white)
 key_override : process (s_axis_tdata_i, current_keys, output_en)
