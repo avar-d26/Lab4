@@ -51,8 +51,8 @@
       "v_vid_in_axi4s_0": "",
       "axis_fifo_3": "",
       "axis_i2s_wrapper_0": "",
-      "create_88key_0": "",
       "BRAM_wrapper_0": "",
+      "create_88key_0": "",
       "FFT_wrapper_0": ""
     },
     "interface_ports": {
@@ -3550,41 +3550,6 @@
           }
         }
       },
-      "create_88key_0": {
-        "vlnv": "xilinx.com:module_ref:create_88key:1.0",
-        "xci_name": "design_1_create_88key_0_0",
-        "xci_path": "ip/design_1_create_88key_0_0/design_1_create_88key_0_0.xci",
-        "inst_hier_path": "create_88key_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "create_88key",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clkb_i": {
-            "direction": "I"
-          },
-          "data_i": {
-            "direction": "I"
-          },
-          "en_i": {
-            "direction": "I"
-          },
-          "r_addr_o": {
-            "direction": "O",
-            "left": "11",
-            "right": "0"
-          },
-          "paino_data_o": {
-            "direction": "O",
-            "left": "87",
-            "right": "0"
-          },
-          "paino_done_o": {
-            "direction": "O"
-          }
-        }
-      },
       "BRAM_wrapper_0": {
         "vlnv": "xilinx.com:module_ref:BRAM_wrapper:1.0",
         "xci_name": "design_1_BRAM_wrapper_0_0",
@@ -3619,6 +3584,41 @@
             "right": "0"
           },
           "doutb": {
+            "direction": "O"
+          }
+        }
+      },
+      "create_88key_0": {
+        "vlnv": "xilinx.com:module_ref:create_88key:1.0",
+        "xci_name": "design_1_create_88key_0_0",
+        "xci_path": "ip/design_1_create_88key_0_0/design_1_create_88key_0_0.xci",
+        "inst_hier_path": "create_88key_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "create_88key",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clkb_i": {
+            "direction": "I"
+          },
+          "data_i": {
+            "direction": "I"
+          },
+          "en_i": {
+            "direction": "I"
+          },
+          "r_addr_o": {
+            "direction": "O",
+            "left": "11",
+            "right": "0"
+          },
+          "paino_data_o": {
+            "direction": "O",
+            "left": "87",
+            "right": "0"
+          },
+          "paino_done_o": {
             "direction": "O"
           }
         }
@@ -3918,8 +3918,8 @@
           "axis_subset_converter_out/aclk",
           "v_axi4s_vid_out_0/aclk",
           "v_vid_in_axi4s_0/aclk",
-          "create_88key_0/clkb_i",
-          "BRAM_wrapper_0/clkb"
+          "BRAM_wrapper_0/clkb",
+          "create_88key_0/clkb_i"
         ]
       },
       "ACLK_2": {

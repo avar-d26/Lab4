@@ -20,10 +20,11 @@ signal load_enable_reg, load_enable : std_logic := '0';
 signal address_counter, counterdelay1, address_counter_delayed : unsigned(11 downto 0) := (others => '0');
 signal paino : std_logic_vector(87 downto 0) := (others => '0');
 
-type statetype is (init, count_address, create_paino, send_paino);
+type statetype is (init, count_address, count_wait_1, count_wait_2, create_paino, send_paino);
 signal cs, ns : statetype := init;
-signal count_en, count_tc, counttc_delay1, count_tc_delayed, create_paino_en, rst : std_logic := '0';
-signal shift_reg : std_logic_vector(4095 downto 0) := (others => '0');
+signal count_en, buildbinreg_en, count_tc, counttc_delay1, count_tc_delayed, create_paino_en, rst : std_logic := '0';
+--signal bin_reg : std_logic_vector(4095 downto 0) := (others => '0');
+signal addr : integer := 0;
 begin
 
 -- double flop synchronizer
@@ -68,16 +69,24 @@ r_addr_o <= std_logic_vector(address_counter);
 
 
         
-        
+-- UPDATE the piano
+update: process(clkb_i) begin
+if rising_edge(clkb_i) then
+    if (create_paino_en = '1') then
+        paino_data_o <= paino;
+    end if;
+end if;
+end process;        
+
+
 ---- MAP BINS TO PIANO KEYS
-paino_data_o <= paino;
+addr <= to_integer(address_counter_delayed);
 mapp : process(clkb_i)
-variable addr : integer := to_integer(address_counter_delayed);
 begin
     if rising_edge(clkb_i) then
         if (rst = '1') then
             paino <= (others => '0');
-        elsif (count_en = '1') then
+        elsif (buildbinreg_en = '1') then
             -- Default: keep previous state
             paino <= paino;
                     
@@ -264,6 +273,7 @@ count_en <= '0';
 create_paino_en <= '0';
 paino_done_o <= '0';
 rst <= '0';
+buildbinreg_en <= '0';
 case cs is
     when init =>
         if (load_enable = '1') then
@@ -272,9 +282,16 @@ case cs is
         rst <= '1';
     when count_address =>
         count_en <= '1';
+        buildbinreg_en <= '1';
         if (count_tc = '1') then
-            ns <= create_paino;
+            ns <= count_wait_1;
         end if;
+    when count_wait_1 =>
+        buildbinreg_en <= '1';
+        ns <= count_wait_2;
+    when count_wait_2 =>
+        buildbinreg_en <= '1';
+        ns <= create_paino;
     when create_paino => 
         create_paino_en <= '1';
         ns <= send_paino;

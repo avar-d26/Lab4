@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/FFT_wrapper.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FFT_wrapper'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/create_88key.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'create_88key'

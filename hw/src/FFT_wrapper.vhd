@@ -80,6 +80,7 @@ signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := 
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
+signal re_mag_dbg, im_mag_dbg : signed(23 downto 0); -- debug signals
 
 type statetype is (init, count_outputs, waiting, done);
 signal cs, ns : statetype := init;
@@ -93,11 +94,12 @@ fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
 process(fft_data_out)
     variable re_mag : signed(23 downto 0);
     variable im_mag : signed(23 downto 0);
-    constant THRESHOLD : signed(23 downto 0) := to_signed(12000, 24); -- Example threshold
+    constant THRESHOLD : signed(23 downto 0) := to_signed(2048576, 24); -- Example threshold
 begin
     re_mag := abs(signed(fft_data_out(47 downto 24)));
     im_mag := abs(signed(fft_data_out(23 downto 0)));
-
+    re_mag_dbg <= re_mag;
+    im_mag_dbg <= im_mag;
     
     if (re_mag > THRESHOLD) or (im_mag > THRESHOLD) then
         fft_data_o_sig <= '1'; 

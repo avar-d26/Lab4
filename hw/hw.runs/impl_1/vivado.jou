@@ -1,14 +1,14 @@
 #-----------------------------------------------------------
 # Vivado v2023.1 (64-bit)
-# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Jul  6 16:08:05 2023
-# Process ID: 12472
-# Current directory: I:/Zybo-Z7/hw/proj/hw.runs/impl_1
-# Command line: vivado.exe -log design_1_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
-# Log file: I:/Zybo-Z7/hw/proj/hw.runs/impl_1/design_1_wrapper.vdi
-# Journal file: I:/Zybo-Z7/hw/proj/hw.runs/impl_1\vivado.jou
-# Running On: DESKTOP-51FNB60, OS: Windows, CPU Frequency: 3696 MHz, CPU Physical cores: 10, Host memory: 34257 MB
+# Start of session at: Sun May 25 21:50:30 2025
+# Process ID: 7443
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1
+# Command line: vivado -log create_88key.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source create_88key.tcl -notrace
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/create_88key.vdi
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 1100.001 MHz, CPU Physical cores: 8, Host memory: 16479 MB
 #-----------------------------------------------------------
-source design_1_wrapper.tcl -notrace
+source create_88key.tcl -notrace

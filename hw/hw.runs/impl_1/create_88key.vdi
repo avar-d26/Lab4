@@ -1,0 +1,128 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Sun May 25 21:50:30 2025
+# Process ID: 7443
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1
+# Command line: vivado -log create_88key.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source create_88key.tcl -notrace
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/create_88key.vdi
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 1100.001 MHz, CPU Physical cores: 8, Host memory: 16479 MB
+#-----------------------------------------------------------
+source create_88key.tcl -notrace
+create_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1338.496 ; gain = 0.023 ; free physical = 7669 ; free virtual = 13451
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2023.1/data/ip'.
+Command: link_design -top create_88key -part xc7z010clg400-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1628.977 ; gain = 0.000 ; free physical = 7302 ; free virtual = 13126
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc]
+WARNING: [Vivado 12-584] No ports matched 'ac_bclk_o'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:47]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:47]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'ac_mclk_o'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:48]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:48]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'ac_mute_n_o'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:49]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:49]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'ac_dac_data_o'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:50]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:50]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'ac_dac_lrclk_o'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:51]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:51]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'ac_adc_data_i'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:52]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:52]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'ac_adc_lrclk_o'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:53]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:53]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'IIC_scl_io'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:54]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:54]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'IIC_sda_io'. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:55]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:55]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-2489] -waveform contains time 6.730500 which will be rounded to 6.731 to ensure it is an integer multiple of 1 picosecond [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:75]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_auto_pc_0' instantiated as 'design_1_i/axi_interconnect_gp0/s00_couplers/auto_pc' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:4076]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_auto_pc_1' instantiated as 'design_1_i/axi_interconnect_hp0/m00_couplers/auto_pc' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:3005]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_axi_dynclk_0_0' instantiated as 'design_1_i/axi_dynclk_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:415]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_axi_gpio_video_0' instantiated as 'design_1_i/axi_gpio_video' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:441]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_axi_vdma_0_0' instantiated as 'design_1_i/axi_vdma_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:679]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_axis_subset_converter_in_0' instantiated as 'design_1_i/axis_subset_converter_in' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:745]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_axis_subset_converter_out_0' instantiated as 'design_1_i/axis_subset_converter_out' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:758]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_dvi2rgb_0_0' instantiated as 'design_1_i/dvi2rgb_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:772]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_m00_regslice_0' instantiated as 'design_1_i/axi_interconnect_hp0/m00_couplers/m00_regslice' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:3085]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_proc_sys_reset_0_0' instantiated as 'design_1_i/proc_sys_reset_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:792]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_proc_sys_reset_fclk0_0' instantiated as 'design_1_i/proc_sys_reset_fclk0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:800]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_proc_sys_reset_fclk1_0' instantiated as 'design_1_i/proc_sys_reset_fclk1' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:808]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_processing_system7_0_0' instantiated as 'design_1_i/processing_system7_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:816]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_rgb2dvi_1_0' instantiated as 'design_1_i/rgb2dvi_1' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:930]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_s00_regslice_0' instantiated as 'design_1_i/axi_interconnect_hp0/s00_couplers/s00_regslice' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:4265]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_s01_regslice_0' instantiated as 'design_1_i/axi_interconnect_hp0/s01_couplers/s01_regslice' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:4452]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_v_axi4s_vid_out_0_0' instantiated as 'design_1_i/v_axi4s_vid_out_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:944]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_v_tc_in_0' instantiated as 'design_1_i/v_tc_in' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:968]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_v_tc_out_0' instantiated as 'design_1_i/v_tc_out' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:998]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_v_vid_in_axi4s_0_0' instantiated as 'design_1_i/v_vid_in_axi4s_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:1031]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_xbar_0' instantiated as 'design_1_i/axi_interconnect_gp0/xbar' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:1985]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'design_1_xbar_1' instantiated as 'design_1_i/axi_interconnect_hp0/xbar' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/synth/design_1.v:2561]
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1736.355 ; gain = 0.000 ; free physical = 7182 ; free virtual = 13013
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 4 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 4 instances
+
+10 Infos, 10 Warnings, 31 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1736.355 ; gain = 397.859 ; free physical = 7182 ; free virtual = 13013
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z010'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_dynclk_0' of type 'design_1_axi_dynclk_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_gpio_video' of type 'design_1_axi_gpio_video_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_gp0/s00_couplers/auto_pc' of type 'design_1_auto_pc_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_gp0/xbar' of type 'design_1_xbar_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_hp0/m00_couplers/auto_pc' of type 'design_1_auto_pc_1' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_hp0/m00_couplers/m00_regslice' of type 'design_1_m00_regslice_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_hp0/s00_couplers/s00_regslice' of type 'design_1_s00_regslice_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_hp0/s01_couplers/s01_regslice' of type 'design_1_s01_regslice_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_interconnect_hp0/xbar' of type 'design_1_xbar_1' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axi_vdma_0' of type 'design_1_axi_vdma_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axis_subset_converter_in' of type 'design_1_axis_subset_converter_in_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/axis_subset_converter_out' of type 'design_1_axis_subset_converter_out_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/dvi2rgb_0' of type 'design_1_dvi2rgb_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/proc_sys_reset_0' of type 'design_1_proc_sys_reset_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/proc_sys_reset_fclk0' of type 'design_1_proc_sys_reset_fclk0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/proc_sys_reset_fclk1' of type 'design_1_proc_sys_reset_fclk1_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/processing_system7_0' of type 'design_1_processing_system7_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/rgb2dvi_1' of type 'design_1_rgb2dvi_1_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/v_axi4s_vid_out_0' of type 'design_1_v_axi4s_vid_out_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/v_tc_in' of type 'design_1_v_tc_in_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/v_tc_out' of type 'design_1_v_tc_out_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'design_1_i/v_vid_in_axi4s_0' of type 'design_1_v_vid_in_axi4s_0_0' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+INFO: [Project 1-461] DRC finished with 22 Errors, 130 Warnings
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+ERROR: [Vivado_Tcl 4-78] Error(s) found during DRC. Opt_design not run.
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1817.230 ; gain = 80.875 ; free physical = 7168 ; free virtual = 13001
+INFO: [Common 17-83] Releasing license: Implementation
+15 Infos, 10 Warnings, 31 Critical Warnings and 23 Errors encountered.
+opt_design failed
+ERROR: [Common 17-39] 'opt_design' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Sun May 25 21:51:06 2025...
