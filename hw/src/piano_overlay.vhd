@@ -93,7 +93,7 @@ begin
         when ActiveRow =>    
             if (active_video_i = '0') then     -- wait until start of new frame
                 next_state <= Blank2;
-            elsif (column_tc = '1') then
+            elsif (key_counter_tc = '1') then
                 next_state <= IncrKey;
             end if;
         when IncrKey =>
@@ -161,6 +161,8 @@ begin
   if rising_edge(clk_i) then
     if reset_i = '1' then
       column_index <= 0;   -- reset
+    elsif column_index = KEY_NUM - 1 then
+      column_index <= 0;
     elsif incr_column_index = '1' then
       column_index <= column_index + 1; -- increment
     end if;
@@ -195,5 +197,9 @@ begin
   end if;
 end process key_override;
 
-m_axis_tdata_o <= m_axis_tdata_sig;    
+m_axis_tdata_o <= m_axis_tdata_sig;   
+m_axis_tvalid_o <= s_axis_tvalid_i;
+m_axis_tuser_o <= s_axis_tuser_i;
+m_axis_tlast_o <= s_axis_tlast_i;
+m_axis_tready_o <= s_axis_tready_i;
 end Behavioral;
