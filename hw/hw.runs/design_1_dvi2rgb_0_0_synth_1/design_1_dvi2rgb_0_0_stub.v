@@ -1,9 +1,9 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-// Date        : Thu Jul  6 16:05:35 2023
-// Host        : DESKTOP-51FNB60 running 64-bit major release  (build 9200)
+// Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
+// Date        : Tue May 27 14:52:49 2025
+// Host        : brad69 running 64-bit Linux Mint 21.3
 // Command     : write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
 //               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ design_1_dvi2rgb_0_0_stub.v
 // Design      : design_1_dvi2rgb_0_0

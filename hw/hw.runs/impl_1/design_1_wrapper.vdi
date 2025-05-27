@@ -1,0 +1,336 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Tue May 27 15:33:56 2025
+# Process ID: 5344
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1
+# Command line: vivado -log design_1_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/design_1_wrapper.vdi
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 2500.000 MHz, CPU Physical cores: 8, Host memory: 16479 MB
+#-----------------------------------------------------------
+source design_1_wrapper.tcl -notrace
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1336.723 ; gain = 0.023 ; free physical = 8676 ; free virtual = 14025
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2023.1/data/ip'.
+add_files: Time (s): cpu = 00:00:20 ; elapsed = 00:00:11 . Memory (MB): peak = 1662.898 ; gain = 326.176 ; free physical = 8513 ; free virtual = 13947
+Command: link_design -top design_1_wrapper -part xc7z010clg400-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_BRAM_wrapper_0_0/design_1_BRAM_wrapper_0_0.dcp' for cell 'design_1_i/BRAM_wrapper_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_FFT_wrapper_0_1/design_1_FFT_wrapper_0_1.dcp' for cell 'design_1_i/FFT_wrapper_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_dynclk_0_0/design_1_axi_dynclk_0_0.dcp' for cell 'design_1_i/axi_dynclk_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0.dcp' for cell 'design_1_i/axi_gpio_video'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.dcp' for cell 'design_1_i/axi_vdma_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_fifo_3_0/design_1_axis_fifo_3_0.dcp' for cell 'design_1_i/axis_fifo_3'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_i2s_wrapper_0_0/design_1_axis_i2s_wrapper_0_0.dcp' for cell 'design_1_i/axis_i2s_wrapper_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/design_1_axis_subset_converter_in_0.dcp' for cell 'design_1_i/axis_subset_converter_in'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_out_0/design_1_axis_subset_converter_out_0.dcp' for cell 'design_1_i/axis_subset_converter_out'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_create_88key_0_0/design_1_create_88key_0_0.dcp' for cell 'design_1_i/create_88key_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/design_1_dvi2rgb_0_0.dcp' for cell 'design_1_i/dvi2rgb_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/design_1_ila_0_0.dcp' for cell 'design_1_i/ila_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0.dcp' for cell 'design_1_i/proc_sys_reset_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk0_0/design_1_proc_sys_reset_fclk0_0.dcp' for cell 'design_1_i/proc_sys_reset_fclk0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk1_0/design_1_proc_sys_reset_fclk1_0.dcp' for cell 'design_1_i/proc_sys_reset_fclk1'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.dcp' for cell 'design_1_i/processing_system7_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/design_1_rgb2dvi_1_0.dcp' for cell 'design_1_i/rgb2dvi_1'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0.dcp' for cell 'design_1_i/v_axi4s_vid_out_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_in_0/design_1_v_tc_in_0.dcp' for cell 'design_1_i/v_tc_in'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_out_0/design_1_v_tc_out_0.dcp' for cell 'design_1_i/v_tc_out'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_vid_in_axi4s_0_0/design_1_v_vid_in_axi4s_0_0.dcp' for cell 'design_1_i/v_vid_in_axi4s_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_xbar_0/design_1_xbar_0.dcp' for cell 'design_1_i/axi_interconnect_gp0/xbar'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0.dcp' for cell 'design_1_i/axi_interconnect_gp0/s00_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_xbar_1/design_1_xbar_1.dcp' for cell 'design_1_i/axi_interconnect_hp0/xbar'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1.dcp' for cell 'design_1_i/axi_interconnect_hp0/m00_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0.dcp' for cell 'design_1_i/axi_interconnect_hp0/m00_couplers/m00_regslice'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0.dcp' for cell 'design_1_i/axi_interconnect_hp0/s00_couplers/s00_regslice'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0.dcp' for cell 'design_1_i/axi_interconnect_hp0/s01_couplers/s01_regslice'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.dcp' for cell 'design_1_i/BRAM_wrapper_0/U0/bram_inst'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/xfft_0/xfft_0.dcp' for cell 'design_1_i/FFT_wrapper_0/U0/uut'
+INFO: [Project 1-454] Reading design checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.dcp' for cell 'design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz'
+Netlist sorting complete. Time (s): cpu = 00:00:00.69 ; elapsed = 00:00:00.69 . Memory (MB): peak = 1868.965 ; gain = 0.000 ; free physical = 7660 ; free virtual = 13288
+INFO: [Netlist 29-17] Analyzing 1568 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+WARNING: [Opt 31-32] Removing redundant IBUF since it is not being driven by a top-level port. design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz/inst/clkin1_ibufg 
+Resolution: The tool has removed redundant IBUF. To resolve this warning, check for redundant IBUF in the input design.
+WARNING: [Constraints 18-550] Could not create 'IBUF_LOW_PWR' constraint because net 'design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz/sysclk' is not directly connected to top level port. Synthesis is ignored for IBUF_LOW_PWR but preserved for implementation.
+INFO: [Chipscope 16-324] Core: design_1_i/ila_0 UUID: be177176-557e-59fe-ace2-fe04795a2b22 
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk1_0/design_1_proc_sys_reset_fclk1_0.xdc] for cell 'design_1_i/proc_sys_reset_fclk1/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk1_0/design_1_proc_sys_reset_fclk1_0.xdc] for cell 'design_1_i/proc_sys_reset_fclk1/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.xdc] for cell 'design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz/inst'
+INFO: [Timing 38-35] Done setting XDC timing constraints. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.xdc:57]
+INFO: [Timing 38-2] Deriving generated clocks [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.xdc:57]
+get_clocks: Time (s): cpu = 00:00:13 ; elapsed = 00:00:11 . Memory (MB): peak = 2630.086 ; gain = 596.828 ; free physical = 7046 ; free virtual = 12685
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.xdc] for cell 'design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01_board.xdc] for cell 'design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz/inst'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01_board.xdc] for cell 'design_1_i/axis_i2s_wrapper_0/U0/the_clock_generator/clock_wiz/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/ila_v6_2/constraints/ila.xdc] for cell 'design_1_i/ila_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/ila_v6_2/constraints/ila.xdc] for cell 'design_1_i/ila_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/ila_v6_2/constraints/ila_impl.xdc] for cell 'design_1_i/ila_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/ila_v6_2/constraints/ila_impl.xdc] for cell 'design_1_i/ila_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc] for cell 'design_1_i/axi_vdma_0/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:68]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:72]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:76]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:80]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:84]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:88]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:92]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:96]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:100]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-4' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:104]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:108]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:192]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:196]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:200]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:204]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:208]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:212]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:216]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-6' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc:220]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc] for cell 'design_1_i/axi_vdma_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0.xdc] for cell 'design_1_i/axi_gpio_video/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0.xdc] for cell 'design_1_i/axi_gpio_video/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0_board.xdc] for cell 'design_1_i/axi_gpio_video/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0_board.xdc] for cell 'design_1_i/axi_gpio_video/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi.xdc] for cell 'design_1_i/rgb2dvi_1/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi.xdc] for cell 'design_1_i/rgb2dvi_1/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+WARNING: [Vivado 12-2489] -input_jitter contains time 0.224970 which will be rounded to 0.225 to ensure it is an integer multiple of 1 picosecond [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc:21]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_dynclk_0_0/src/axi_dynclk.xdc] for cell 'design_1_i/axi_dynclk_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_dynclk_0_0/src/axi_dynclk.xdc] for cell 'design_1_i/axi_dynclk_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk1_0/design_1_proc_sys_reset_fclk1_0_board.xdc] for cell 'design_1_i/proc_sys_reset_fclk1/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk1_0/design_1_proc_sys_reset_fclk1_0_board.xdc] for cell 'design_1_i/proc_sys_reset_fclk1/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk0_0/design_1_proc_sys_reset_fclk0_0.xdc] for cell 'design_1_i/proc_sys_reset_fclk0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk0_0/design_1_proc_sys_reset_fclk0_0.xdc] for cell 'design_1_i/proc_sys_reset_fclk0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk0_0/design_1_proc_sys_reset_fclk0_0_board.xdc] for cell 'design_1_i/proc_sys_reset_fclk0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_fclk0_0/design_1_proc_sys_reset_fclk0_0_board.xdc] for cell 'design_1_i/proc_sys_reset_fclk0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0.xdc] for cell 'design_1_i/proc_sys_reset_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0.xdc] for cell 'design_1_i/proc_sys_reset_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0_board.xdc] for cell 'design_1_i/proc_sys_reset_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0_board.xdc] for cell 'design_1_i/proc_sys_reset_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/dvi2rgb.xdc] for cell 'design_1_i/dvi2rgb_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/dvi2rgb.xdc] for cell 'design_1_i/dvi2rgb_0/U0'
+CRITICAL WARNING: [Designutils 20-1280] Could not find module 'ila_refclk'. The XDC file /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_refclk/ila_v6_2/constraints/ila.xdc will not be read for any cell of this module.
+CRITICAL WARNING: [Designutils 20-1280] Could not find module 'ila_pixclk'. The XDC file /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_pixclk/ila_v6_2/constraints/ila.xdc will not be read for any cell of this module.
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc]
+WARNING: [Vivado 12-2489] -waveform contains time 6.730500 which will be rounded to 6.731 to ensure it is an integer multiple of 1 picosecond [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc:75]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/constrs_1/imports/src/zybo_z7-10_constraints.xdc]
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_timing_workaround.xdc] for cell 'design_1_i/dvi2rgb_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_timing_workaround.xdc] for cell 'design_1_i/dvi2rgb_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_clocks.xdc] for cell 'design_1_i/rgb2dvi_1/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_clocks.xdc] for cell 'design_1_i/rgb2dvi_1/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_clocks.xdc] for cell 'design_1_i/axi_interconnect_hp0/s00_couplers/s00_regslice/inst'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-7' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_clocks.xdc:10]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_clocks.xdc] for cell 'design_1_i/axi_interconnect_hp0/s00_couplers/s00_regslice/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_clocks.xdc] for cell 'design_1_i/axi_interconnect_hp0/s01_couplers/s01_regslice/inst'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-7' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_clocks.xdc:10]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_clocks.xdc] for cell 'design_1_i/axi_interconnect_hp0/s01_couplers/s01_regslice/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_clocks.xdc] for cell 'design_1_i/axi_interconnect_hp0/m00_couplers/m00_regslice/inst'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-7' -to list should not be empty. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_clocks.xdc:10]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_clocks.xdc] for cell 'design_1_i/axi_interconnect_hp0/m00_couplers/m00_regslice/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0_clocks.xdc] for cell 'design_1_i/axi_vdma_0/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0_clocks.xdc] for cell 'design_1_i/axi_vdma_0/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_clocks.xdc] for cell 'design_1_i/v_axi4s_vid_out_0/inst'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_clocks.xdc] for cell 'design_1_i/v_axi4s_vid_out_0/inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_in_0/design_1_v_tc_in_0_clocks.xdc] for cell 'design_1_i/v_tc_in/U0'
+INFO: [Timing 38-2] Deriving generated clocks [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_in_0/design_1_v_tc_in_0_clocks.xdc:2]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_in_0/design_1_v_tc_in_0_clocks.xdc] for cell 'design_1_i/v_tc_in/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_out_0/design_1_v_tc_out_0_clocks.xdc] for cell 'design_1_i/v_tc_out/U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_tc_out_0/design_1_v_tc_out_0_clocks.xdc] for cell 'design_1_i/v_tc_out/U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_vid_in_axi4s_0_0/design_1_v_vid_in_axi4s_0_0_clocks.xdc] for cell 'design_1_i/v_vid_in_axi4s_0/inst'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_vid_in_axi4s_0_0/design_1_v_vid_in_axi4s_0_0_clocks.xdc] for cell 'design_1_i/v_vid_in_axi4s_0/inst'
+INFO: [Project 1-1714] 28 XPM XDC files have been applied to the design.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-1687] 18 scoped IP constraints or related sub-commands were skipped due to synthesis logic optimizations usually triggered by constant connectivity or unconnected output pins. To review the skipped constraints and messages, run the command 'set_param netlist.IPMsgFiltering false' before opening the design.
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 7031 ; free virtual = 12672
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 91 instances were transformed.
+  CFGLUT5 => CFGLUT5 (SRL16E, SRLC32E): 76 instances
+  IOBUF => IOBUF (IBUF, OBUFT): 4 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 10 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 1 instance 
+
+47 Infos, 26 Warnings, 2 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:01:02 ; elapsed = 00:00:47 . Memory (MB): peak = 3010.270 ; gain = 1347.371 ; free physical = 7031 ; free virtual = 12672
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z010'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 7030 ; free virtual = 12668
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 1f5ae62a9
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 7010 ; free virtual = 12652
+
+Starting Logic Optimization Task
+
+Phase 1 Generate And Synthesize Debug Cores
+INFO: [Chipscope 16-329] Generating Script for core instance : dbg_hub 
+INFO: [IP_Flow 19-3806] Processing IP xilinx.com:ip:xsdbm:3.0 for cell dbg_hub_CV.
+Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6211 ; free virtual = 12006
+Phase 1 Generate And Synthesize Debug Cores | Checksum: 15782eabd
+
+Time (s): cpu = 00:01:55 ; elapsed = 00:01:53 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6211 ; free virtual = 12006
+
+Phase 2 Retarget
+INFO: [Opt 31-1566] Pulled 15 inverters resulting in an inversion of 120 pins
+INFO: [Opt 31-138] Pushed 37 inverter(s) to 54 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 2 Retarget | Checksum: ed495de4
+
+Time (s): cpu = 00:02:00 ; elapsed = 00:01:56 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6199 ; free virtual = 11994
+INFO: [Opt 31-389] Phase Retarget created 667 cells and removed 1001 cells
+INFO: [Opt 31-1021] In phase Retarget, 191 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 3 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 3 Constant propagation | Checksum: fc98ed0b
+
+Time (s): cpu = 00:02:01 ; elapsed = 00:01:57 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6193 ; free virtual = 11990
+INFO: [Opt 31-389] Phase Constant propagation created 436 cells and removed 1760 cells
+INFO: [Opt 31-1021] In phase Constant propagation, 751 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 4 Sweep
+Phase 4 Sweep | Checksum: 1deb1e091
+
+Time (s): cpu = 00:02:03 ; elapsed = 00:01:59 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6137 ; free virtual = 11961
+INFO: [Opt 31-389] Phase Sweep created 1 cells and removed 2562 cells
+INFO: [Opt 31-1021] In phase Sweep, 1110 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 5 BUFG optimization
+Phase 5 BUFG optimization | Checksum: 1deb1e091
+
+Time (s): cpu = 00:02:04 ; elapsed = 00:01:59 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6131 ; free virtual = 11955
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 6 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 6 Shift Register Optimization | Checksum: 17718ebb9
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:00 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6165 ; free virtual = 11955
+INFO: [Opt 31-389] Phase Shift Register Optimization created 2 cells and removed 6 cells
+INFO: [Opt 31-1021] In phase Shift Register Optimization, 1 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 7 Post Processing Netlist
+Phase 7 Post Processing Netlist | Checksum: 1995e9477
+
+Time (s): cpu = 00:02:06 ; elapsed = 00:02:01 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6165 ; free virtual = 11955
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+INFO: [Opt 31-1021] In phase Post Processing Netlist, 90 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |             667  |            1001  |                                            191  |
+|  Constant propagation         |             436  |            1760  |                                            751  |
+|  Sweep                        |               1  |            2562  |                                           1110  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               2  |               6  |                                              1  |
+|  Post Processing Netlist      |               0  |               0  |                                             90  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00.1 ; elapsed = 00:00:00.1 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6164 ; free virtual = 11954
+Ending Logic Optimization Task | Checksum: 12c89086b
+
+Time (s): cpu = 00:02:06 ; elapsed = 00:02:01 . Memory (MB): peak = 3010.270 ; gain = 0.000 ; free physical = 6164 ; free virtual = 11953
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Running Vector-less Activity Propagation...
+INFO: [Pwropt 34-9] Applying IDT optimizations ...
+INFO: [Pwropt 34-10] Applying ODC optimizations ...
+
+Finished Running Vector-less Activity Propagation
+
+
+Starting PowerOpt Patch Enables Task
+INFO: [Pwropt 34-162] WRITE_MODE attribute of 44 BRAM(s) out of a total of 76 has been updated to save power. Run report_power_opt to get a complete listing of the BRAMs updated.
+INFO: [Pwropt 34-201] Structural ODC has moved 2 WE to EN ports
+Number of BRAM Ports augmented: 65 newly gated: 2 Total Ports: 152
+Number of Flops added for Enable Generation: 7
+
+Ending PowerOpt Patch Enables Task | Checksum: 11fba7c42
+
+Time (s): cpu = 00:00:00.73 ; elapsed = 00:00:00.54 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5717 ; free virtual = 11547
+Ending Power Optimization Task | Checksum: 11fba7c42
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:15 . Memory (MB): peak = 3538.508 ; gain = 528.238 ; free physical = 5717 ; free virtual = 11547
+
+Starting Final Cleanup Task
+
+Starting Logic Optimization Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Logic Optimization Task | Checksum: 1ecd9dd46
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5716 ; free virtual = 11537
+Ending Final Cleanup Task | Checksum: 1ecd9dd46
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:08 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5716 ; free virtual = 11537
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5716 ; free virtual = 11537
+Ending Netlist Obfuscation Task | Checksum: 1ecd9dd46
+
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5716 ; free virtual = 11537
+INFO: [Common 17-83] Releasing license: Implementation
+81 Infos, 26 Warnings, 2 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:03:00 ; elapsed = 00:02:31 . Memory (MB): peak = 3538.508 ; gain = 528.238 ; free physical = 5716 ; free virtual = 11537
+INFO: [runtcl-4] Executing : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
+Command: report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/design_1_wrapper_drc_opted.rpt.
+report_drc completed successfully
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.84 ; elapsed = 00:00:00.16 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5727 ; free virtual = 11558
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/impl_1/design_1_wrapper_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:13 ; elapsed = 00:00:08 . Memory (MB): peak = 3538.508 ; gain = 0.000 ; free physical = 5739 ; free virtual = 11573
+INFO: [Chipscope 16-240] Debug cores have already been implemented
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z010'
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+ERROR: [DRC UTLZ-1] Resource utilization: MMCME2_ADV over-utilized in Top Level Design (This design requires more MMCME2_ADV cells than are available in the target device. This design requires 3 of such cell types but only 2 compatible sites are available in the target device. Please analyze your synthesis results and constraints to ensure the design is mapped to Xilinx primitives as expected. If so, please consider targeting a larger device.)
+INFO: [Vivado_Tcl 4-198] DRC finished with 1 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+ERROR: [Vivado_Tcl 4-23] Error(s) found during DRC. Placer not run.
+INFO: [Common 17-83] Releasing license: Implementation
+97 Infos, 26 Warnings, 2 Critical Warnings and 2 Errors encountered.
+place_design failed
+ERROR: [Common 17-39] 'place_design' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Tue May 27 15:37:50 2025...

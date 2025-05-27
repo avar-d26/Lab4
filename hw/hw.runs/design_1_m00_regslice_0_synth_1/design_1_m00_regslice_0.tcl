@@ -70,6 +70,7 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "design_1_m00_regslice_0_synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 4
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 OPTRACE "Creating in-memory project" START { }
@@ -83,7 +84,7 @@ set_property webtalk.parent_dir /home/bzhao30/ENGS128/Lab4/hw/hw.cache/wt [curre
 set_property parent.project_path /home/bzhao30/ENGS128/Lab4/hw/hw.xpr [current_project]
 set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
-set_property target_language Verilog [current_project]
+set_property target_language VHDL [current_project]
 set_property board_part_repo_paths {/home/bzhao30/ENGS128/Lab4/hw/hw.board} [current_project]
 set_property board_part digilentinc.com:zybo-z7-10:part0:1.1 [current_project]
 set_property ip_repo_paths /home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo [current_project]

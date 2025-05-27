@@ -1,101 +1,99 @@
 #-----------------------------------------------------------
 # Vivado v2023.1 (64-bit)
-# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Jul  6 16:06:15 2023
-# Process ID: 14132
-# Current directory: I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1
-# Command line: vivado.exe -log design_1_v_axi4s_vid_out_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_v_axi4s_vid_out_0_0.tcl
-# Log file: I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/design_1_v_axi4s_vid_out_0_0.vds
-# Journal file: I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1\vivado.jou
-# Running On: DESKTOP-51FNB60, OS: Windows, CPU Frequency: 3696 MHz, CPU Physical cores: 10, Host memory: 34257 MB
+# Start of session at: Tue May 27 14:53:38 2025
+# Process ID: 8614
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1
+# Command line: vivado -log design_1_v_axi4s_vid_out_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_v_axi4s_vid_out_0_0.tcl
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/design_1_v_axi4s_vid_out_0_0.vds
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 2500.000 MHz, CPU Physical cores: 8, Host memory: 16479 MB
 #-----------------------------------------------------------
-Sourcing tcl script 'C:/Users/tesla369/AppData/Roaming/Xilinx/Vivado/Vivado_init.tcl'
-Set Board Part RepoPath: c:/gigigit/vivado-boards/new
 source design_1_v_axi4s_vid_out_0_0.tcl -notrace
-create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1458.070 ; gain = 236.086
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:09 . Memory (MB): peak = 1344.770 ; gain = 0.023 ; free physical = 6140 ; free virtual = 8577
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository 'i:/Zybo-Z7/hw/repo'.
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'I:/Xilinx/Vivado/2023.1/data/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2023.1/data/ip'.
 INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: design_1_v_axi4s_vid_out_0_0
 Command: synth_design -top design_1_v_axi4s_vid_out_0_0 -part xc7z010clg400-1 -incremental_mode off -mode out_of_context
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Device 21-403] Loading part xc7z010clg400-1
-INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 2876
+INFO: [Synth 8-7075] Helper process launched with PID 9081
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2288.004 ; gain = 408.926
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2005.961 ; gain = 376.711 ; free physical = 5504 ; free virtual = 7950
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'design_1_v_axi4s_vid_out_0_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/synth/design_1_v_axi4s_vid_out_0_0.v:53]
-INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2378]
-INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_cdc_single' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:208]
-INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_single' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_single' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152]
-INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_cdc_single' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:208]
-INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_coupler' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:293]
-INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_fifo_async' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:57]
-INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_async' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:2151]
-INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_base' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:55]
-INFO: [Synth 8-6157] synthesizing module 'xpm_memory_base' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:56]
-INFO: [Synth 8-6059] Synth Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value.   [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:508]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_memory_base' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:56]
-INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_gray' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_gray' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
-INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_reg_vec' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_reg_vec' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
-INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_gray__parameterized0' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_gray__parameterized0' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
-INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_reg_vec__parameterized0' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_reg_vec__parameterized0' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
-INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_gray__parameterized1' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_gray__parameterized1' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
-INFO: [Synth 8-226] default block is never used [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1207]
-INFO: [Synth 8-226] default block is never used [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1274]
-INFO: [Synth 8-226] default block is never used [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1296]
-INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_reg_bit' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1907]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_reg_bit' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1907]
-INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_rst' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1619]
-INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_sync_rst' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1058]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_sync_rst' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1058]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_rst' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1619]
-INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn__parameterized0' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn__parameterized0' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn__parameterized1' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn__parameterized1' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn__parameterized2' [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn__parameterized2' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_base' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:55]
-INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_async' (0#1) [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:2151]
-WARNING: [Synth 8-7071] port 'almost_full' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
-WARNING: [Synth 8-7071] port 'wr_ack' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
-WARNING: [Synth 8-7071] port 'almost_empty' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
-WARNING: [Synth 8-7071] port 'data_valid' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
-WARNING: [Synth 8-7023] instance 'XPM_FIFO_ASYNC_INST' of module 'xpm_fifo_async' has 26 connections declared, but only 22 given [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
-INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_fifo_async' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:57]
-INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_coupler' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:293]
-INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_sync' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:505]
-INFO: [Synth 8-155] case statement is not full and has no default [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:993]
-INFO: [Synth 8-155] case statement is not full and has no default [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:691]
-INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_sync' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:505]
-INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_formatter' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:1183]
-INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_formatter' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:1183]
-INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2378]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_v_axi4s_vid_out_0_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/synth/design_1_v_axi4s_vid_out_0_0.v:53]
-WARNING: [Synth 8-6014] Unused sequential element gen_rd_b.gen_doutb_pipe.enb_pipe_reg[0] was removed.  [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:3071]
-WARNING: [Synth 8-6014] Unused sequential element dest_out_bin_ff_reg was removed.  [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:417]
-WARNING: [Synth 8-6014] Unused sequential element dest_out_bin_ff_reg was removed.  [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:417]
-WARNING: [Synth 8-6014] Unused sequential element dest_out_bin_ff_reg was removed.  [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:417]
-WARNING: [Synth 8-6014] Unused sequential element gen_fwft.empty_fwft_fb_reg was removed.  [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1391]
-WARNING: [Synth 8-6014] Unused sequential element fifo_fid_dly_reg was removed.  [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:718]
-WARNING: [Synth 8-6014] Unused sequential element vtg_fid_dly_reg was removed.  [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:745]
-WARNING: [Synth 8-6014] Unused sequential element aclk_reset_pulse_reg was removed.  [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2592]
-WARNING: [Synth 8-3848] Net fifo_underflow_from_remap_reg in module/entity v_axi4s_vid_out_v4_0_16 does not have driver. [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2517]
+INFO: [Synth 8-6157] synthesizing module 'design_1_v_axi4s_vid_out_0_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/synth/design_1_v_axi4s_vid_out_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2378]
+INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_cdc_single' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:208]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_single' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_single' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152]
+INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_cdc_single' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:208]
+INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_coupler' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:293]
+INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_fifo_async' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:57]
+INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_async' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:2151]
+INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_base' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:55]
+INFO: [Synth 8-6157] synthesizing module 'xpm_memory_base' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:56]
+INFO: [Synth 8-6059] Synth Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value.   [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:508]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_memory_base' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:56]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_gray' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_gray' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
+INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_reg_vec' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_reg_vec' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_gray__parameterized0' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_gray__parameterized0' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
+INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_reg_vec__parameterized0' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_reg_vec__parameterized0' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1885]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_gray__parameterized1' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_gray__parameterized1' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:283]
+INFO: [Synth 8-226] default block is never used [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1207]
+INFO: [Synth 8-226] default block is never used [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1274]
+INFO: [Synth 8-226] default block is never used [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1296]
+INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_reg_bit' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1907]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_reg_bit' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1907]
+INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6157] synthesizing module 'xpm_fifo_rst' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1619]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_sync_rst' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1058]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_sync_rst' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1058]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_rst' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1619]
+INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn__parameterized0' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn__parameterized0' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn__parameterized1' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn__parameterized1' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6157] synthesizing module 'xpm_counter_updn__parameterized2' [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_counter_updn__parameterized2' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1859]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_base' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:55]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_fifo_async' (0#1) [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:2151]
+WARNING: [Synth 8-7071] port 'almost_full' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
+WARNING: [Synth 8-7071] port 'wr_ack' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
+WARNING: [Synth 8-7071] port 'almost_empty' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
+WARNING: [Synth 8-7071] port 'data_valid' of module 'xpm_fifo_async' is unconnected for instance 'XPM_FIFO_ASYNC_INST' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
+WARNING: [Synth 8-7023] instance 'XPM_FIFO_ASYNC_INST' of module 'xpm_fifo_async' has 26 connections declared, but only 22 given [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:109]
+INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_fifo_async' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:57]
+INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_coupler' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:293]
+INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_sync' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:505]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:993]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:691]
+INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_sync' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:505]
+INFO: [Synth 8-6157] synthesizing module 'v_axi4s_vid_out_v4_0_16_formatter' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:1183]
+INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16_formatter' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:1183]
+INFO: [Synth 8-6155] done synthesizing module 'v_axi4s_vid_out_v4_0_16' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2378]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_v_axi4s_vid_out_0_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/synth/design_1_v_axi4s_vid_out_0_0.v:53]
+WARNING: [Synth 8-6014] Unused sequential element gen_rd_b.gen_doutb_pipe.enb_pipe_reg[0] was removed.  [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:3071]
+WARNING: [Synth 8-6014] Unused sequential element dest_out_bin_ff_reg was removed.  [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:417]
+WARNING: [Synth 8-6014] Unused sequential element dest_out_bin_ff_reg was removed.  [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:417]
+WARNING: [Synth 8-6014] Unused sequential element dest_out_bin_ff_reg was removed.  [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:417]
+WARNING: [Synth 8-6014] Unused sequential element gen_fwft.empty_fwft_fb_reg was removed.  [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1391]
+WARNING: [Synth 8-6014] Unused sequential element fifo_fid_dly_reg was removed.  [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:718]
+WARNING: [Synth 8-6014] Unused sequential element vtg_fid_dly_reg was removed.  [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:745]
+WARNING: [Synth 8-6014] Unused sequential element aclk_reset_pulse_reg was removed.  [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2592]
+WARNING: [Synth 8-3848] Net fifo_underflow_from_remap_reg in module/entity v_axi4s_vid_out_v4_0_16 does not have driver. [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/c523/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:2517]
 WARNING: [Synth 8-7129] Port VIDEO_FORMAT[1] in module v_axi4s_vid_out_v4_0_16_formatter is either unconnected or has no load
 WARNING: [Synth 8-7129] Port VIDEO_FORMAT[0] in module v_axi4s_vid_out_v4_0_16_formatter is either unconnected or has no load
 WARNING: [Synth 8-7129] Port VTG_HSYNC[0] in module v_axi4s_vid_out_v4_0_16_sync is either unconnected or has no load
@@ -144,57 +142,57 @@ WARNING: [Synth 8-7129] Port vtg_field_id_arb in module v_axi4s_vid_out_v4_0_16 
 WARNING: [Synth 8-7129] Port repeat_en in module v_axi4s_vid_out_v4_0_16 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port remap_420_en in module v_axi4s_vid_out_v4_0_16 is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2396.348 ; gain = 517.270
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2083.867 ; gain = 454.617 ; free physical = 4554 ; free virtual = 7010
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2414.250 ; gain = 535.172
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2098.711 ; gain = 469.461 ; free physical = 4509 ; free virtual = 6965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2414.250 ; gain = 535.172
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2098.711 ; gain = 469.461 ; free physical = 4509 ; free virtual = 6965
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 2414.250 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2098.711 ; gain = 0.000 ; free physical = 4473 ; free virtual = 6930
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_ooc.xdc] for cell 'inst'
-Finished Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_ooc.xdc] for cell 'inst'
-Parsing XDC File [I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/dont_touch.xdc]
-Finished Parsing XDC File [I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/dont_touch.xdc]
-Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_clocks.xdc] for cell 'inst'
-Finished Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_clocks.xdc] for cell 'inst'
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc].
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/dont_touch.xdc]
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_clocks.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/design_1_v_axi4s_vid_out_0_0_clocks.xdc] for cell 'inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc].
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [I:/Xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc].
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/opt/xilinx/Vivado/2023.1/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_v_axi4s_vid_out_0_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 INFO: [Project 1-1714] 9 XPM XDC files have been applied to the design.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2526.992 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2246.461 ; gain = 0.000 ; free physical = 3928 ; free virtual = 6385
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 2526.992 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2246.461 ; gain = 0.000 ; free physical = 3917 ; free virtual = 6374
 INFO: [Designutils 20-5008] Incremental synthesis strategy off
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 2653 ; free virtual = 5134
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 2653 ; free virtual = 5134
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/dont_touch.xdc, line 9).
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/dont_touch.xdc, line 9).
 Applied set_property KEEP_HIERARCHY = SOFT for inst/COUPLER_INST/\generate_async_fifo.FIFO_INST /XPM_FIFO_ASYNC_INST/\gnuram_async_fifo.xpm_fifo_base_inst /\gen_cdc_pntr.rd_pntr_cdc_inst . (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for inst/COUPLER_INST/\generate_async_fifo.FIFO_INST /XPM_FIFO_ASYNC_INST/\gnuram_async_fifo.xpm_fifo_base_inst /\gen_cdc_pntr.wr_pntr_cdc_inst . (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for inst/COUPLER_INST/\generate_async_fifo.FIFO_INST /XPM_FIFO_ASYNC_INST/\gnuram_async_fifo.xpm_fifo_base_inst /\gen_cdc_pntr.rd_pntr_cdc_dc_inst . (constraint file  auto generated constraint).
@@ -205,7 +203,7 @@ Applied set_property KEEP_HIERARCHY = SOFT for inst/COUPLER_INST/\generate_async
 Applied set_property KEEP_HIERARCHY = SOFT for inst/COUPLER_INST/\generate_async_fifo.FIFO_INST /XPM_FIFO_ASYNC_INST/\gnuram_async_fifo.xpm_fifo_base_inst /xpm_fifo_rst_inst/\gen_rst_ic.wrst_rd_inst . (constraint file  auto generated constraint).
 Applied set_property KEEP_HIERARCHY = SOFT for inst/COUPLER_INST/\generate_async_fifo.FIFO_INST /XPM_FIFO_ASYNC_INST. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 2646 ; free virtual = 5126
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'gen_rst_ic.curr_wrst_state_reg' in module 'xpm_fifo_rst'
 INFO: [Synth 8-802] inferred FSM for state register 'gen_rst_ic.curr_rrst_state_reg' in module 'xpm_fifo_rst'
@@ -262,7 +260,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'gen_fwft.curr_fwft_state_r
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'v_axi4s_vid_out_v4_0_16_sync'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 2404 ; free virtual = 4891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -369,7 +367,7 @@ WARNING: [Synth 8-7129] Port video_format[0] in module v_axi4s_vid_out_v4_0_16 i
 WARNING: [Synth 8-7129] Port repeat_en in module v_axi4s_vid_out_v4_0_16 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port remap_420_en in module v_axi4s_vid_out_v4_0_16 is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1767 ; free virtual = 4253
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -390,13 +388,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1945 ; free virtual = 4448
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:31 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1903 ; free virtual = 4416
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -416,7 +414,7 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1793 ; free virtual = 4307
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -435,37 +433,37 @@ Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-3295] tying undriven pin CDC_SINGLE_REMAP_UNDERFLOW_INST/xpm_cdc_single_inst:src_in to constant 0
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished IO Insertion : Time (s): cpu = 00:00:37 ; elapsed = 00:00:37 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1226 ; free virtual = 3758
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:37 ; elapsed = 00:00:37 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1221 ; free virtual = 3753
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1211 ; free virtual = 3743
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1209 ; free virtual = 3741
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1206 ; free virtual = 3738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1205 ; free virtual = 3737
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -493,18 +491,18 @@ Report Cell Usage:
 |10    |FDSE     |    11|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1205 ; free virtual = 3737
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 45 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:24 . Memory (MB): peak = 2526.992 ; gain = 535.172
-Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2526.992 ; gain = 647.914
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:35 . Memory (MB): peak = 2246.461 ; gain = 469.461 ; free physical = 1207 ; free virtual = 3737
+Synthesis Optimization Complete : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2246.461 ; gain = 617.211 ; free physical = 1207 ; free virtual = 3737
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 2526.992 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2246.461 ; gain = 0.000 ; free physical = 1473 ; free virtual = 4004
 INFO: [Netlist 29-17] Analyzing 62 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2526.992 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2246.461 ; gain = 0.000 ; free physical = 1441 ; free virtual = 3974
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
@@ -512,10 +510,12 @@ Synth Design complete | Checksum: 6f79024
 INFO: [Common 17-83] Releasing license: Synthesis
 86 Infos, 106 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 2526.992 ; gain = 1021.719
-INFO: [Common 17-1381] The checkpoint 'I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/design_1_v_axi4s_vid_out_0_0.dcp' has been generated.
-INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_v_axi4s_vid_out_0_0, cache-ID = 319243817317076b
+synth_design: Time (s): cpu = 00:00:50 ; elapsed = 00:00:44 . Memory (MB): peak = 2246.461 ; gain = 901.691 ; free physical = 1427 ; free virtual = 3959
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1555.989; main = 1265.788; forked = 293.841
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3179.664; main = 2246.465; forked = 965.215
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/design_1_v_axi4s_vid_out_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_v_axi4s_vid_out_0_0, cache-ID = 6a1afd31f57473a5
 INFO: [Coretcl 2-1174] Renamed 30 cell refs.
-INFO: [Common 17-1381] The checkpoint 'I:/Zybo-Z7/hw/proj/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/design_1_v_axi4s_vid_out_0_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_v_axi4s_vid_out_0_0_synth_1/design_1_v_axi4s_vid_out_0_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file design_1_v_axi4s_vid_out_0_0_utilization_synth.rpt -pb design_1_v_axi4s_vid_out_0_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jul  6 16:06:58 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue May 27 14:54:39 2025...

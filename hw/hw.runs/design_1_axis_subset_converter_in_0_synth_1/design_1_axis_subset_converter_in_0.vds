@@ -1,55 +1,53 @@
 #-----------------------------------------------------------
 # Vivado v2023.1 (64-bit)
-# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Jul  6 16:06:01 2023
-# Process ID: 12616
-# Current directory: I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1
-# Command line: vivado.exe -log design_1_axis_subset_converter_in_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_axis_subset_converter_in_0.tcl
-# Log file: I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1/design_1_axis_subset_converter_in_0.vds
-# Journal file: I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1\vivado.jou
-# Running On: DESKTOP-51FNB60, OS: Windows, CPU Frequency: 3696 MHz, CPU Physical cores: 10, Host memory: 34257 MB
+# Start of session at: Tue May 27 14:52:47 2025
+# Process ID: 7829
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1
+# Command line: vivado -log design_1_axis_subset_converter_in_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_axis_subset_converter_in_0.tcl
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/design_1_axis_subset_converter_in_0.vds
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 2500.000 MHz, CPU Physical cores: 8, Host memory: 16479 MB
 #-----------------------------------------------------------
-Sourcing tcl script 'C:/Users/tesla369/AppData/Roaming/Xilinx/Vivado/Vivado_init.tcl'
-Set Board Part RepoPath: c:/gigigit/vivado-boards/new
 source design_1_axis_subset_converter_in_0.tcl -notrace
-create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1459.824 ; gain = 236.902
+create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1335.859 ; gain = 0.023 ; free physical = 3515 ; free virtual = 6144
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository 'i:/Zybo-Z7/hw/repo'.
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'I:/Xilinx/Vivado/2023.1/data/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2023.1/data/ip'.
 INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: design_1_axis_subset_converter_in_0
 Command: synth_design -top design_1_axis_subset_converter_in_0 -part xc7z010clg400-1 -incremental_mode off -mode out_of_context
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Device 21-403] Loading part xc7z010clg400-1
-INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 14424
+INFO: [Synth 8-7075] Helper process launched with PID 8203
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 2288.770 ; gain = 409.164
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2006.051 ; gain = 378.680 ; free physical = 1522 ; free virtual = 4174
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/synth/design_1_axis_subset_converter_in_0.v:53]
-INFO: [Synth 8-6157] synthesizing module 'top_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/top_design_1_axis_subset_converter_in_0.v:60]
-INFO: [Synth 8-6157] synthesizing module 'axis_subset_converter_v1_1_28_core' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d78a/hdl/axis_subset_converter_v1_1_vl_rfs.v:62]
-INFO: [Synth 8-6155] done synthesizing module 'axis_subset_converter_v1_1_28_core' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d78a/hdl/axis_subset_converter_v1_1_vl_rfs.v:62]
-INFO: [Synth 8-6157] synthesizing module 'tdata_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdata_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tdata_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdata_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6157] synthesizing module 'tuser_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tuser_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tuser_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tuser_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6157] synthesizing module 'tid_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tid_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tid_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tid_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6157] synthesizing module 'tdest_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdest_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tdest_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdest_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6157] synthesizing module 'tstrb_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tstrb_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tstrb_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tstrb_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6157] synthesizing module 'tkeep_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tkeep_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tkeep_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tkeep_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6157] synthesizing module 'tlast_design_1_axis_subset_converter_in_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tlast_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'tlast_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tlast_design_1_axis_subset_converter_in_0.v:48]
-INFO: [Synth 8-6155] done synthesizing module 'top_design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/top_design_1_axis_subset_converter_in_0.v:60]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_subset_converter_in_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/synth/design_1_axis_subset_converter_in_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/synth/design_1_axis_subset_converter_in_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'top_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/top_design_1_axis_subset_converter_in_0.v:60]
+INFO: [Synth 8-6157] synthesizing module 'axis_subset_converter_v1_1_28_core' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d78a/hdl/axis_subset_converter_v1_1_vl_rfs.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'axis_subset_converter_v1_1_28_core' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d78a/hdl/axis_subset_converter_v1_1_vl_rfs.v:62]
+INFO: [Synth 8-6157] synthesizing module 'tdata_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdata_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tdata_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdata_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6157] synthesizing module 'tuser_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tuser_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tuser_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tuser_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6157] synthesizing module 'tid_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tid_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tid_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tid_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6157] synthesizing module 'tdest_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdest_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tdest_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdest_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6157] synthesizing module 'tstrb_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tstrb_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tstrb_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tstrb_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6157] synthesizing module 'tkeep_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tkeep_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tkeep_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tkeep_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6157] synthesizing module 'tlast_design_1_axis_subset_converter_in_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tlast_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'tlast_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tlast_design_1_axis_subset_converter_in_0.v:48]
+INFO: [Synth 8-6155] done synthesizing module 'top_design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/top_design_1_axis_subset_converter_in_0.v:60]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_subset_converter_in_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/synth/design_1_axis_subset_converter_in_0.v:53]
 WARNING: [Synth 8-7129] Port tid[0] in module tlast_design_1_axis_subset_converter_in_0 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port tdata[23] in module tlast_design_1_axis_subset_converter_in_0 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port tdata[22] in module tlast_design_1_axis_subset_converter_in_0 is either unconnected or has no load
@@ -152,53 +150,53 @@ WARNING: [Synth 8-7129] Port tstrb[1] in module tstrb_design_1_axis_subset_conve
 WARNING: [Synth 8-7129] Port tstrb[0] in module tstrb_design_1_axis_subset_converter_in_0 is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2387.613 ; gain = 508.008
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 2077.957 ; gain = 450.586 ; free physical = 1010 ; free virtual = 3662
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2405.523 ; gain = 525.918
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 2095.770 ; gain = 468.398 ; free physical = 998 ; free virtual = 3650
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2405.523 ; gain = 525.918
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 2095.770 ; gain = 468.398 ; free physical = 997 ; free virtual = 3649
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2405.523 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2095.770 ; gain = 0.000 ; free physical = 991 ; free virtual = 3643
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/design_1_axis_subset_converter_in_0_ooc.xdc] for cell 'inst'
-Finished Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/design_1_axis_subset_converter_in_0_ooc.xdc] for cell 'inst'
-Parsing XDC File [I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1/dont_touch.xdc]
-Finished Parsing XDC File [I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1/dont_touch.xdc]
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/design_1_axis_subset_converter_in_0_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_in_0/design_1_axis_subset_converter_in_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2433.395 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2165.738 ; gain = 0.000 ; free physical = 556 ; free virtual = 3209
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 2433.395 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2165.738 ; gain = 0.000 ; free physical = 552 ; free virtual = 3205
 INFO: [Designutils 20-5008] Incremental synthesis strategy off
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:12 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 179 ; free virtual = 2664
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:12 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 179 ; free virtual = 2664
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1/dont_touch.xdc, line 9).
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/dont_touch.xdc, line 9).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:12 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 179 ; free virtual = 2664
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 174 ; free virtual = 2654
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -221,25 +219,25 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 164 ; free virtual = 2632
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 3407 ; free virtual = 5831
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 3407 ; free virtual = 5831
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 3406 ; free virtual = 5831
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -257,37 +255,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished IO Insertion : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -305,16 +303,16 @@ Report Cell Usage:
 +-+-----+------+
 +-+-----+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5238 ; free virtual = 7676
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 12 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 2433.395 ; gain = 525.918
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:22 . Memory (MB): peak = 2433.395 ; gain = 553.789
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 2165.738 ; gain = 468.398 ; free physical = 5228 ; free virtual = 7667
+Synthesis Optimization Complete : Time (s): cpu = 00:00:33 ; elapsed = 00:00:33 . Memory (MB): peak = 2165.738 ; gain = 538.367 ; free physical = 5228 ; free virtual = 7667
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2433.395 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2165.738 ; gain = 0.000 ; free physical = 5228 ; free virtual = 7667
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2433.395 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2165.738 ; gain = 0.000 ; free physical = 5504 ; free virtual = 7932
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
@@ -322,9 +320,11 @@ Synth Design complete | Checksum: 28b65dd9
 INFO: [Common 17-83] Releasing license: Synthesis
 38 Infos, 101 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 2433.395 ; gain = 926.070
-INFO: [Common 17-1381] The checkpoint 'I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1/design_1_axis_subset_converter_in_0.dcp' has been generated.
-INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_axis_subset_converter_in_0, cache-ID = 466047c8d2c82724
-INFO: [Common 17-1381] The checkpoint 'I:/Zybo-Z7/hw/proj/hw.runs/design_1_axis_subset_converter_in_0_synth_1/design_1_axis_subset_converter_in_0.dcp' has been generated.
+synth_design: Time (s): cpu = 00:00:45 ; elapsed = 00:00:40 . Memory (MB): peak = 2165.738 ; gain = 829.879 ; free physical = 5500 ; free virtual = 7928
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1563.021; main = 1252.201; forked = 311.210
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3111.812; main = 2133.727; forked = 978.086
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/design_1_axis_subset_converter_in_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_axis_subset_converter_in_0, cache-ID = 329046d4260b26c0
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_axis_subset_converter_in_0_synth_1/design_1_axis_subset_converter_in_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file design_1_axis_subset_converter_in_0_utilization_synth.rpt -pb design_1_axis_subset_converter_in_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jul  6 16:06:41 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue May 27 14:53:46 2025...

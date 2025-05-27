@@ -92,17 +92,28 @@ fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
 
 -- detect proper frequencies, FIX BY SQUARING JFHLJKSADHFHSDNFLAK
 process(fft_data_out)
-    variable re_mag : signed(23 downto 0);
-    variable im_mag : signed(23 downto 0);
-    constant THRESHOLD : signed(23 downto 0) := to_signed(2048576, 24); -- Example threshold
+    variable re      : signed(23 downto 0);
+    variable im      : signed(23 downto 0);
+    variable re_sq   : unsigned(47 downto 0);
+    variable im_sq   : unsigned(47 downto 0);
+    variable mag_sq  : unsigned(47 downto 0);
+    constant THRESHOLD_SQ : unsigned(47 downto 0) := to_unsigned(2**44, 48);  -- 2^22 squared
 begin
-    re_mag := abs(signed(fft_data_out(47 downto 24)));
-    im_mag := abs(signed(fft_data_out(23 downto 0)));
-    re_mag_dbg <= re_mag;
-    im_mag_dbg <= im_mag;
-    
-    if (re_mag > THRESHOLD) or (im_mag > THRESHOLD) then
-        fft_data_o_sig <= '1'; 
+    re := signed(fft_data_out(47 downto 24));
+    im := signed(fft_data_out(23 downto 0));
+
+    -- Square the real and imaginary parts (cast to unsigned after multiplication)
+    re_sq := unsigned(resize(re, 48)) * unsigned(resize(re, 48));
+    im_sq := unsigned(resize(im, 48)) * unsigned(resize(im, 48));
+
+    -- Add squares to get magnitude squared
+    mag_sq := re_sq + im_sq;
+
+    re_mag_dbg <= resize(re, 24);
+    im_mag_dbg <= resize(im, 24);
+
+    if mag_sq > THRESHOLD_SQ then
+        fft_data_o_sig <= '1';
     else
         fft_data_o_sig <= '0';
     end if;

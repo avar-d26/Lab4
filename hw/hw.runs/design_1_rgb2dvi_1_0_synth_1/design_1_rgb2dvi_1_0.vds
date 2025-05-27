@@ -1,36 +1,34 @@
 #-----------------------------------------------------------
 # Vivado v2023.1 (64-bit)
-# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Jul  6 16:05:26 2023
-# Process ID: 14544
-# Current directory: I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1
-# Command line: vivado.exe -log design_1_rgb2dvi_1_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_rgb2dvi_1_0.tcl
-# Log file: I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1/design_1_rgb2dvi_1_0.vds
-# Journal file: I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1\vivado.jou
-# Running On: DESKTOP-51FNB60, OS: Windows, CPU Frequency: 3696 MHz, CPU Physical cores: 10, Host memory: 34257 MB
+# Start of session at: Tue May 27 14:51:28 2025
+# Process ID: 6634
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1
+# Command line: vivado -log design_1_rgb2dvi_1_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_rgb2dvi_1_0.tcl
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/design_1_rgb2dvi_1_0.vds
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 1796.513 MHz, CPU Physical cores: 8, Host memory: 16479 MB
 #-----------------------------------------------------------
-Sourcing tcl script 'C:/Users/tesla369/AppData/Roaming/Xilinx/Vivado/Vivado_init.tcl'
-Set Board Part RepoPath: c:/gigigit/vivado-boards/new
 source design_1_rgb2dvi_1_0.tcl -notrace
-create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1458.289 ; gain = 236.215
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1304.477 ; gain = 0.023 ; free physical = 5718 ; free virtual = 11163
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository 'i:/Zybo-Z7/hw/repo'.
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'I:/Xilinx/Vivado/2023.1/data/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2023.1/data/ip'.
 INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: design_1_rgb2dvi_1_0
 Command: synth_design -top design_1_rgb2dvi_1_0 -part xc7z010clg400-1 -incremental_mode off -mode out_of_context
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Device 21-403] Loading part xc7z010clg400-1
-INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 14432
+INFO: [Synth 8-7075] Helper process launched with PID 6894
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2288.648 ; gain = 408.234
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 2007.543 ; gain = 380.648 ; free physical = 258 ; free virtual = 3862
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'design_1_rgb2dvi_1_0' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/synth/design_1_rgb2dvi_1_0.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'design_1_rgb2dvi_1_0' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/synth/design_1_rgb2dvi_1_0.vhd:72]
 	Parameter kGenerateSerialClk bound to: 0 - type: bool 
 	Parameter kClkPrimitive bound to: PLL - type: string 
 	Parameter kRstActiveHigh bound to: 0 - type: bool 
@@ -39,15 +37,15 @@ INFO: [Synth 8-638] synthesizing module 'design_1_rgb2dvi_1_0' [i:/Zybo-Z7/hw/pr
 	Parameter kD1Swap bound to: 0 - type: bool 
 	Parameter kD2Swap bound to: 0 - type: bool 
 	Parameter kClkSwap bound to: 0 - type: bool 
-INFO: [Synth 8-3491] module 'rgb2dvi' declared at 'i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/rgb2dvi.vhd:62' bound to instance 'U0' of component 'rgb2dvi' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/synth/design_1_rgb2dvi_1_0.vhd:124]
-INFO: [Synth 8-638] synthesizing module 'rgb2dvi' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/rgb2dvi.vhd:94]
-INFO: [Synth 8-638] synthesizing module 'ResetBridge' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsyncReset.vhd:72]
-INFO: [Synth 8-638] synthesizing module 'SyncAsync' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsync.vhd:72]
-INFO: [Synth 8-256] done synthesizing module 'SyncAsync' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsync.vhd:72]
-INFO: [Synth 8-256] done synthesizing module 'ResetBridge' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsyncReset.vhd:72]
-INFO: [Synth 8-638] synthesizing module 'OutputSERDES' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:76]
+INFO: [Synth 8-3491] module 'rgb2dvi' declared at '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/rgb2dvi.vhd:62' bound to instance 'U0' of component 'rgb2dvi' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/synth/design_1_rgb2dvi_1_0.vhd:124]
+INFO: [Synth 8-638] synthesizing module 'rgb2dvi' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/rgb2dvi.vhd:94]
+INFO: [Synth 8-638] synthesizing module 'ResetBridge' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsyncReset.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'SyncAsync' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsync.vhd:72]
+INFO: [Synth 8-256] done synthesizing module 'SyncAsync' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsync.vhd:72]
+INFO: [Synth 8-256] done synthesizing module 'ResetBridge' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/SyncAsyncReset.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'OutputSERDES' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:76]
 	Parameter IOSTANDARD bound to: TMDS_33 - type: string 
-INFO: [Synth 8-113] binding component instance 'OutputBuffer' to cell 'OBUFDS' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:83]
+INFO: [Synth 8-113] binding component instance 'OutputBuffer' to cell 'OBUFDS' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:83]
 	Parameter DATA_RATE_OQ bound to: DDR - type: string 
 	Parameter DATA_RATE_TQ bound to: SDR - type: string 
 	Parameter DATA_WIDTH bound to: 10 - type: integer 
@@ -55,7 +53,7 @@ INFO: [Synth 8-113] binding component instance 'OutputBuffer' to cell 'OBUFDS' [
 	Parameter TBYTE_CTL bound to: FALSE - type: string 
 	Parameter TBYTE_SRC bound to: FALSE - type: string 
 	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-113] binding component instance 'SerializerMaster' to cell 'OSERDESE2' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:92]
+INFO: [Synth 8-113] binding component instance 'SerializerMaster' to cell 'OSERDESE2' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:92]
 	Parameter DATA_RATE_OQ bound to: DDR - type: string 
 	Parameter DATA_RATE_TQ bound to: SDR - type: string 
 	Parameter DATA_WIDTH bound to: 10 - type: integer 
@@ -63,69 +61,69 @@ INFO: [Synth 8-113] binding component instance 'SerializerMaster' to cell 'OSERD
 	Parameter TBYTE_CTL bound to: FALSE - type: string 
 	Parameter TBYTE_SRC bound to: FALSE - type: string 
 	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-113] binding component instance 'SerializerSlave' to cell 'OSERDESE2' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:135]
-INFO: [Synth 8-256] done synthesizing module 'OutputSERDES' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:76]
-INFO: [Synth 8-638] synthesizing module 'TMDS_Encoder' [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/TMDS_Encoder.vhd:80]
-INFO: [Synth 8-256] done synthesizing module 'TMDS_Encoder' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/TMDS_Encoder.vhd:80]
-INFO: [Synth 8-256] done synthesizing module 'rgb2dvi' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/rgb2dvi.vhd:94]
-INFO: [Synth 8-256] done synthesizing module 'design_1_rgb2dvi_1_0' (0#1) [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/synth/design_1_rgb2dvi_1_0.vhd:72]
+INFO: [Synth 8-113] binding component instance 'SerializerSlave' to cell 'OSERDESE2' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:135]
+INFO: [Synth 8-256] done synthesizing module 'OutputSERDES' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/OutputSERDES.vhd:76]
+INFO: [Synth 8-638] synthesizing module 'TMDS_Encoder' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/TMDS_Encoder.vhd:80]
+INFO: [Synth 8-256] done synthesizing module 'TMDS_Encoder' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/TMDS_Encoder.vhd:80]
+INFO: [Synth 8-256] done synthesizing module 'rgb2dvi' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/d57c/src/rgb2dvi.vhd:94]
+INFO: [Synth 8-256] done synthesizing module 'design_1_rgb2dvi_1_0' (0#1) [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/synth/design_1_rgb2dvi_1_0.vhd:72]
 WARNING: [Synth 8-7129] Port SerialClk in module TMDS_Encoder is either unconnected or has no load
 WARNING: [Synth 8-7129] Port aRst in module TMDS_Encoder is either unconnected or has no load
 WARNING: [Synth 8-7129] Port aRst in module rgb2dvi is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2386.402 ; gain = 505.988
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2077.480 ; gain = 450.586 ; free physical = 169 ; free virtual = 3254
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2404.328 ; gain = 523.914
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2092.324 ; gain = 465.430 ; free physical = 166 ; free virtual = 3243
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2404.328 ; gain = 523.914
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2092.324 ; gain = 465.430 ; free physical = 166 ; free virtual = 3243
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 2416.336 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2095.293 ; gain = 0.000 ; free physical = 196 ; free virtual = 3159
 INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_ooc.xdc] for cell 'U0'
-Finished Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_ooc.xdc] for cell 'U0'
-Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi.xdc] for cell 'U0'
-Finished Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi.xdc] for cell 'U0'
-Parsing XDC File [I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1/dont_touch.xdc]
-Finished Parsing XDC File [I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1/dont_touch.xdc]
-Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_clocks.xdc] for cell 'U0'
-Finished Parsing XDC File [i:/Zybo-Z7/hw/proj/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_clocks.xdc] for cell 'U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_ooc.xdc] for cell 'U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi.xdc] for cell 'U0'
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/dont_touch.xdc]
+Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_clocks.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/src/rgb2dvi_clocks.xdc] for cell 'U0'
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2517.059 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2240.074 ; gain = 0.000 ; free physical = 211 ; free virtual = 3109
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 2517.059 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2240.074 ; gain = 0.000 ; free physical = 206 ; free virtual = 3108
 INFO: [Designutils 20-5008] Incremental synthesis strategy off
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 161 ; free virtual = 2628
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 160 ; free virtual = 2628
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1/dont_touch.xdc, line 9).
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/dont_touch.xdc, line 9).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 166 ; free virtual = 2625
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 166 ; free virtual = 2598
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -169,25 +167,25 @@ Start Cross Boundary and Area Optimization
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 WARNING: [Synth 8-7129] Port aRst in module rgb2dvi is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 167 ; free virtual = 2349
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 173 ; free virtual = 2289
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 173 ; free virtual = 2289
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Technology Mapping : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 173 ; free virtual = 2289
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -205,37 +203,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished IO Insertion : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1199 ; free virtual = 3366
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1198 ; free virtual = 3365
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1205 ; free virtual = 3372
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1204 ; free virtual = 3372
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1202 ; free virtual = 3370
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1201 ; free virtual = 3370
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -264,18 +262,18 @@ Report Cell Usage:
 |12    |OBUFDS    |     4|
 +------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1202 ; free virtual = 3371
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:24 . Memory (MB): peak = 2517.059 ; gain = 523.914
-Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2517.059 ; gain = 636.645
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:36 ; elapsed = 00:00:37 . Memory (MB): peak = 2240.074 ; gain = 465.430 ; free physical = 1214 ; free virtual = 3365
+Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 2240.074 ; gain = 613.180 ; free physical = 1216 ; free virtual = 3367
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2517.059 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2240.074 ; gain = 0.000 ; free physical = 1215 ; free virtual = 3367
 INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2517.059 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2240.074 ; gain = 0.000 ; free physical = 1489 ; free virtual = 3639
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
@@ -283,10 +281,12 @@ Synth Design complete | Checksum: 4ad9720
 INFO: [Common 17-83] Releasing license: Synthesis
 37 Infos, 5 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 2517.059 ; gain = 1012.578
-INFO: [Common 17-1381] The checkpoint 'I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1/design_1_rgb2dvi_1_0.dcp' has been generated.
-INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_rgb2dvi_1_0, cache-ID = e3f03a258ba652a9
+synth_design: Time (s): cpu = 00:00:51 ; elapsed = 00:00:46 . Memory (MB): peak = 2240.074 ; gain = 929.660 ; free physical = 1488 ; free virtual = 3637
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1491.027; main = 1234.031; forked = 265.732
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3168.371; main = 2240.078; forked = 960.309
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/design_1_rgb2dvi_1_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_rgb2dvi_1_0, cache-ID = 3008b342d0208791
 INFO: [Coretcl 2-1174] Renamed 10 cell refs.
-INFO: [Common 17-1381] The checkpoint 'I:/Zybo-Z7/hw/proj/hw.runs/design_1_rgb2dvi_1_0_synth_1/design_1_rgb2dvi_1_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint '/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_rgb2dvi_1_0_synth_1/design_1_rgb2dvi_1_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file design_1_rgb2dvi_1_0_utilization_synth.rpt -pb design_1_rgb2dvi_1_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jul  6 16:06:09 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue May 27 14:52:30 2025...

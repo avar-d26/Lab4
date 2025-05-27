@@ -7,14 +7,10 @@
 # Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 # 
 
-echo "This script was generated under a different operating system."
-echo "Please update the PATH and LD_LIBRARY_PATH variables below, before executing this script"
-exit
-
 if [ -z "$PATH" ]; then
-  PATH=I:/Xilinx/Vitis/2023.1/bin;I:/Xilinx/Vivado/2023.1/ids_lite/ISE/bin/nt64;I:/Xilinx/Vivado/2023.1/ids_lite/ISE/lib/nt64:I:/Xilinx/Vivado/2023.1/bin
+  PATH=/opt/xilinx/Vitis/2023.1/bin:/opt/xilinx/Vivado/2023.1/ids_lite/ISE/bin/lin64:/opt/xilinx/Vivado/2023.1/bin
 else
-  PATH=I:/Xilinx/Vitis/2023.1/bin;I:/Xilinx/Vivado/2023.1/ids_lite/ISE/bin/nt64;I:/Xilinx/Vivado/2023.1/ids_lite/ISE/lib/nt64:I:/Xilinx/Vivado/2023.1/bin:$PATH
+  PATH=/opt/xilinx/Vitis/2023.1/bin:/opt/xilinx/Vivado/2023.1/ids_lite/ISE/bin/lin64:/opt/xilinx/Vivado/2023.1/bin:$PATH
 fi
 export PATH
 
@@ -25,7 +21,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='I:/Zybo-Z7/hw/proj/hw.runs/design_1_processing_system7_0_0_synth_1'
+HD_PWD='/home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_processing_system7_0_0_synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

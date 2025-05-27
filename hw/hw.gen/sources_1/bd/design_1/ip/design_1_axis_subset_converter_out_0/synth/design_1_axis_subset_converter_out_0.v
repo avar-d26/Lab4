@@ -1,5 +1,5 @@
 // (c) Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-// (c) Copyright 2022-2023 Advanced Micro Devices, Inc. All rights reserved.
+// (c) Copyright 2022-2025 Advanced Micro Devices, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of AMD and is protected under U.S. and international copyright
@@ -52,8 +52,8 @@
 
 (* X_CORE_INFO = "top_design_1_axis_subset_converter_out_0,Vivado 2023.1" *)
 (* CHECK_LICENSE_TYPE = "design_1_axis_subset_converter_out_0,top_design_1_axis_subset_converter_out_0,{}" *)
-(* CORE_GENERATION_INFO = "design_1_axis_subset_converter_out_0,top_design_1_axis_subset_converter_out_0,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axis_subset_converter,x_ipVersion=1.1,x_ipCoreRevision=28,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=zynq,C_S_AXIS_TDATA_WIDTH=24,C_S_AXIS_TID_WIDTH=1,C_S_AXIS_TDEST_WIDTH=1,C_S_AXIS_TUSER_WIDTH=1,C_S_AXIS_SIGNAL_SET=0b00000000000000000000000010011011,C_M_AXIS_TDATA_WIDTH=24,C_M_AXIS_TID_WIDTH=1,C_M_AXIS_TDEST_WIDTH=1,C_M_AXIS_SIGNAL_SET=\
-0b00000000000000000000000010011011,C_M_AXIS_TUSER_WIDTH=1,C_DEFAULT_TLAST=0}" *)
+(* CORE_GENERATION_INFO = "design_1_axis_subset_converter_out_0,top_design_1_axis_subset_converter_out_0,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axis_subset_converter,x_ipVersion=1.1,x_ipCoreRevision=28,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,C_FAMILY=zynq,C_S_AXIS_TDATA_WIDTH=24,C_S_AXIS_TID_WIDTH=1,C_S_AXIS_TDEST_WIDTH=1,C_S_AXIS_TUSER_WIDTH=1,C_S_AXIS_SIGNAL_SET=0b00000000000000000000000010011011,C_M_AXIS_TDATA_WIDTH=24,C_M_AXIS_TID_WIDTH=1,C_M_AXIS_TDEST_WIDTH=1,C_M_AXIS_SIGNAL_SET=0b0\
+0000000000000000000000010011011,C_M_AXIS_TUSER_WIDTH=1,C_DEFAULT_TLAST=0}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_axis_subset_converter_out_0 (
   aclk,
