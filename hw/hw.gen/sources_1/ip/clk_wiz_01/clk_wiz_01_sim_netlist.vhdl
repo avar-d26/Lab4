@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
--- Date        : Tue May 20 15:14:15 2025
+-- Date        : Tue May 20 15:14:14 2025
 -- Host        : brad69 running 64-bit Linux Mint 21.3
--- Command     : write_vhdl -force -mode funcsim
---               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top clk_wiz_01 -prefix
+--               clk_wiz_01_ clk_wiz_01_sim_netlist.vhdl
 -- Design      : clk_wiz_01
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -15,14 +15,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity clk_wiz_01_clk_wiz is
+entity clk_wiz_01_clk_wiz_01_clk_wiz is
   port (
     mclk : out STD_LOGIC;
     sysclk : in STD_LOGIC
   );
-end clk_wiz_01_clk_wiz;
+end clk_wiz_01_clk_wiz_01_clk_wiz;
 
-architecture STRUCTURE of clk_wiz_01_clk_wiz is
+architecture STRUCTURE of clk_wiz_01_clk_wiz_01_clk_wiz is
   signal clkfbout_buf_clk_wiz_01 : STD_LOGIC;
   signal clkfbout_clk_wiz_01 : STD_LOGIC;
   signal mclk_clk_wiz_01 : STD_LOGIC;
@@ -176,7 +176,7 @@ end clk_wiz_01;
 
 architecture STRUCTURE of clk_wiz_01 is
 begin
-inst: entity work.clk_wiz_01_clk_wiz
+inst: entity work.clk_wiz_01_clk_wiz_01_clk_wiz
      port map (
       mclk => mclk,
       sysclk => sysclk

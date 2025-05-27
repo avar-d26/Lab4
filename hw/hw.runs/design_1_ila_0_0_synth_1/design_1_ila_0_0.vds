@@ -1,0 +1,27 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Tue May 27 11:38:17 2025
+# Process ID: 8619
+# Current directory: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_ila_0_0_synth_1
+# Command line: vivado -log design_1_ila_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_ila_0_0.tcl
+# Log file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_ila_0_0_synth_1/design_1_ila_0_0.vds
+# Journal file: /home/bzhao30/ENGS128/Lab4/hw/hw.runs/design_1_ila_0_0_synth_1/vivado.jou
+# Running On: brad69, OS: Linux, CPU Frequency: 1099.999 MHz, CPU Physical cores: 8, Host memory: 16479 MB
+#-----------------------------------------------------------
+source design_1_ila_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1301.512 ; gain = 0.023 ; free physical = 6236 ; free virtual = 9099
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/bzhao30/ENGS128/Lab4/hw/hw.ipdefs/repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/xilinx/Vivado/2023.1/data/ip'.
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: design_1_ila_0_0
+Command: synth_design -top design_1_ila_0_0 -part xc7z010clg400-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 9358

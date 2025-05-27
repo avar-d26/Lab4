@@ -4,8 +4,8 @@
 // Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
 // Date        : Tue May 20 15:14:14 2025
 // Host        : brad69 running 64-bit Linux Mint 21.3
-// Command     : write_verilog -force -mode synth_stub
-//               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top clk_wiz_01 -prefix
+//               clk_wiz_01_ clk_wiz_01_stub.v
 // Design      : clk_wiz_01
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1

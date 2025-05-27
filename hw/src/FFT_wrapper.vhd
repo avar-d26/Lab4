@@ -90,7 +90,7 @@ begin
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
 
--- detect proper frequencies
+-- detect proper frequencies, FIX BY SQUARING JFHLJKSADHFHSDNFLAK
 process(fft_data_out)
     variable re_mag : signed(23 downto 0);
     variable im_mag : signed(23 downto 0);

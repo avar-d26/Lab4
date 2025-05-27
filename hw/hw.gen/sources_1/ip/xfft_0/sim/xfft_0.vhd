@@ -196,7 +196,7 @@ BEGIN
       C_HAS_NFFT => 0,
       C_USE_FLT_PT => 0,
       C_INPUT_WIDTH => 24,
-      C_TWIDDLE_WIDTH => 20,
+      C_TWIDDLE_WIDTH => 24,
       C_OUTPUT_WIDTH => 24,
       C_HAS_SCALING => 1,
       C_HAS_BFP => 0,

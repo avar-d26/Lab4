@@ -1,0 +1,40 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/blk_mem_gen_0/sim/blk_mem_gen_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module blk_mem_gen_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01_clk_wiz.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_wiz_01_clk_wiz
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_wiz_01
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/xfft_0/sim/xfft_0.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'xfft_0'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/BRAM_wrapper.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'BRAM_wrapper'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/FFT_wrapper.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FFT_wrapper'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/axis_fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'axis_fifo'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/axis_i2s_wrapper.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'axis_i2s_wrapper'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/axis_transmitter_interface.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'axis_transmitter_interface'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/bclk_divider.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'bclk_divider'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/clock_divider.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/create_88key.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'create_88key'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'fifo'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/i2s_clk_gen.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'i2s_clk_gen'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/i2s_receiver.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'i2s_receiver'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/i2s_transmitter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'i2s_transmitter'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/src/shift_register.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'shift_register'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/hw.srcs/sim_1/imports/src/tb_passthru.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'tb_passthru'

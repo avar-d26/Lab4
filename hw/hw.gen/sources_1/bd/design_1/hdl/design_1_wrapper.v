@@ -1,9 +1,9 @@
 //Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 //Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-//Date        : Thu Jul  6 16:03:08 2023
-//Host        : DESKTOP-51FNB60 running 64-bit major release  (build 9200)
+//Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
+//Date        : Tue May 27 11:27:58 2025
+//Host        : brad69 running 64-bit Linux Mint 21.3
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -32,6 +32,13 @@ module design_1_wrapper
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    ac_adc_data_i,
+    ac_adc_lrclk_o,
+    ac_bclk_o,
+    ac_dac_data_o,
+    ac_dac_lrclk_o,
+    ac_mclk_o,
+    ac_mute_n_o,
     hdmi_in_clk_n,
     hdmi_in_clk_p,
     hdmi_in_data_n,
@@ -66,6 +73,13 @@ module design_1_wrapper
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  input ac_adc_data_i;
+  output ac_adc_lrclk_o;
+  output ac_bclk_o;
+  output ac_dac_data_o;
+  output ac_dac_lrclk_o;
+  output ac_mclk_o;
+  output ac_mute_n_o;
   input hdmi_in_clk_n;
   input hdmi_in_clk_p;
   input [2:0]hdmi_in_data_n;
@@ -101,6 +115,13 @@ module design_1_wrapper
   wire FIXED_IO_ps_clk;
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
+  wire ac_adc_data_i;
+  wire ac_adc_lrclk_o;
+  wire ac_bclk_o;
+  wire ac_dac_data_o;
+  wire ac_dac_lrclk_o;
+  wire ac_mclk_o;
+  wire ac_mute_n_o;
   wire hdmi_in_clk_n;
   wire hdmi_in_clk_p;
   wire [2:0]hdmi_in_data_n;
@@ -149,6 +170,13 @@ module design_1_wrapper
         .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
         .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
         .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+        .ac_adc_data_i(ac_adc_data_i),
+        .ac_adc_lrclk_o(ac_adc_lrclk_o),
+        .ac_bclk_o(ac_bclk_o),
+        .ac_dac_data_o(ac_dac_data_o),
+        .ac_dac_lrclk_o(ac_dac_lrclk_o),
+        .ac_mclk_o(ac_mclk_o),
+        .ac_mute_n_o(ac_mute_n_o),
         .hdmi_in_clk_n(hdmi_in_clk_n),
         .hdmi_in_clk_p(hdmi_in_clk_p),
         .hdmi_in_data_n(hdmi_in_data_n),
