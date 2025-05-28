@@ -33,7 +33,8 @@ signal clk, resetn_en : std_logic := '0';
 signal key_state_sig : std_logic_vector(KEY_NUM-1 downto 0); -- 88-bit piano key status of which keys are active 
 
 -- Video Timing Signals
-signal sof_state_sig, active_video_sig, hsync_sig, vsync_sig, vblank_sig, hblank_sig, fsynch_sig : std_logic := '0';
+signal sof_state_sig, active_video_sig, hsync_sig, vsync_sig, vblank_sig, hblank_sig : std_logic := '0';
+signal fsync_sig : std_logic_vector (0 downto 0) := (others => '0');
 
 -- Testbench Signals
 signal sine_data, sine_data_tx : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
@@ -41,7 +42,7 @@ signal bit_count : integer := 0;
 
 -- AXI Stream Signals
 signal M_AXIS_TDATA, S_AXIS_TDATA : std_logic_vector(DATA_WIDTH-1 downto 0);
-signal M_AXIS_USER, S_AXIS_USER : std_logic := '0';
+signal M_AXIS_TUSER, S_AXIS_TUSER : std_logic := '0';
 signal M_AXIS_TVALID, S_AXIS_TVALID, S_AXIS_TREADY : std_logic := '0';
 signal M_AXIS_TREADY : std_logic := '1';
 signal M_AXIS_TLAST, S_AXIS_TLAST : std_logic := '0';
@@ -54,7 +55,7 @@ component piano_overlay is
   Generic (
     KEY_NUM : integer := 88;
     DATA_WIDTH : integer := 24;
-    COLUMN_WIDTH : 14);
+    COLUMN_WIDTH : integer := 14);
   Port (
     clk_i            : in  std_logic;
     resetn_i            : in  std_logic;
@@ -74,14 +75,14 @@ component piano_overlay is
     s_axis_tvalid_i  : in  std_logic;
     s_axis_tuser_i   : in  std_logic;
     s_axis_tlast_i   : in  std_logic;
-    s_axis_tready_i  : out std_logic;
+    s_axis_tready_o  : out std_logic;
 
     -- AXI-Stream video master
     m_axis_tdata_o   : out std_logic_vector(DATA_WIDTH-1 downto 0);
     m_axis_tvalid_o  : out std_logic;
     m_axis_tuser_o   : out std_logic;
     m_axis_tlast_o   : out std_logic;
-    m_axis_tready_o  : in  std_logic
+    m_axis_tready_i  : in  std_logic
   );
 end component;
 
@@ -101,6 +102,9 @@ component v_tc_0 is
     fsync_out : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
   );
 end component;
+
+begin
+
 ----------------------------------------------------------------------------
 -- Clock generation
 clock_gen_process : process
@@ -137,14 +141,14 @@ piano_overlay_dut: piano_overlay
     s_axis_tvalid_i => S_AXIS_TVALID,
     s_axis_tuser_i => S_AXIS_TUSER,
     s_axis_tlast_i => S_AXIS_TLAST,
-    s_axis_tready_i => S_AXIS_TREADY,
+    s_axis_tready_o => S_AXIS_TREADY,
 
     -- AXI-Stream video master
     m_axis_tdata_o => M_AXIS_TDATA,
     m_axis_tvalid_o  => M_AXIS_TVALID,
     m_axis_tuser_o => M_AXIS_TUSER,
     m_axis_tlast_o => M_AXIS_TLAST,
-    m_axis_tready_o => M_AXIS_TREADY,
+    m_axis_tready_i => M_AXIS_TREADY
   );
 
 -- Video Timing Controller Signals
@@ -160,8 +164,7 @@ video_timing_controller: v_tc_0
     vblank_out => vblank_sig,
     active_video_out => active_video_sig,
     resetn => resetn_en,
-    fsync_out => fsynch_sig,
-  );
+    fsync_out => fsync_sig);
 
 
 ----------------------------------------------------------------------------
@@ -187,8 +190,19 @@ begin
   for i in 0 to 10 loop
     S_AXIS_TDATA <= x"FFFFFF";     -- White pixel (24-bit RGB)
     S_AXIS_TVALID <= '1';
-    S_AXIS_TUSER <= '1' when i = 0 else '0';  -- First pixel of frame
-    S_AXIS_TLAST <= '1' when i = 10 else '0'; -- Last pixel of line
+    
+    -- VHDL-93 compliant version of conditional assignment
+    if i = 0 then
+      S_AXIS_TUSER <= '1';  -- First pixel of frame
+    else
+      S_AXIS_TUSER <= '0';
+    end if;
+    
+    if i = 10 then
+      S_AXIS_TLAST <= '1'; -- Last pixel of line
+    else
+      S_AXIS_TLAST <= '0';
+    end if;
 
     wait for CLOCK_PERIOD;
   end loop;
