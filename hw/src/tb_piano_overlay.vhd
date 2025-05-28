@@ -15,6 +15,8 @@ entity tb_piano_overlay is
 end tb_piano_overlay;
 
 architecture testbench of tb_piano_overlay is
+
+
 ----------------------------------------------------------------------------
 -- Constants
 constant DATA_WIDTH : integer := 24;        -- 24-bit video RGB data 
@@ -55,7 +57,7 @@ component piano_overlay is
   Generic (
     KEY_NUM : integer := 88;
     DATA_WIDTH : integer := 24;
-    COLUMN_WIDTH : integer := 14);
+    COLUMN_WIDTH : integer := 13);
   Port (
     clk_i            : in  std_logic;
     resetn_i            : in  std_logic;
@@ -66,6 +68,7 @@ component piano_overlay is
     vsync_i          : in  std_logic;
     vblank_i         : in  std_logic;
     hblank_i         : in  std_logic;
+    fsync_i          : in std_logic_vector (0 downto 0);
 
     -- Key frame input
     key_state_i      : in  std_logic_vector(KEY_NUM-1 downto 0);
@@ -87,7 +90,7 @@ component piano_overlay is
 end component;
 
 -- Video Timing Controller IP
-component v_tc_0 is
+component v_tc_1 is
   port (
     clk : IN STD_LOGIC;
     clken : IN STD_LOGIC;
@@ -132,6 +135,7 @@ piano_overlay_dut: piano_overlay
     vsync_i => vsync_sig,
     vblank_i => vblank_sig,
     hblank_i => hblank_sig,
+    fsync_i => fsync_sig,
 
     -- Key frame input
     key_state_i => key_state_sig,
@@ -152,7 +156,7 @@ piano_overlay_dut: piano_overlay
   );
 
 -- Video Timing Controller Signals
-video_timing_controller: v_tc_0
+video_timing_controller: v_tc_1
   port map (
     clk => clk,
     clken => '1',
@@ -183,35 +187,13 @@ begin
   -- Set keys 0, 5, and 87 as pressed
   key_state_sig <= (others => '0');
   key_state_sig(0) <= '1';
-  key_state_sig(5) <= '1';
+  key_state_sig(81) <= '1';
   key_state_sig(87) <= '1';
 
-  -- Simulate a few cycles of white pixel input
-  for i in 0 to 10 loop
-    S_AXIS_TDATA <= x"FFFFFF";     -- White pixel (24-bit RGB)
-    S_AXIS_TVALID <= '1';
-    
-    -- VHDL-93 compliant version of conditional assignment
-    if i = 0 then
-      S_AXIS_TUSER <= '1';  -- First pixel of frame
-    else
-      S_AXIS_TUSER <= '0';
-    end if;
-    
-    if i = 10 then
-      S_AXIS_TLAST <= '1'; -- Last pixel of line
-    else
-      S_AXIS_TLAST <= '0';
-    end if;
 
-    wait for CLOCK_PERIOD;
-  end loop;
+  S_AXIS_TDATA <= x"FFFFFF";     -- White pixel (24-bit RGB)
+  S_AXIS_TVALID <= '1';
 
-  -- Hold values low afterward
-  S_AXIS_TVALID <= '0';
-  S_AXIS_TUSER  <= '0';
-  S_AXIS_TLAST  <= '0';
-  S_AXIS_TDATA  <= (others => '0');
 
   wait;  -- Wait indefinitely
   
