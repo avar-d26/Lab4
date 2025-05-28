@@ -5,9 +5,11 @@
 !hw/
 !hw/src/
 !hw/src/**
+
+# Allow only files in Zybo-Z7-10-HDMI/src
 !Zybo-Z7-10-HDMI/
 !Zybo-Z7-10-HDMI/src/
-Zybo-Z7-10-HDMI/src/**
+!Zybo-Z7-10-HDMI/src/**
 
 # Keep .gitignore itself
 !.gitignore
