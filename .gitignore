@@ -1,10 +1,10 @@
 # Ignore everything
 **
 
-# Allow only files inside hw/src/
+# Allow only files in hw/src
 !hw/
 !hw/src/
 !hw/src/**
 
-# Optional: Keep .gitignore tracked
+# Keep .gitignore itself
 !.gitignore

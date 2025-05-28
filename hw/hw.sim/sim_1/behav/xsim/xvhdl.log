@@ -1,5 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/0bb5/src/SyncBase.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'SyncBase'
-ERROR: [VRFC 10-2987] 'syncasync' is not compiled in library 'xil_defaultlib' [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/0bb5/src/SyncBase.vhd:90]
-ERROR: [VRFC 10-9458] unit 'behavioral' is ignored due to previous errors [/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/0bb5/src/SyncBase.vhd:74]
-INFO: [VRFC 10-8704] VHDL file '/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/0bb5/src/SyncBase.vhd' is ignored due to errors
