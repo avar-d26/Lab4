@@ -5,6 +5,9 @@
 !hw/
 !hw/src/
 !hw/src/**
+!Zybo-Z7-10-HDMI/
+!Zybo-Z7-10-HDMI/src/
+Zybo-Z7-10-HDMI/src/**
 
 # Keep .gitignore itself
 !.gitignore
