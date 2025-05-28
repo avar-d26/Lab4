@@ -18,7 +18,7 @@ entity piano_overlay is
     COLUMN_WIDTH : 14);
   Port (
     clk_i            : in  std_logic;
-    reset_i            : in  std_logic;
+    resetn_i            : in  std_logic; -- active low reset
 
     -- Video timing
     active_video_i   : in  std_logic;
@@ -147,7 +147,7 @@ end process state_update;
 current_keys_reg : process(clk_i)
 begin
   if rising_edge(clk_i) then
-    if reset_i = '1' then
+    if resetn_i = '0' then
       current_keys <= (others => '0');
     elsif vsync_i = '1' then
       current_keys <= key_state_i;
@@ -159,7 +159,7 @@ end process current_keys_reg;
 column_index_counter : process(clk_i)
 begin
   if rising_edge(clk_i) then
-    if reset_i = '1' then
+    if resetn_i = '0' then
       column_index <= 0;   -- reset
     elsif column_index = KEY_NUM - 1 then
       column_index <= 0;
@@ -173,7 +173,7 @@ end process column_index_counter;
 key_length_counter : process(clk_i)
 begin
   if rising_edge(clk_i) then
-    if reset_i = '1' then
+    if resetn_i = '0' then
       key_length <= (others => '0');   -- reset
     elsif key_counter_tc = '1' then
       key_length <= (others => '0');   -- set back to 0 after done counting
