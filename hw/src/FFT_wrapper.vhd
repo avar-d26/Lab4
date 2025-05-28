@@ -37,7 +37,11 @@ entity FFT_wrapper is
     s00_axis_tstrb    :  in std_logic_vector((INPUT_DATA_WIDTH/8)-1 downto 0); -- dont care
     s00_axis_tlast    :  in std_logic;
     s00_axis_tvalid   :  in std_logic;
-
+    
+    -- debugs
+    re_mag_dbg_o        : out std_logic_vector(23 downto 0);
+    im_mag_dbg_o        : out std_logic_vector(23 downto 0);
+    mag_sq_dbg_o        : out std_logic_vector(47 downto 0);
 
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
