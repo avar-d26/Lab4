@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
--- Date        : Tue May 27 14:52:28 2025
+-- Date        : Tue May 27 14:52:27 2025
 -- Host        : brad69 running 64-bit Linux Mint 21.3
--- Command     : write_vhdl -force -mode funcsim
---               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_dynclk_0_0/design_1_axi_dynclk_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_axi_dynclk_0_0 -prefix
+--               design_1_axi_dynclk_0_0_ design_1_axi_dynclk_0_0_sim_netlist.vhdl
 -- Design      : design_1_axi_dynclk_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -24,8 +24,6 @@ entity design_1_axi_dynclk_0_0_SyncAsync is
     RST : in STD_LOGIC;
     LOCKED_O : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi_dynclk_0_0_SyncAsync : entity is "SyncAsync";
 end design_1_axi_dynclk_0_0_SyncAsync;
 
 architecture STRUCTURE of design_1_axi_dynclk_0_0_SyncAsync is
@@ -112,8 +110,6 @@ entity design_1_axi_dynclk_0_0_axi_dynclk_S00_AXI is
     s_axi_lite_araddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
     s_axi_lite_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi_dynclk_0_0_axi_dynclk_S00_AXI : entity is "axi_dynclk_S00_AXI";
 end design_1_axi_dynclk_0_0_axi_dynclk_S00_AXI;
 
 architecture STRUCTURE of design_1_axi_dynclk_0_0_axi_dynclk_S00_AXI is
@@ -4832,8 +4828,6 @@ entity design_1_axi_dynclk_0_0_mmcme2_drp is
     \rom_do_reg[10]_2\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     RST : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi_dynclk_0_0_mmcme2_drp : entity is "mmcme2_drp";
 end design_1_axi_dynclk_0_0_mmcme2_drp;
 
 architecture STRUCTURE of design_1_axi_dynclk_0_0_mmcme2_drp is
@@ -6492,8 +6486,6 @@ entity design_1_axi_dynclk_0_0_axi_dynclk is
   attribute C_S_AXI_LITE_ADDR_WIDTH of design_1_axi_dynclk_0_0_axi_dynclk : entity is 6;
   attribute C_S_AXI_LITE_DATA_WIDTH : integer;
   attribute C_S_AXI_LITE_DATA_WIDTH of design_1_axi_dynclk_0_0_axi_dynclk : entity is 32;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axi_dynclk_0_0_axi_dynclk : entity is "axi_dynclk";
   attribute kAddBUFMR : string;
   attribute kAddBUFMR of design_1_axi_dynclk_0_0_axi_dynclk : entity is "FALSE";
   attribute kRefClkFreqHz : integer;

@@ -1,1 +1,10 @@
-hw/hw.sim/sim_1/behav/xsim/tb_passthru_behav.wdb
+# Ignore everything
+**
+
+# Allow only files inside hw/src/
+!hw/
+!hw/src/
+!hw/src/**
+
+# Optional: Keep .gitignore tracked
+!.gitignore

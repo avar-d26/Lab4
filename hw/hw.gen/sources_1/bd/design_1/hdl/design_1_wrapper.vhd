@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
---Date        : Tue May 27 14:12:12 2025
+--Date        : Wed May 28 14:08:43 2025
 --Host        : brad69 running 64-bit Linux Mint 21.3
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -42,12 +42,6 @@ entity design_1_wrapper is
     ac_dac_lrclk_o : out STD_LOGIC;
     ac_mclk_o : out STD_LOGIC;
     ac_mute_n_o : out STD_LOGIC;
-    hdmi_in_clk_n : in STD_LOGIC;
-    hdmi_in_clk_p : in STD_LOGIC;
-    hdmi_in_data_n : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    hdmi_in_data_p : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    hdmi_in_ddc_scl_io : inout STD_LOGIC;
-    hdmi_in_ddc_sda_io : inout STD_LOGIC;
     hdmi_in_hpd_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     hdmi_out_clk_n : out STD_LOGIC;
     hdmi_out_clk_p : out STD_LOGIC;
@@ -82,16 +76,6 @@ architecture STRUCTURE of design_1_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    hdmi_in_clk_p : in STD_LOGIC;
-    hdmi_in_clk_n : in STD_LOGIC;
-    hdmi_in_data_p : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    hdmi_in_data_n : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    hdmi_in_ddc_scl_i : in STD_LOGIC;
-    hdmi_in_ddc_scl_o : out STD_LOGIC;
-    hdmi_in_ddc_scl_t : out STD_LOGIC;
-    hdmi_in_ddc_sda_i : in STD_LOGIC;
-    hdmi_in_ddc_sda_o : out STD_LOGIC;
-    hdmi_in_ddc_sda_t : out STD_LOGIC;
     hdmi_in_hpd_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     hdmi_out_clk_p : out STD_LOGIC;
     hdmi_out_clk_n : out STD_LOGIC;
@@ -120,12 +104,6 @@ architecture STRUCTURE of design_1_wrapper is
     IO : inout STD_LOGIC
   );
   end component IOBUF;
-  signal hdmi_in_ddc_scl_i : STD_LOGIC;
-  signal hdmi_in_ddc_scl_o : STD_LOGIC;
-  signal hdmi_in_ddc_scl_t : STD_LOGIC;
-  signal hdmi_in_ddc_sda_i : STD_LOGIC;
-  signal hdmi_in_ddc_sda_o : STD_LOGIC;
-  signal hdmi_in_ddc_sda_t : STD_LOGIC;
   signal hdmi_out_ddc_scl_i : STD_LOGIC;
   signal hdmi_out_ddc_scl_o : STD_LOGIC;
   signal hdmi_out_ddc_scl_t : STD_LOGIC;
@@ -163,16 +141,6 @@ design_1_i: component design_1
       ac_dac_lrclk_o => ac_dac_lrclk_o,
       ac_mclk_o => ac_mclk_o,
       ac_mute_n_o => ac_mute_n_o,
-      hdmi_in_clk_n => hdmi_in_clk_n,
-      hdmi_in_clk_p => hdmi_in_clk_p,
-      hdmi_in_data_n(2 downto 0) => hdmi_in_data_n(2 downto 0),
-      hdmi_in_data_p(2 downto 0) => hdmi_in_data_p(2 downto 0),
-      hdmi_in_ddc_scl_i => hdmi_in_ddc_scl_i,
-      hdmi_in_ddc_scl_o => hdmi_in_ddc_scl_o,
-      hdmi_in_ddc_scl_t => hdmi_in_ddc_scl_t,
-      hdmi_in_ddc_sda_i => hdmi_in_ddc_sda_i,
-      hdmi_in_ddc_sda_o => hdmi_in_ddc_sda_o,
-      hdmi_in_ddc_sda_t => hdmi_in_ddc_sda_t,
       hdmi_in_hpd_tri_o(0) => hdmi_in_hpd_tri_o(0),
       hdmi_out_clk_n => hdmi_out_clk_n,
       hdmi_out_clk_p => hdmi_out_clk_p,
@@ -184,20 +152,6 @@ design_1_i: component design_1
       hdmi_out_ddc_sda_i => hdmi_out_ddc_sda_i,
       hdmi_out_ddc_sda_o => hdmi_out_ddc_sda_o,
       hdmi_out_ddc_sda_t => hdmi_out_ddc_sda_t
-    );
-hdmi_in_ddc_scl_iobuf: component IOBUF
-     port map (
-      I => hdmi_in_ddc_scl_o,
-      IO => hdmi_in_ddc_scl_io,
-      O => hdmi_in_ddc_scl_i,
-      T => hdmi_in_ddc_scl_t
-    );
-hdmi_in_ddc_sda_iobuf: component IOBUF
-     port map (
-      I => hdmi_in_ddc_sda_o,
-      IO => hdmi_in_ddc_sda_io,
-      O => hdmi_in_ddc_sda_i,
-      T => hdmi_in_ddc_sda_t
     );
 hdmi_out_ddc_scl_iobuf: component IOBUF
      port map (

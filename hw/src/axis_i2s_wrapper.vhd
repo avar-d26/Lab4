@@ -64,13 +64,13 @@ entity axis_i2s_wrapper is
         ----------------------------------------------------------------------------
         -- AXI Stream Interface (Receiver/Responder)
     	-- Ports of Axi Responder Bus Interface S00_AXIS
-		s00_axis_aclk     : in std_logic;
-		s00_axis_aresetn  : in std_logic;
-		s00_axis_tready   : out std_logic;
-		s00_axis_tdata	  : in std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
-		s00_axis_tstrb    : in std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
-		s00_axis_tlast    : in std_logic;
-		s00_axis_tvalid   : in std_logic;
+--		s00_axis_aclk     : in std_logic;
+--		s00_axis_aresetn  : in std_logic;
+--		s00_axis_tready   : out std_logic;
+--		s00_axis_tdata	  : in std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
+--		s00_axis_tstrb    : in std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
+--		s00_axis_tlast    : in std_logic;
+--		s00_axis_tvalid   : in std_logic;
 		
         -- AXI Stream Interface (Tranmitter/Controller)
 		-- Ports of Axi Controller Bus Interface M00_AXIS
@@ -438,7 +438,7 @@ m00_axis_tvalid <= m00_axis_tvalid_sig;
 
 m00_axis_tready_sig <= m00_axis_tready;
 
-s00_axis_tready <= s00_axis_tready_sig;
+--s00_axis_tready <= s00_axis_tready_sig;
 
 ac_adc_lrclk_o <= ac_adc_lrclk_o_sig;
 ac_bclk_o <= ac_bclk_o_sig;

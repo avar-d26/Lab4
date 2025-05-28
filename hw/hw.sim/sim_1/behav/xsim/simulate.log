@@ -1,5 +1,0 @@
-Time resolution is 1 ps
-Block Memory Generator module tb_passthru.bram_inst.bram_inst.inst.\native_mem_module.blk_mem_gen_v8_4_6_inst  is using a behavioral model for simulation which will not precisely model memory collision behavior.
-blk_mem_gen_v8_4_6 collision detected at time: 161252685590, Instance: tb_passthru.bram_inst.bram_inst.inst.\native_mem_module.blk_mem_gen_v8_4_6_inst , A write address: 0, B  read address: 0
-blk_mem_gen_v8_4_6 collision detected at time: 161252693050, Instance: tb_passthru.bram_inst.bram_inst.inst.\native_mem_module.blk_mem_gen_v8_4_6_inst , A write address: 0, B  read address: 0
-INFO: xsimkernel Simulation Memory Usage: 165592 KB (Peak: 215808 KB), Simulation CPU Usage: 39182080 ms

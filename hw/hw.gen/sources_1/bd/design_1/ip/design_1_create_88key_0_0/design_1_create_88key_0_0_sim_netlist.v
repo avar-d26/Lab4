@@ -2,10 +2,10 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
-// Date        : Tue May 27 14:54:59 2025
+// Date        : Tue May 27 14:54:58 2025
 // Host        : brad69 running 64-bit Linux Mint 21.3
-// Command     : write_verilog -force -mode funcsim
-//               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_create_88key_0_0/design_1_create_88key_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top design_1_create_88key_0_0 -prefix
+//               design_1_create_88key_0_0_ design_1_create_88key_0_0_sim_netlist.v
 // Design      : design_1_create_88key_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13,60 +13,6 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "design_1_create_88key_0_0,create_88key,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "module_ref" *) 
-(* x_core_info = "create_88key,Vivado 2023.1" *) 
-(* NotValidForBitStream *)
-module design_1_create_88key_0_0
-   (clkb_i,
-    data_i,
-    en_i,
-    r_addr_o,
-    paino_data_o,
-    paino_done_o);
-  input clkb_i;
-  input data_i;
-  input en_i;
-  output [11:0]r_addr_o;
-  output [87:0]paino_data_o;
-  output paino_done_o;
-
-  wire \<const0> ;
-  wire clkb_i;
-  wire data_i;
-  wire en_i;
-  wire [87:0]\^paino_data_o ;
-  wire paino_done_o;
-  wire [11:0]r_addr_o;
-
-  assign paino_data_o[87:18] = \^paino_data_o [87:18];
-  assign paino_data_o[17] = \<const0> ;
-  assign paino_data_o[16:15] = \^paino_data_o [16:15];
-  assign paino_data_o[14] = \<const0> ;
-  assign paino_data_o[13] = \^paino_data_o [13];
-  assign paino_data_o[12] = \<const0> ;
-  assign paino_data_o[11] = \^paino_data_o [11];
-  assign paino_data_o[10] = \<const0> ;
-  assign paino_data_o[9] = \^paino_data_o [9];
-  assign paino_data_o[8] = \<const0> ;
-  assign paino_data_o[7] = \^paino_data_o [7];
-  assign paino_data_o[6] = \<const0> ;
-  assign paino_data_o[5] = \<const0> ;
-  assign paino_data_o[4] = \^paino_data_o [4];
-  assign paino_data_o[3] = \<const0> ;
-  assign paino_data_o[2] = \<const0> ;
-  assign paino_data_o[1:0] = \^paino_data_o [1:0];
-  GND GND
-       (.G(\<const0> ));
-  design_1_create_88key_0_0_create_88key U0
-       (.clkb_i(clkb_i),
-        .data_i(data_i),
-        .en_i(en_i),
-        .paino_data_o({\^paino_data_o [87:18],\^paino_data_o [16:15],\^paino_data_o [13],\^paino_data_o [11],\^paino_data_o [9],\^paino_data_o [7],\^paino_data_o [4],\^paino_data_o [1:0]}),
-        .paino_done_o(paino_done_o),
-        .r_addr_o(r_addr_o));
-endmodule
-
-(* ORIG_REF_NAME = "create_88key" *) 
 module design_1_create_88key_0_0_create_88key
    (r_addr_o,
     paino_data_o,
@@ -3699,6 +3645,59 @@ module design_1_create_88key_0_0_create_88key
         .D(\paino[9]_i_1_n_0 ),
         .Q(p_0_in146_in),
         .R(rst));
+endmodule
+
+(* CHECK_LICENSE_TYPE = "design_1_create_88key_0_0,create_88key,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "module_ref" *) 
+(* x_core_info = "create_88key,Vivado 2023.1" *) 
+(* NotValidForBitStream *)
+module design_1_create_88key_0_0
+   (clkb_i,
+    data_i,
+    en_i,
+    r_addr_o,
+    paino_data_o,
+    paino_done_o);
+  input clkb_i;
+  input data_i;
+  input en_i;
+  output [11:0]r_addr_o;
+  output [87:0]paino_data_o;
+  output paino_done_o;
+
+  wire \<const0> ;
+  wire clkb_i;
+  wire data_i;
+  wire en_i;
+  wire [87:0]\^paino_data_o ;
+  wire paino_done_o;
+  wire [11:0]r_addr_o;
+
+  assign paino_data_o[87:18] = \^paino_data_o [87:18];
+  assign paino_data_o[17] = \<const0> ;
+  assign paino_data_o[16:15] = \^paino_data_o [16:15];
+  assign paino_data_o[14] = \<const0> ;
+  assign paino_data_o[13] = \^paino_data_o [13];
+  assign paino_data_o[12] = \<const0> ;
+  assign paino_data_o[11] = \^paino_data_o [11];
+  assign paino_data_o[10] = \<const0> ;
+  assign paino_data_o[9] = \^paino_data_o [9];
+  assign paino_data_o[8] = \<const0> ;
+  assign paino_data_o[7] = \^paino_data_o [7];
+  assign paino_data_o[6] = \<const0> ;
+  assign paino_data_o[5] = \<const0> ;
+  assign paino_data_o[4] = \^paino_data_o [4];
+  assign paino_data_o[3] = \<const0> ;
+  assign paino_data_o[2] = \<const0> ;
+  assign paino_data_o[1:0] = \^paino_data_o [1:0];
+  GND GND
+       (.G(\<const0> ));
+  design_1_create_88key_0_0_create_88key U0
+       (.clkb_i(clkb_i),
+        .data_i(data_i),
+        .en_i(en_i),
+        .paino_data_o({\^paino_data_o [87:18],\^paino_data_o [16:15],\^paino_data_o [13],\^paino_data_o [11],\^paino_data_o [9],\^paino_data_o [7],\^paino_data_o [4],\^paino_data_o [1:0]}),
+        .paino_done_o(paino_done_o),
+        .r_addr_o(r_addr_o));
 endmodule
 `ifndef GLBL
 `define GLBL

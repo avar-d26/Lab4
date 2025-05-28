@@ -1,0 +1,88 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_refclk/sim/ila_refclk.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ila_refclk
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_pixclk/sim/ila_pixclk.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ila_pixclk
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_processing_system7_0_0/sim/design_1_processing_system7_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_processing_system7_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01_clk_wiz.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_wiz_01_clk_wiz
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/clk_wiz_01/clk_wiz_01.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_wiz_01
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/blk_mem_gen_0/sim/blk_mem_gen_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module blk_mem_gen_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ipshared/f822/src/mmcme2_drp.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mmcme2_drp
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_xlconcat_0_0/sim/design_1_xlconcat_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_xlconcat_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_xbar_0/sim/design_1_xbar_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_xbar_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_xbar_1/sim/design_1_xbar_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_xbar_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdata_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tdata_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tuser_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tuser_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tstrb_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tstrb_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tkeep_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tkeep_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tid_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tid_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tdest_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tdest_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/tlast_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tlast_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/hdl/top_design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_in_0/sim/design_1_axis_subset_converter_in_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_axis_subset_converter_in_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tdata_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tdata_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tuser_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tuser_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tstrb_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tstrb_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tkeep_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tkeep_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tid_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tid_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tdest_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tdest_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/tlast_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tlast_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/hdl/top_design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_axis_subset_converter_out_0/sim/design_1_axis_subset_converter_out_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_axis_subset_converter_out_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_subset_converter_reset_0/sim/design_1_subset_converter_reset_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_subset_converter_reset_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_v_axi4s_vid_out_0_0/sim/design_1_v_axi4s_vid_out_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_v_axi4s_vid_out_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_v_vid_in_axi4s_0_0/sim/design_1_v_vid_in_axi4s_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_v_vid_in_axi4s_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_auto_pc_0/sim/design_1_auto_pc_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_auto_pc_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_s00_regslice_0/sim/design_1_s00_regslice_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_s00_regslice_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_s01_regslice_0/sim/design_1_s01_regslice_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_s01_regslice_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_m00_regslice_0/sim/design_1_m00_regslice_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_m00_regslice_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/bd/design_1/ip/design_1_auto_pc_1/sim/design_1_auto_pc_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_auto_pc_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/v_tc_0/v_tc_0/demo_tb/axi4lite_mst.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi4lite_mst
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/v_tc_0/v_tc_0/demo_tb/axi4s_video_slv.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi4s_video_slv
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/v_tc_0/v_tc_0/demo_tb/axi4s_video_mst.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi4s_video_mst
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/v_tc_0/v_tc_0/demo_tb/ce_generator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ce_gen
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/ip/v_tc_0/v_tc_0/demo_tb/tb_v_tc_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module timing_gen
+INFO: [VRFC 10-311] analyzing module tb_v_tc_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.ip_user_files/sim_scripts/v_tc_0/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/bzhao30/ENGS128/Lab4/hw/hw.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'glbl' [/home/bzhao30/ENGS128/Lab4/hw/hw.sim/sim_1/behav/xsim/glbl.v:6]

@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
--- Date        : Tue May 27 14:53:52 2025
+-- Date        : Tue May 27 14:53:51 2025
 -- Host        : brad69 running 64-bit Linux Mint 21.3
--- Command     : write_vhdl -force -mode funcsim
---               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_subset_converter_out_0/design_1_axis_subset_converter_out_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_axis_subset_converter_out_0 -prefix
+--               design_1_axis_subset_converter_out_0_ design_1_axis_subset_converter_out_0_sim_netlist.vhdl
 -- Design      : design_1_axis_subset_converter_out_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -103,8 +103,6 @@ entity design_1_axis_subset_converter_out_0_top_design_1_axis_subset_converter_o
   attribute G_TASK_SEVERITY_INFO of design_1_axis_subset_converter_out_0_top_design_1_axis_subset_converter_out_0 : entity is 0;
   attribute G_TASK_SEVERITY_WARNING : integer;
   attribute G_TASK_SEVERITY_WARNING of design_1_axis_subset_converter_out_0_top_design_1_axis_subset_converter_out_0 : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axis_subset_converter_out_0_top_design_1_axis_subset_converter_out_0 : entity is "top_design_1_axis_subset_converter_out_0";
 end design_1_axis_subset_converter_out_0_top_design_1_axis_subset_converter_out_0;
 
 architecture STRUCTURE of design_1_axis_subset_converter_out_0_top_design_1_axis_subset_converter_out_0 is

@@ -94,13 +94,6 @@ OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/hdl/design_1_wrapper.vhd
 add_files /home/bzhao30/ENGS128/Lab4/hw/hw.srcs/sources_1/bd/design_1/design_1.bd
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_dynclk_0_0/src/axi_dynclk.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_pixclk/ila_v6_2/constraints/ila.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_pixclk/ila_pixclk_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_refclk/ila_v6_2/constraints/ila.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_refclk/ila_refclk_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/ila_timing_workaround.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/dvi2rgb.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_dvi2rgb_0_0/src/dvi2rgb_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0_board.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0_ooc.xdc]
@@ -118,15 +111,7 @@ set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_gpio_video_0/design_1_axi_gpio_video_0.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_xbar_0/design_1_xbar_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_xbar_1/design_1_xbar_1_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_clocks.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_clocks.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_clocks.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0_clocks.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/design_1_axi_vdma_0_0_ooc.xdc]
@@ -144,8 +129,16 @@ set_property used_in_synthesis false [get_files -all /home/bzhao30/ENGS128/Lab4/
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/ila_v6_2/constraints/ila_impl.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/ila_v6_2/constraints/ila.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_ila_0_0/design_1_ila_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_FFT_wrapper_0_1/design_1_FFT_wrapper_0_1_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_i2s_wrapper_0_0/design_1_axis_i2s_wrapper_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_FFT_wrapper_0_1/design_1_FFT_wrapper_0_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_clocks.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s00_regslice_0/design_1_s00_regslice_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_clocks.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_s01_regslice_0/design_1_s01_regslice_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_clocks.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_m00_regslice_0/design_1_m00_regslice_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/design_1_ooc.xdc]
 
 read_ip -quiet /home/bzhao30/ENGS128/Lab4/hw/hw.srcs/sources_1/ip/clk_wiz_01/clk_wiz_01.xci
@@ -174,6 +167,8 @@ set_property used_in_implementation false [get_files /home/bzhao30/ENGS128/Lab4/
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental /home/bzhao30/ENGS128/proj/hw.srcs/utils_1/imports/synth_1/design_1_wrapper.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

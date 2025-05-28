@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
-| Date         : Tue May 27 14:59:28 2025
+| Date         : Wed May 28 14:15:12 2025
 | Host         : brad69 running 64-bit Linux Mint 21.3
 | Command      : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
 | Design       : design_1_wrapper
@@ -92,7 +92,7 @@ Warning! LUT value is adjusted to account for LUT combining.
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |   12 |     0 |          0 |       100 | 12.00 |
+| Bonded IOB                  |   10 |     0 |          0 |       100 | 10.00 |
 | Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
 | Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
@@ -149,8 +149,8 @@ Warning! LUT value is adjusted to account for LUT combining.
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | OBUF     |    7 |                  IO |
-| IBUF     |    5 |                  IO |
-| OBUFT    |    4 |                  IO |
+| IBUF     |    3 |                  IO |
+| OBUFT    |    2 |                  IO |
 +----------+------+---------------------+
 
 
@@ -175,7 +175,6 @@ Warning! LUT value is adjusted to account for LUT combining.
 | design_1_proc_sys_reset_0_0          |    1 |
 | design_1_m00_regslice_0              |    1 |
 | design_1_ila_0_0                     |    1 |
-| design_1_dvi2rgb_0_0                 |    1 |
 | design_1_create_88key_0_0            |    1 |
 | design_1_axis_subset_converter_out_0 |    1 |
 | design_1_axis_subset_converter_in_0  |    1 |

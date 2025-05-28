@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
--- Date        : Tue May 27 14:54:49 2025
+-- Date        : Tue May 27 14:54:48 2025
 -- Host        : brad69 running 64-bit Linux Mint 21.3
--- Command     : write_vhdl -force -mode funcsim
---               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_axis_fifo_3_0/design_1_axis_fifo_3_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_axis_fifo_3_0 -prefix
+--               design_1_axis_fifo_3_0_ design_1_axis_fifo_3_0_sim_netlist.vhdl
 -- Design      : design_1_axis_fifo_3_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -28,8 +28,6 @@ entity design_1_axis_fifo_3_0_fifo is
     m00_axis_tready : in STD_LOGIC;
     empty_reg : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axis_fifo_3_0_fifo : entity is "fifo";
 end design_1_axis_fifo_3_0_fifo;
 
 architecture STRUCTURE of design_1_axis_fifo_3_0_fifo is
@@ -1193,8 +1191,6 @@ entity design_1_axis_fifo_3_0_axis_fifo is
     s00_axis_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
     m00_axis_tready : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axis_fifo_3_0_axis_fifo : entity is "axis_fifo";
 end design_1_axis_fifo_3_0_axis_fifo;
 
 architecture STRUCTURE of design_1_axis_fifo_3_0_axis_fifo is

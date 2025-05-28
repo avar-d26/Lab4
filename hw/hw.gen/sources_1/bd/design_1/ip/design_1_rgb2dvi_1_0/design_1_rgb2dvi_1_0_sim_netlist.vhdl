@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
--- Date        : Tue May 27 14:52:30 2025
+-- Date        : Tue May 27 14:52:29 2025
 -- Host        : brad69 running 64-bit Linux Mint 21.3
--- Command     : write_vhdl -force -mode funcsim
---               /home/bzhao30/ENGS128/Lab4/hw/hw.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_1_0/design_1_rgb2dvi_1_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top design_1_rgb2dvi_1_0 -prefix
+--               design_1_rgb2dvi_1_0_ design_1_rgb2dvi_1_0_sim_netlist.vhdl
 -- Design      : design_1_rgb2dvi_1_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -23,8 +23,6 @@ entity design_1_rgb2dvi_1_0_OutputSERDES is
     PixelClk : in STD_LOGIC;
     aRst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_rgb2dvi_1_0_OutputSERDES : entity is "OutputSERDES";
 end design_1_rgb2dvi_1_0_OutputSERDES;
 
 architecture STRUCTURE of design_1_rgb2dvi_1_0_OutputSERDES is
@@ -660,8 +658,6 @@ entity design_1_rgb2dvi_1_0_SyncAsync is
     PixelClk : in STD_LOGIC;
     AS : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_rgb2dvi_1_0_SyncAsync : entity is "SyncAsync";
 end design_1_rgb2dvi_1_0_SyncAsync;
 
 architecture STRUCTURE of design_1_rgb2dvi_1_0_SyncAsync is
@@ -713,8 +709,6 @@ entity design_1_rgb2dvi_1_0_TMDS_Encoder is
     vid_pVDE : in STD_LOGIC;
     vid_pData : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_rgb2dvi_1_0_TMDS_Encoder : entity is "TMDS_Encoder";
 end design_1_rgb2dvi_1_0_TMDS_Encoder;
 
 architecture STRUCTURE of design_1_rgb2dvi_1_0_TMDS_Encoder is
@@ -4495,8 +4489,6 @@ entity design_1_rgb2dvi_1_0_ResetBridge is
     aRst_n : in STD_LOGIC;
     PixelClk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_rgb2dvi_1_0_ResetBridge : entity is "ResetBridge";
 end design_1_rgb2dvi_1_0_ResetBridge;
 
 architecture STRUCTURE of design_1_rgb2dvi_1_0_ResetBridge is
@@ -4538,8 +4530,6 @@ entity design_1_rgb2dvi_1_0_rgb2dvi is
     PixelClk : in STD_LOGIC;
     SerialClk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_rgb2dvi_1_0_rgb2dvi : entity is "rgb2dvi";
   attribute kClkPrimitive : string;
   attribute kClkPrimitive of design_1_rgb2dvi_1_0_rgb2dvi : entity is "PLL";
   attribute kClkRange : integer;
