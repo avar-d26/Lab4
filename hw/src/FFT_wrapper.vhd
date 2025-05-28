@@ -81,6 +81,7 @@ signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 signal re_mag_dbg, im_mag_dbg : signed(23 downto 0); -- debug signals
+signal mag_sq_dbg : unsigned(47 downto 0);
 
 type statetype is (init, count_outputs, waiting, done);
 signal cs, ns : statetype := init;
@@ -97,20 +98,20 @@ process(fft_data_out)
     variable re_sq   : unsigned(47 downto 0);
     variable im_sq   : unsigned(47 downto 0);
     variable mag_sq  : unsigned(47 downto 0);
-    constant THRESHOLD_SQ : unsigned(47 downto 0) := to_unsigned(2**44, 48);  -- 2^22 squared
+    constant THRESHOLD_SQ : unsigned(47 downto 0) := to_unsigned(2**46, 48);  -- 2^23 squared
 begin
     re := signed(fft_data_out(47 downto 24));
     im := signed(fft_data_out(23 downto 0));
 
     -- Square the real and imaginary parts (cast to unsigned after multiplication)
-    re_sq := unsigned(resize(re, 48)) * unsigned(resize(re, 48));
-    im_sq := unsigned(resize(im, 48)) * unsigned(resize(im, 48));
-
+    re_sq := resize(unsigned(resize(re, 48) * resize(re, 48)), 48);
+    im_sq := resize(unsigned(resize(im, 48) * resize(im, 48)), 48);
     -- Add squares to get magnitude squared
     mag_sq := re_sq + im_sq;
 
     re_mag_dbg <= resize(re, 24);
     im_mag_dbg <= resize(im, 24);
+    mag_sq_dbg <= mag_sq;
 
     if mag_sq > THRESHOLD_SQ then
         fft_data_o_sig <= '1';
