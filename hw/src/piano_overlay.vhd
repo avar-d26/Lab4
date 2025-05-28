@@ -56,7 +56,7 @@ signal horizontal_pos: integer := 0; -- horizontal position counter
 
 signal column_index  : integer range 0 to KEY_NUM - 1;
 signal key_length : unsigned(3 downto 0) := (others => '0');
-signal key_counter_tc, col_counter_tc : std_logic := '0';
+signal key_counter_tc, key_count_en, col_counter_tc : std_logic := '0';
 signal m_axis_tdata_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
 signal output_en, incr_col_index : std_logic := '0';
 
@@ -126,7 +126,9 @@ case curr_state is
         when Idle => output_en <= '0';
         when Blank1 => output_en <= '0';
         when ActiveRow => output_en <= '1';
+                          key_count_en <= '1';
         when IncrKey => incr_col_index <= '1';
+                        output_en <= '1';
         when Blank2 => output_en <= '0';
         when others => output_en <= '0';
 	end case;					-- end of case statement
@@ -179,7 +181,7 @@ begin
       key_length <= (others => '0');   -- reset
     elsif key_counter_tc = '1' then
       key_length <= (others => '0');   -- set back to 0 after done counting
-    elsif output_en = '1' then
+    elsif key_count_en = '1' then
       key_length <= key_length + 1; -- increment
     end if;
   end if;
@@ -189,7 +191,7 @@ key_counter_tc <='1' when key_length = COLUMN_WIDTH - 1 else '0';
 col_counter_tc <='1' when column_index = KEY_NUM - 1 else '0';
 
 -- Key Override Process to output red instead of default key color (black or white)
-key_override : process (s_axis_tdata_i, current_keys, output_en)
+key_override : process (s_axis_tdata_i, current_keys, column_index, output_en)
 begin
   if output_en = '1' then
     if current_keys(column_index) = '1' then

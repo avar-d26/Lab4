@@ -193,8 +193,18 @@ begin
 
   S_AXIS_TDATA <= x"FFFFFF";     -- White pixel (24-bit RGB)
   S_AXIS_TVALID <= '1';
-
-
+  
+  wait for 10 ms;
+  
+  -- Set keys 12, 13, 14, 15, 55, 74, and 87 as pressed
+  key_state_sig <= (others => '0');
+  key_state_sig(12) <= '1';
+  key_state_sig(13) <= '1';
+  key_state_sig(14) <= '1';
+  key_state_sig(15) <= '1';
+  key_state_sig(55) <= '1';
+  key_state_sig(74) <= '1';
+  key_state_sig(87) <= '1';
   wait;  -- Wait indefinitely
   
 end process;
