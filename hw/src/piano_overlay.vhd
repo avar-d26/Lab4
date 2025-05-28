@@ -121,6 +121,7 @@ begin
 
 incr_col_index <= '0';
 output_en <= '0';
+key_count_en <= '0';
 
 case curr_state is	
         when Idle => output_en <= '0';

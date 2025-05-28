@@ -23,11 +23,7 @@ constant DATA_WIDTH : integer := 24;        -- 24-bit video RGB data
 constant KEY_NUM : integer := 88;         -- number of keys on piano
 constant COLUMN_WIDTH : integer := 14;       -- number of pixels in each key column
 constant CLOCK_PERIOD   : time := 10ns;          -- 100 MHz clock
-constant AUDIO_DATA_WIDTH : integer := 24;      -- I2S data width
-constant SINE_FREQ      : real := 1000.0;       -- Test sine wave frequency
-constant SINE_AMPL      : real := 8388607.0;    -- 24-bit amplitude
-constant SAMPLING_FREQ  : real := 48000.00;     -- 48 kHz sampling rate
-constant T_SAMPLE : real := 1.0/SAMPLING_FREQ;
+
 
 ----------------------------------------------------------------------------
 -- Signals
@@ -38,9 +34,6 @@ signal key_state_sig : std_logic_vector(KEY_NUM-1 downto 0); -- 88-bit piano key
 signal sof_state_sig, active_video_sig, hsync_sig, vsync_sig, vblank_sig, hblank_sig : std_logic := '0';
 signal fsync_sig : std_logic_vector (0 downto 0) := (others => '0');
 
--- Testbench Signals
-signal sine_data, sine_data_tx : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
-signal bit_count : integer := 0;
 
 -- AXI Stream Signals
 signal M_AXIS_TDATA, S_AXIS_TDATA : std_logic_vector(DATA_WIDTH-1 downto 0);
@@ -184,10 +177,10 @@ begin
 
   -- Simulate AXI Stream input to piano overlay (sending default RGB of all white)
   
-  -- Set keys 0, 5, and 87 as pressed
+  -- Set keys 0, 30-36, and 87 as pressed
   key_state_sig <= (others => '0');
   key_state_sig(0) <= '1';
-  key_state_sig(81) <= '1';
+  key_state_sig(36 downto 30) <= (others => '1');
   key_state_sig(87) <= '1';
 
 
@@ -196,14 +189,10 @@ begin
   
   wait for 10 ms;
   
-  -- Set keys 12, 13, 14, 15, 55, 74, and 87 as pressed
+  -- Set keys 12-17, 70-75, and 87 as pressed
   key_state_sig <= (others => '0');
-  key_state_sig(12) <= '1';
-  key_state_sig(13) <= '1';
-  key_state_sig(14) <= '1';
-  key_state_sig(15) <= '1';
-  key_state_sig(55) <= '1';
-  key_state_sig(74) <= '1';
+  key_state_sig(17 downto 12) <= (others => '1');
+  key_state_sig(75 downto 70) <= (others => '1');
   key_state_sig(87) <= '1';
   wait;  -- Wait indefinitely
   
