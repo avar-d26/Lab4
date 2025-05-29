@@ -528,35 +528,39 @@ void DemoScaleFrame(u8 *srcFrame, u8 *destFrame, u32 srcWidth, u32 srcHeight, u3
 
 void DemoPrintTest(u8 *frame, u32 width, u32 height, u32 stride, int pattern)
 {
-    u32 xcoi, ycoi;
-    u32 iPixelAddr;
-    u8 wRed, wBlue, wGreen;
-    u32 keyIndex;
     const int keyWidth = 14;
     const int totalKeys = 88;
-    const int blackKeyOffset = keyWidth / 4; // black keys are narrower and centered
+    const int pianoPixels = keyWidth * totalKeys;
 
-    // Define the black key pattern in each 12-key octave (C to B)
+    // Which notes are black keys in a 12-note octave (C=0 to B=11)
     const int blackKeyPattern[12] = {
         0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0
     };
-    // Start drawing at left edge
-    u32 startX = 0;
+
+    u32 xcoi, ycoi, iPixelAddr;
+    u8 wRed, wGreen, wBlue;
 
     if (pattern != DEMO_PATTERN_0) {
         xil_printf("Error: Only DEMO_PATTERN_0 supported for piano pattern.\n");
         return;
     }
 
-    // Draw white keys
-    for (keyIndex = 0; keyIndex < totalKeys; ++keyIndex)
+    // Draw piano keys (88 keys × 14 pixels)
+    for (int keyIndex = 0; keyIndex < totalKeys; ++keyIndex)
     {
+        // Determine if this key is black
+        int noteInOctave = keyIndex % 12;
+        int isBlack = blackKeyPattern[noteInOctave];
+
+        // Set color
+        if (isBlack) {
+            wRed = 0; wGreen = 0; wBlue = 0;
+        } else {
+            wRed = 255; wGreen = 255; wBlue = 255;
+        }
+
+        // Draw the key (14 pixel columns)
         u32 xStart = keyIndex * keyWidth;
-        if (xStart >= width) break;
-
-        // Color white key
-        wRed = 255; wGreen = 255; wBlue = 255;
-
         for (xcoi = xStart * 3; xcoi < (xStart + keyWidth) * 3 && xcoi < width * 3; xcoi += 3)
         {
             iPixelAddr = xcoi;
@@ -570,36 +574,20 @@ void DemoPrintTest(u8 *frame, u32 width, u32 height, u32 stride, int pattern)
         }
     }
 
-    // Draw black keys (shorter vertical range)
-    for (keyIndex = 0; keyIndex < totalKeys; ++keyIndex)
+    // Fill any remaining area on the right with white
+    for (xcoi = pianoPixels * 3; xcoi < width * 3; xcoi += 3)
     {
-        // Determine if a black key overlays this white key
-        int noteInOctave = keyIndex % 12;
-        if (blackKeyPattern[noteInOctave])
+        iPixelAddr = xcoi;
+        for (ycoi = 0; ycoi < height; ++ycoi)
         {
-            // Black key starts a bit to the right of the base key (centered)
-            u32 xStart = keyIndex * keyWidth + keyWidth / 4;
-            u32 blackWidth = keyWidth / 2;
-            if (xStart + blackWidth >= width) continue;
-
-            // Color black key
-            wRed = 0; wGreen = 0; wBlue = 0;
-
-            for (xcoi = xStart * 3; xcoi < (xStart + blackWidth) * 3 && xcoi < width * 3; xcoi += 3)
-            {
-                iPixelAddr = xcoi;
-                for (ycoi = 0; ycoi < height * 2 / 3; ++ycoi) // black keys are shorter
-                {
-                    frame[iPixelAddr] = wRed;
-                    frame[iPixelAddr + 1] = wBlue;
-                    frame[iPixelAddr + 2] = wGreen;
-                    iPixelAddr += stride;
-                }
-            }
+            frame[iPixelAddr] = 255;     // Red
+            frame[iPixelAddr + 1] = 255; // Blue
+            frame[iPixelAddr + 2] = 255; // Green
+            iPixelAddr += stride;
         }
     }
 
-    // Flush memory
+    // Flush frame to memory
     Xil_DCacheFlushRange((unsigned int) frame, DEMO_MAX_FRAME);
 }
 
