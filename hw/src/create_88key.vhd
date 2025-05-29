@@ -5,12 +5,19 @@ USE ieee.numeric_std.ALL;
 
 
 entity create_88key is
+generic (
+    PIANO_DATA_LENGTH : integer := 88
+);
 port(
     clkb_i : in std_logic;
     data_i : in std_logic;
     en_i : in std_logic;
+    
+    -- debugs
+    addr_dbg_o : out std_logic_vector(11 downto 0);
+    paino_dbg_o : out std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0);
     r_addr_o : out std_logic_vector(11 downto 0);
-    paino_data_o : out std_logic_vector(87 downto 0);
+    paino_data_o : out std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0);
     paino_done_o : out std_logic
     );
 end create_88key;
@@ -18,11 +25,11 @@ end create_88key;
 architecture Behavioral of create_88key is
 signal load_enable_reg, load_enable : std_logic := '0';
 signal address_counter, counterdelay1, address_counter_delayed : unsigned(11 downto 0) := (others => '0');
-signal paino : std_logic_vector(87 downto 0) := (others => '0');
+signal paino : std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0) := (others => '0');
 
-type statetype is (init, count_address, count_wait_1, count_wait_2, create_paino, send_paino);
-signal cs, ns : statetype := init;
-signal count_en, buildbinreg_en, count_tc, counttc_delay1, count_tc_delayed, create_paino_en, rst : std_logic := '0';
+type statetype is (init, countAddress, countWait1, countWait2, createPaino, sendPaino);
+signal current_state, next_state : statetype := init;
+signal count_en, buildbinreg_en, count_tc, counttc_delay1, count_tc_delayed, createPaino_en, rst : std_logic := '0';
 --signal bin_reg : std_logic_vector(4095 downto 0) := (others => '0');
 signal addr : integer := 0;
 begin
@@ -72,7 +79,7 @@ r_addr_o <= std_logic_vector(address_counter);
 -- UPDATE the piano
 update: process(clkb_i) begin
 if rising_edge(clkb_i) then
-    if (create_paino_en = '1') then
+    if (createPaino_en = '1') then
         paino_data_o <= paino;
     end if;
 end if;
@@ -81,6 +88,8 @@ end process;
 
 ---- MAP BINS TO PIANO KEYS
 addr <= to_integer(address_counter_delayed);
+addr_dbg_o <= std_logic_vector(address_counter_delayed);
+paino_dbg_o <= paino;
 mapp : process(clkb_i)
 begin
     if rising_edge(clkb_i) then
@@ -263,47 +272,59 @@ end process;
 ------------------------FSM-----------------
 stateupdate: process(clkb_i) begin
 if rising_edge(clkb_i) then 
-    cs <= ns;
+    current_state <= next_state;
 end if;
 end process;
 
-nextstate : process(cs, load_enable, count_tc) begin
-ns <= cs;
-count_en <= '0';
-create_paino_en <= '0';
-paino_done_o <= '0';
-rst <= '0';
-buildbinreg_en <= '0';
-case cs is
+nextstate : process(current_state, load_enable, count_tc) begin
+next_state <= current_state;
+
+case current_state is
     when init =>
         if (load_enable = '1') then
-            ns <= count_address;
+            next_state <= countAddress;
         end if;
-        rst <= '1';
-    when count_address =>
-        count_en <= '1';
-        buildbinreg_en <= '1';
+        
+    when countAddress =>
         if (count_tc = '1') then
-            ns <= count_wait_1;
+            next_state <= countWait1;
         end if;
-    when count_wait_1 =>
-        buildbinreg_en <= '1';
-        ns <= count_wait_2;
-    when count_wait_2 =>
-        buildbinreg_en <= '1';
-        ns <= create_paino;
-    when create_paino => 
-        create_paino_en <= '1';
-        ns <= send_paino;
-    when send_paino => 
-        paino_done_o <= '1';
+    when countWait1 =>
+        next_state <= countWait2;
+    when countWait2 =>
+        next_state <= createPaino;
+    when createPaino => 
+        next_state <= sendPaino;
+    when sendPaino => 
         if (load_enable = '0') then
-            ns <= init;
+            next_state <= init;
         end if;
-    when others => ns <= init;
+    when others => next_state <= init;
 end case;
 end process;
             
-        
+outputlogic : process(current_state) begin
+count_en <= '0';
+createPaino_en <= '0';
+paino_done_o <= '0';
+rst <= '0';
+buildbinreg_en <= '0';
+     case current_state is
+    when init =>
+        rst <= '1';
+    when countAddress =>
+        count_en <= '1';
+        buildbinreg_en <= '1';
+    when countWait1 =>
+        buildbinreg_en <= '1';
+    when countWait2 =>
+        buildbinreg_en <= '1';
+    when createPaino => 
+        createPaino_en <= '1';
+    when sendPaino => 
+        paino_done_o <= '1';
+    when others => null;
+end case;
+end process;   
             
 end Behavioral;

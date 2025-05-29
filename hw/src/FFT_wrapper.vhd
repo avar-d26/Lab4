@@ -27,7 +27,9 @@ USE ieee.numeric_std.ALL;
 entity FFT_wrapper is 
 	generic (
 		INPUT_DATA_WIDTH	: integer	:= 32;
-		OUTPUT_DATA_WIDTH   : integer   := 8
+		OUTPUT_DATA_WIDTH   : integer   := 8;
+		FFT_WIDTH           : integer := 8192;
+		ADDR_LENGTH         : integer := 4096
 	);
     PORT (
     s00_axis_aclk     :  in std_logic; --
@@ -41,7 +43,9 @@ entity FFT_wrapper is
     -- debugs
     re_mag_dbg_o        : out std_logic_vector(23 downto 0);
     im_mag_dbg_o        : out std_logic_vector(23 downto 0);
-    mag_sq_dbg_o        : out std_logic_vector(47 downto 0);
+    mag_sum_dbg_o        : out std_logic_vector(24 downto 0);
+    threshold_dbg_o      : out std_logic_vector(24 downto 0);
+    fft_data_o_dbg_o     : out std_logic;
 
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
@@ -84,47 +88,47 @@ signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := 
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
+
 signal re_mag_dbg, im_mag_dbg : signed(23 downto 0); -- debug signals
 signal mag_sq_dbg : unsigned(47 downto 0);
 
-type statetype is (init, count_outputs, waiting, done);
-signal cs, ns : statetype := init;
+type statetype is (init, countOutputs, waiting);
+signal current_state, next_state : statetype := init;
 signal cnt_rst : std_logic := '0';
 begin
 
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
 
--- detect proper frequencies, FIX BY SQUARING JFHLJKSADHFHSDNFLAK
 process(fft_data_out)
     variable re      : signed(23 downto 0);
     variable im      : signed(23 downto 0);
-    variable re_sq   : unsigned(47 downto 0);
-    variable im_sq   : unsigned(47 downto 0);
-    variable mag_sq  : unsigned(47 downto 0);
-    constant THRESHOLD_SQ : unsigned(47 downto 0) := to_unsigned(2**46, 48);  -- 2^23 squared
+    variable re_abs  : unsigned(23 downto 0);
+    variable im_abs  : unsigned(23 downto 0);
+    variable mag_sum : unsigned(24 downto 0);  -- One extra bit for overflow
+    constant THRESHOLD : unsigned(24 downto 0) := to_unsigned(2**23 + 2**22, 25);  -- Example threshold
 begin
     re := signed(fft_data_out(47 downto 24));
     im := signed(fft_data_out(23 downto 0));
 
-    -- Square the real and imaginary parts (cast to unsigned after multiplication)
-    re_sq := resize(unsigned(resize(re, 48) * resize(re, 48)), 48);
-    im_sq := resize(unsigned(resize(im, 48) * resize(im, 48)), 48);
-    -- Add squares to get magnitude squared
-    mag_sq := re_sq + im_sq;
+    re_abs := resize(unsigned(abs(re)), 24);
+    im_abs := resize(unsigned(abs(im)), 24);
+    mag_sum := resize(re_abs, 25) + resize(im_abs, 25);
 
-    re_mag_dbg <= resize(re, 24);
-    im_mag_dbg <= resize(im, 24);
-    mag_sq_dbg <= mag_sq;
-
-    if mag_sq > THRESHOLD_SQ then
+    re_mag_dbg_o <= std_logic_vector(re_abs);
+    im_mag_dbg_o <= std_logic_vector(im_abs);
+    mag_sum_dbg_o <= std_logic_vector(mag_sum);
+    threshold_dbg_o <= std_logic_vector(threshold);
+    fft_data_o_dbg_o <= std_logic(fft_data_o_sig);
+    
+    if mag_sum > THRESHOLD then
         fft_data_o_sig <= '1';
     else
         fft_data_o_sig <= '0';
     end if;
 end process;
 
-
+-- FFT INSTANTIATION
 
 uut : xfft_0 PORT MAP(
     aclk => s00_axis_aclk,
@@ -167,31 +171,45 @@ tvalid_o <= tvalid_sig;
 -- FINITE STATE MACHINE
 stateupdate: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
-    cs <= ns;
+    current_state <= next_state;
 end if;
 end process;
 
 
-next_state_logic : process(cs, output_counter) begin
-ns <= cs;
-cnt_rst <= '0';
-fft_done_o <= '0';
-case cs is 
+next_state_logic : process(current_state, output_counter) begin
+next_state <= current_state;
+
+case current_state is 
     when init => 
-        ns <= count_outputs;
-        cnt_rst <= '1';
-    when count_outputs =>
-        if (output_counter = to_unsigned(4100, 14)) then -- give it a few clock cycles
-            ns <= waiting;
+        next_state <= countOutputs;
+    when countOutputs =>
+        if (output_counter = to_unsigned(ADDR_LENGTH + 4, 14)) then -- give it a few clock cycles
+            next_state <= waiting;
         end if;
     when waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
-        if (output_counter = to_unsigned(8192, 14)) then
-            ns <= init;
+        if (output_counter = to_unsigned(FFT_WIDTH, 14)) then
+            next_state <= init;
         end if;
-    when others => ns <= init;
+    when others => next_state <= init;
 end case;
 end process;
+
+output_logic : process(current_state) begin
+cnt_rst <= '0';
+fft_done_o <= '0';
+case current_state is 
+    when init => 
+        cnt_rst <= '1';
+    when countOutputs =>
+
+    when waiting => 
+        fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
+
+    when others => null;
+end case;
+end process;
+
 
 counter : process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then
