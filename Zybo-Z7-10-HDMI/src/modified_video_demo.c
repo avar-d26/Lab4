@@ -528,158 +528,79 @@ void DemoScaleFrame(u8 *srcFrame, u8 *destFrame, u32 srcWidth, u32 srcHeight, u3
 
 void DemoPrintTest(u8 *frame, u32 width, u32 height, u32 stride, int pattern)
 {
-	u32 xcoi, ycoi;
-	u32 iPixelAddr;
-	u8 wRed, wBlue, wGreen;
-	u32 wCurrentInt;
-	double fRed, fBlue, fGreen, fColor;
-	u32 xLeft, xMid, xRight, xInt;
-	u32 yMid, yInt;
-	double xInc, yInc;
+    u32 xcoi, ycoi;
+    u32 iPixelAddr;
+    u8 wRed, wBlue, wGreen;
+    u32 keyIndex;
+    const int keyWidth = 14;
+    const int totalKeys = 88;
+    const int blackKeyOffset = keyWidth / 4; // black keys are narrower and centered
 
+    // Define the black key pattern in each 12-key octave (C to B)
+    const int blackKeyPattern[12] = {
+        0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0
+    };
+    // Start drawing at left edge
+    u32 startX = 0;
 
-	switch (pattern)
-	{
-	case DEMO_PATTERN_0:
+    if (pattern != DEMO_PATTERN_0) {
+        xil_printf("Error: Only DEMO_PATTERN_0 supported for piano pattern.\n");
+        return;
+    }
 
-		xInt = width / 4; //Four intervals, each with width/4 pixels
-		xLeft = xInt * 3;
-		xMid = xInt * 2 * 3;
-		xRight = xInt * 3 * 3;
-		xInc = 256.0 / ((double) xInt); //256 color intensities are cycled through per interval (overflow must be caught when color=256.0)
+    // Draw white keys
+    for (keyIndex = 0; keyIndex < totalKeys; ++keyIndex)
+    {
+        u32 xStart = keyIndex * keyWidth;
+        if (xStart >= width) break;
 
-		yInt = height / 2; //Two intervals, each with width/2 lines
-		yMid = yInt;
-		yInc = 256.0 / ((double) yInt); //256 color intensities are cycled through per interval (overflow must be caught when color=256.0)
+        // Color white key
+        wRed = 255; wGreen = 255; wBlue = 255;
 
-		fBlue = 0.0;
-		fRed = 256.0;
-		for(xcoi = 0; xcoi < (width*3); xcoi+=3)
-		{
-			/*
-			 * Convert color intensities to integers < 256, and trim values >=256
-			 */
-			wRed = (fRed >= 256.0) ? 255 : ((u8) fRed);
-			wBlue = (fBlue >= 256.0) ? 255 : ((u8) fBlue);
-			iPixelAddr = xcoi;
-			fGreen = 0.0;
-			for(ycoi = 0; ycoi < height; ycoi++)
-			{
+        for (xcoi = xStart * 3; xcoi < (xStart + keyWidth) * 3 && xcoi < width * 3; xcoi += 3)
+        {
+            iPixelAddr = xcoi;
+            for (ycoi = 0; ycoi < height; ++ycoi)
+            {
+                frame[iPixelAddr] = wRed;
+                frame[iPixelAddr + 1] = wBlue;
+                frame[iPixelAddr + 2] = wGreen;
+                iPixelAddr += stride;
+            }
+        }
+    }
 
-				wGreen = (fGreen >= 256.0) ? 255 : ((u8) fGreen);
-				frame[iPixelAddr] = wRed;
-				frame[iPixelAddr + 1] = wBlue;
-				frame[iPixelAddr + 2] = wGreen;
-				if (ycoi < yMid)
-				{
-					fGreen += yInc;
-				}
-				else
-				{
-					fGreen -= yInc;
-				}
+    // Draw black keys (shorter vertical range)
+    for (keyIndex = 0; keyIndex < totalKeys; ++keyIndex)
+    {
+        // Determine if a black key overlays this white key
+        int noteInOctave = keyIndex % 12;
+        if (blackKeyPattern[noteInOctave])
+        {
+            // Black key starts a bit to the right of the base key (centered)
+            u32 xStart = keyIndex * keyWidth + keyWidth / 4;
+            u32 blackWidth = keyWidth / 2;
+            if (xStart + blackWidth >= width) continue;
 
-				/*
-				 * This pattern is printed one vertical line at a time, so the address must be incremented
-				 * by the stride instead of just 1.
-				 */
-				iPixelAddr += stride;
-			}
+            // Color black key
+            wRed = 0; wGreen = 0; wBlue = 0;
 
-			if (xcoi < xLeft)
-			{
-				fBlue = 0.0;
-				fRed -= xInc;
-			}
-			else if (xcoi < xMid)
-			{
-				fBlue += xInc;
-				fRed += xInc;
-			}
-			else if (xcoi < xRight)
-			{
-				fBlue -= xInc;
-				fRed -= xInc;
-			}
-			else
-			{
-				fBlue += xInc;
-				fRed = 0;
-			}
-		}
-		/*
-		 * Flush the framebuffer memory range to ensure changes are written to the
-		 * actual memory, and therefore accessible by the VDMA.
-		 */
-		Xil_DCacheFlushRange((unsigned int) frame, DEMO_MAX_FRAME);
-		break;
-	case DEMO_PATTERN_1:
+            for (xcoi = xStart * 3; xcoi < (xStart + blackWidth) * 3 && xcoi < width * 3; xcoi += 3)
+            {
+                iPixelAddr = xcoi;
+                for (ycoi = 0; ycoi < height * 2 / 3; ++ycoi) // black keys are shorter
+                {
+                    frame[iPixelAddr] = wRed;
+                    frame[iPixelAddr + 1] = wBlue;
+                    frame[iPixelAddr + 2] = wGreen;
+                    iPixelAddr += stride;
+                }
+            }
+        }
+    }
 
-		xInt = width / 7; //Seven intervals, each with width/7 pixels
-		xInc = 256.0 / ((double) xInt); //256 color intensities per interval. Notice that overflow is handled for this pattern.
-
-		fColor = 0.0;
-		wCurrentInt = 1;
-		for(xcoi = 0; xcoi < (width*3); xcoi+=3)
-		{
-
-			/*
-			 * Just draw white in the last partial interval (when width is not divisible by 7)
-			 */
-			if (wCurrentInt > 7)
-			{
-				wRed = 255;
-				wBlue = 255;
-				wGreen = 255;
-			}
-			else
-			{
-				if (wCurrentInt & 0b001)
-					wRed = (u8) fColor;
-				else
-					wRed = 0;
-
-				if (wCurrentInt & 0b010)
-					wBlue = (u8) fColor;
-				else
-					wBlue = 0;
-
-				if (wCurrentInt & 0b100)
-					wGreen = (u8) fColor;
-				else
-					wGreen = 0;
-			}
-
-			iPixelAddr = xcoi;
-
-			for(ycoi = 0; ycoi < height; ycoi++)
-			{
-				frame[iPixelAddr] = wRed;
-				frame[iPixelAddr + 1] = wBlue;
-				frame[iPixelAddr + 2] = wGreen;
-				/*
-				 * This pattern is printed one vertical line at a time, so the address must be incremented
-				 * by the stride instead of just 1.
-				 */
-				iPixelAddr += stride;
-			}
-
-			fColor += xInc;
-			if (fColor >= 256.0)
-			{
-				fColor = 0.0;
-				wCurrentInt++;
-			}
-		}
-		/*
-		 * Flush the framebuffer memory range to ensure changes are written to the
-		 * actual memory, and therefore accessible by the VDMA.
-		 */
-		Xil_DCacheFlushRange((unsigned int) frame, DEMO_MAX_FRAME);
-		break;
-	default :
-		xil_printf("Error: invalid pattern passed to DemoPrintTest");
-	}
+    // Flush memory
+    Xil_DCacheFlushRange((unsigned int) frame, DEMO_MAX_FRAME);
 }
 
 void DemoISR(void *callBackRef, void *pVideo)
