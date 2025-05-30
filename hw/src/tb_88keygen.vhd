@@ -11,7 +11,7 @@ architecture sim of tb_create_88key is
   signal addra              : std_logic_vector(11 downto 0) := (others => '0');
   signal dina               : std_logic := '0';
   signal addrb              : std_logic_vector(11 downto 0) := (others => '0');
-  signal doutb              : std_logic;
+  signal doutb              : std_logic := '0';
 
   signal en_i               : std_logic := '0';
   signal r_addr_o           : std_logic_vector(11 downto 0);
@@ -60,32 +60,45 @@ begin
     );
 
   -- Simulation control
+  -- Simulation control
   stim_proc : process
   begin
     -- Wait for global reset
     wait for 50 ns;
 
-    -- Write 4096 values alternating between 0 and 1
-for i in 0 to 4095 loop
-  wea    <= '1';
-  addra  <= std_logic_vector(to_unsigned(i, 12));
-  if (i mod 2 = 0) then
-    dina <= '0';
-  else
-    dina <= '1';
-  end if;
-  wait for CLK_PERIOD;
-end loop;   
+    -- Write 4096 values, only index 0 and 500 get '1', others get '0'
+    for i in 0 to 4095 loop
+      -- Longer pause for wea = '0'
+      if i = 1024 then
+        wea <= '0';  -- Temporarily disable write
+        wait for 5000 ns;  -- Increased from 200 ns to 500 ns
+      end if;
+
+      -- Start reading earlier for more overlap
+      if i = 4000 then
+        en_i <= '1';  -- Trigger FSM ~100 writes before end
+      end if;
+
+      wea    <= '1';
+      addra  <= std_logic_vector(to_unsigned(i, 12));
+      if (i = 50 or i = 500 or i = 1 or i = 4095) then
+        dina <= '1';
+      else
+        dina <= '0';
+      end if;
+      wait for CLK_PERIOD;
+    end loop;
+
     -- Stop writing
     wea <= '0';
-    wait for 20 ns;
 
-    -- Start reading
-    en_i <= '1';
-    wait for 3000 ns;  -- allow FSM to run
+    -- Let FSM run for a while
+    wait for 3000 ns;
 
     -- Stop simulation
     wait;
   end process;
+
+
 
 end sim;

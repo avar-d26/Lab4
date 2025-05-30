@@ -41,10 +41,8 @@ entity FFT_wrapper is
     s00_axis_tvalid   :  in std_logic;
     
     -- debugs
-    re_mag_dbg_o        : out std_logic_vector(23 downto 0);
-    im_mag_dbg_o        : out std_logic_vector(23 downto 0);
-    mag_sum_dbg_o        : out std_logic_vector(24 downto 0);
-    threshold_dbg_o      : out std_logic_vector(24 downto 0);
+    mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
+    threshold_dbg_o      : out std_logic_vector(9 downto 0);
     fft_data_o_dbg_o     : out std_logic;
 
     tvalid_o          : out std_logic; 
@@ -100,33 +98,36 @@ begin
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
 
-process(fft_data_out)
-    variable re      : signed(23 downto 0);
-    variable im      : signed(23 downto 0);
-    variable re_abs  : unsigned(23 downto 0);
-    variable im_abs  : unsigned(23 downto 0);
-    variable mag_sum : unsigned(24 downto 0);  -- One extra bit for overflow
-    constant THRESHOLD : unsigned(24 downto 0) := to_unsigned(2**23 + 2**22, 25);  -- Example threshold
+process(s00_axis_aclk)
+    variable re_top     : signed(4 downto 0);      -- 5-bit signed
+    variable im_top     : signed(4 downto 0);      -- 5-bit signed
+    variable re_sq      : unsigned(9 downto 0);    -- 5×5 = 10 bits 
+    variable im_sq      : unsigned(9 downto 0);
+    variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
+    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(470, 10); -- 
+    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(350, 10); --
 begin
-    re := signed(fft_data_out(47 downto 24));
-    im := signed(fft_data_out(23 downto 0));
+    -- Extract signed MSBs
+    re_top := signed(fft_data_out(47 downto 43));  -- bits [47:43] = 5 bits
+    im_top := signed(fft_data_out(23 downto 19));  -- bits [23:19] = 5 bits
 
-    re_abs := resize(unsigned(abs(re)), 24);
-    im_abs := resize(unsigned(abs(im)), 24);
-    mag_sum := resize(re_abs, 25) + resize(im_abs, 25);
+    -- Square and cast to unsigned
+    re_sq := unsigned(re_top * re_top);
+    im_sq := unsigned(im_top * im_top);
+    mag_sum := resize(re_sq, 10) + resize(im_sq, 10);
 
-    re_mag_dbg_o <= std_logic_vector(re_abs);
-    im_mag_dbg_o <= std_logic_vector(im_abs);
     mag_sum_dbg_o <= std_logic_vector(mag_sum);
-    threshold_dbg_o <= std_logic_vector(threshold);
-    fft_data_o_dbg_o <= std_logic(fft_data_o_sig);
-    
-    if mag_sum > THRESHOLD then
-        fft_data_o_sig <= '1';
-    else
-        fft_data_o_sig <= '0';
+    threshold_dbg_o <= std_logic_vector(THRESHOLD_HIGH);
+
+    -- Compare
+    if mag_sum > THRESHOLD_HIGH then
+        fft_data_o <= '1';
+    elsif mag_sum < THRESHOLD_LOW then
+        fft_data_o <= '0';
     end if;
 end process;
+
+
 
 -- FFT INSTANTIATION
 
@@ -158,7 +159,6 @@ uut : xfft_0 PORT MAP(
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
-    fft_data_o <= fft_data_o_sig;    
     tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(12)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
     bin_addr_o <= bin_addr_o_sig(11 downto 0); -- 12 bits for 0 to 4095
 end if;
@@ -187,7 +187,6 @@ case current_state is
             next_state <= waiting;
         end if;
     when waiting => 
-        fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
         if (output_counter = to_unsigned(FFT_WIDTH, 14)) then
             next_state <= init;
         end if;
