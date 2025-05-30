@@ -338,47 +338,6 @@ the_i2s_transmitter : i2s_transmitter PORT MAP(
     right_audio_data_i => right_audio_data_sig,
     dac_serial_data_o => ac_dac_data_o_sig);
 
----------------------------------------------------------------------------- 
----- AXI DDS
---axi_dds_inst : engs128_axi_dds
---    generic map (
---        DDS_DATA_WIDTH => AC_DATA_WIDTH,
---        DDS_PHASE_DATA_WIDTH => 12,
---        C_S00_AXI_DATA_WIDTH => 32,
---        C_S00_AXI_ADDR_WIDTH => 4
---    )
---    port map (
---        -- User ports
---        dds_clk_i => lrclk,
---        dds_enable_i => dds_en,  -- Enable DDS
---        dds_reset_i => dds_rst, 
---        left_dds_data_o => left_dds_data,
---        right_dds_data_o => right_dds_data,
---        left_dds_phase_inc_dbg_o => left_dds_phase_inc_dbg_o,
---        right_dds_phase_inc_dbg_o => right_dds_phase_inc_dbg_o,
-        
---        s00_axi_aclk => s00_axi_aclk,
---        s00_axi_aresetn => s00_axi_aresetn,
---        s00_axi_awaddr => s00_axi_awaddr,
---        s00_axi_awprot => s00_axi_awprot,
---        s00_axi_awvalid => s00_axi_awvalid,
---        s00_axi_awready => s00_axi_awready,
---        s00_axi_wdata => s00_axi_wdata,
---        s00_axi_wstrb => s00_axi_wstrb,
---        s00_axi_wvalid => s00_axi_wvalid,
---        s00_axi_wready => s00_axi_wready,
---        s00_axi_bresp => s00_axi_bresp,
---        s00_axi_bvalid => s00_axi_bvalid,
---        s00_axi_bready => s00_axi_bready,
---        s00_axi_araddr => s00_axi_araddr,
---        s00_axi_arprot => s00_axi_arprot,
---        s00_axi_arvalid => s00_axi_arvalid,
---        s00_axi_arready => s00_axi_arready,
---        s00_axi_rdata => s00_axi_rdata,
---        s00_axi_rresp => s00_axi_rresp,
---        s00_axi_rvalid => s00_axi_rvalid,
---        s00_axi_rready => s00_axi_rready
---    );
 
 ---------------------------------------------------------------------------- 
 -- AXI stream transmitter
@@ -394,22 +353,6 @@ axis_trans : axis_transmitter_interface PORT MAP(
     m00_axis_tsrb_o => m00_axis_tstrb_sig,
     m00_axis_tvalid_o => m00_axis_tvalid_sig);
 
----------------------------------------------------------------------------- 
--- AXI stream receiver
---axis_receiver : axis_receiver_interface PORT MAP(
---    lrclk_i => lrclk,
---    s00_axis_aclk_i => s00_axis_aclk,
---    s00_axis_aresetn_i => s00_axis_aresetn,
---    s00_axis_tdata_i => s00_axis_tdata,
---    s00_axis_tlast_i => s00_axis_tlast,
---    s00_axis_tsrb_i => s00_axis_tstrb,
---    s00_axis_tvalid_i => s00_axis_tvalid,
-    
---    left_audio_data_o => left_audio_data_sig,
---    right_audio_data_o => right_audio_data_sig,
---    left_audio_data_valid_o => left_audio_data_valid_o_sig,
---    right_audio_data_valid_o => right_audio_data_valid_o_sig,
---    s00_axis_tready_o => s00_axis_tready_sig);
 
 ---------------------------------------------------------------------------- 
 -- Logic
@@ -418,17 +361,7 @@ axis_trans : axis_transmitter_interface PORT MAP(
 ac_mute_n_o <= '1'; -- TASK 2, always unmuted
 
 
---left_audio_trans_in <= left_audio_data_sig;
---right_audio_trans_in <= right_audio_data_sig;
-    
 
-
----------------------------------------------------------------------------
--- Debug Ports
---dbg_left_audio_rx_o <= left_audio_data_sig;
---dbg_right_audio_rx_o <= right_audio_data_sig;
-
-----------------------------------------------------------------------------
 --wire signals to outputs
 m00_axis_tdata <= m00_axis_tdata_sig;
 m00_axis_tlast <= m00_axis_tlast_sig;
