@@ -24,12 +24,12 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
 
-entity FFT_wrapper is 
+entity small_test_FFT_wrapper is 
 	generic (
 		INPUT_DATA_WIDTH	: integer	:= 32;
 		OUTPUT_DATA_WIDTH   : integer   := 8;
-		FFT_WIDTH           : integer := 8192;
-		ADDR_LENGTH         : integer := 4096
+		FFT_WIDTH           : integer := 64;
+		ADDR_LENGTH         : integer := 32
 	);
     PORT (
     s00_axis_aclk     :  in std_logic; --
@@ -48,16 +48,16 @@ entity FFT_wrapper is
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
     fft_done_o        : out std_logic;
-    bin_addr_o        : out std_logic_vector(11 downto 0)
+    bin_addr_o        : out std_logic_vector(4 downto 0)
     );
-end FFT_wrapper;
+end small_test_FFT_wrapper;
 
-architecture Behavioral of FFT_wrapper is
+architecture Behavioral of small_test_FFT_wrapper is
 
-COMPONENT xfft_0 IS
+COMPONENT xfft_1 IS
   PORT (
     aclk : IN STD_LOGIC;
-    s_axis_config_tdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     s_axis_config_tvalid : IN STD_LOGIC;
     s_axis_config_tready : OUT STD_LOGIC;
     
@@ -70,7 +70,7 @@ COMPONENT xfft_0 IS
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tready : IN STD_LOGIC;
     m_axis_data_tlast : OUT STD_LOGIC;
-    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
     
     event_frame_started : OUT STD_LOGIC;
     event_tlast_unexpected : OUT STD_LOGIC;
@@ -84,7 +84,7 @@ END COMPONENT;
 signal fft_data_in, fft_data_out : std_logic_vector(47 downto 0) := (others => '0');
 signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := (others => '0');
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
-signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
+signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 
 signal re_mag_dbg, im_mag_dbg : signed(23 downto 0); -- debug signals
@@ -104,7 +104,7 @@ process(s00_axis_aclk)
     variable re_sq      : unsigned(9 downto 0);    -- 5×5 = 10 bits 
     variable im_sq      : unsigned(9 downto 0);
     variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
-    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(465, 10); -- 
+    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(445, 10); -- 
     constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(350, 10); --
 begin
     -- Extract signed MSBs
@@ -134,7 +134,7 @@ end process;
 
 -- FFT INSTANTIATION
 
-uut : xfft_0 PORT MAP(
+uut : xfft_1 PORT MAP(
     aclk => s00_axis_aclk,
     s_axis_config_tdata => (others => '0'),
     s_axis_config_tvalid => '1',
@@ -162,8 +162,8 @@ uut : xfft_0 PORT MAP(
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
-    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(12)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
-    bin_addr_o <= bin_addr_o_sig(11 downto 0); -- 12 bits for 0 to 4095
+    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(5)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
+    bin_addr_o <= bin_addr_o_sig(4 downto 0); -- 12 bits for 0 to 4095
 end if;
 end process;
 
@@ -186,7 +186,7 @@ case current_state is
     when init => 
         next_state <= countOutputs;
     when countOutputs =>
-        if (output_counter = to_unsigned(ADDR_LENGTH + 10, 14)) then -- give it a few clock cycles
+        if (output_counter = to_unsigned(ADDR_LENGTH + 4, 14)) then -- give it a few clock cycles
             next_state <= waiting;
         end if;
     when waiting => 
