@@ -123,9 +123,9 @@ begin
     
         -- Compare
         if mag_sum > THRESHOLD_HIGH then
-            fft_data_o <= '1';
+            fft_data_o_sig <= '1';
         elsif mag_sum < THRESHOLD_LOW then
-            fft_data_o <= '0';
+            fft_data_o_sig <= '0';
         end if;
     end if;
 end process;
@@ -162,6 +162,7 @@ uut : xfft_1 PORT MAP(
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
+    fft_data_o <= fft_data_o_sig;
     tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(5)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
     bin_addr_o <= bin_addr_o_sig(4 downto 0); -- 12 bits for 0 to 4095
 end if;

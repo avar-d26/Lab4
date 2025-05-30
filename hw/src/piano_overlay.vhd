@@ -34,14 +34,14 @@ entity piano_overlay is
     -- AXI-Stream video slave
     s_axis_tdata_i   : in  std_logic_vector(DATA_WIDTH-1 downto 0);
     s_axis_tvalid_i  : in  std_logic;
-    s_axis_tuser_i   : in  std_logic;
+    s_axis_tuser_i   : in  std_logic_vector(0 downto 0);
     s_axis_tlast_i   : in  std_logic;
     s_axis_tready_o  : out std_logic;
 
     -- AXI-Stream video master
     m_axis_tdata_o   : out std_logic_vector(DATA_WIDTH-1 downto 0);
     m_axis_tvalid_o  : out std_logic;
-    m_axis_tuser_o   : out std_logic;
+    m_axis_tuser_o   : out std_logic_vector(0 downto 0);
     m_axis_tlast_o   : out std_logic;
     m_axis_tready_i  : in  std_logic
   );
