@@ -133,7 +133,6 @@ begin
   -- Clock generation (unchanged)
   clk_100MHz <= not clk_100MHz after CLOCK_PERIOD/2;
   clk_134MHz <= not clk_134MHz after FAST_CLK_PER/2;
-  bclk       <= not bclk after 50 ns; -- ~3.072 MHz for I2S
 
   -- Reset generation (unchanged)
   process
@@ -156,7 +155,7 @@ begin
     )
     port map (
       sysclk_i         => clk_100MHz,
-      ac_bclk_o        => open,
+      ac_bclk_o        => bclk,
       ac_mclk_o        => open,
       ac_mute_n_o      => open,
       ac_dac_data_o    => ac_dac_data_o,
