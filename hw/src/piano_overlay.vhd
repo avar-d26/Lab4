@@ -17,33 +17,34 @@ entity piano_overlay is
     DATA_WIDTH : integer := 24;
     COLUMN_WIDTH : integer := 13);
   Port (
-    clk_i            : in  std_logic;
     resetn_i            : in  std_logic; -- active low reset
 
     -- Video timing
-    active_video_i   : in  std_logic;
-    hsync_i          : in  std_logic;
-    vsync_i          : in  std_logic;
-    vblank_i         : in  std_logic;
-    hblank_i         : in  std_logic;
-    fsync_i          : in std_logic_vector (0 downto 0);
+    active_video   : in  std_logic;
+    hblank         : in  std_logic;
+    hsync          : in  std_logic;
+    vblank         : in  std_logic;
+    vsync          : in  std_logic;
+    fsync          : in std_logic_vector (0 downto 0);
 
     -- Key frame input
     key_state_i      : in  std_logic_vector(KEY_NUM-1 downto 0);
 
     -- AXI-Stream video slave
-    s_axis_tdata_i   : in  std_logic_vector(DATA_WIDTH-1 downto 0);
-    s_axis_tvalid_i  : in  std_logic;
-    s_axis_tuser_i   : in  std_logic_vector(0 downto 0);
-    s_axis_tlast_i   : in  std_logic;
-    s_axis_tready_o  : out std_logic;
+    s_axis_aclk    : in std_logic;
+    s_axis_tdata   : in  std_logic_vector(DATA_WIDTH-1 downto 0);
+    s_axis_tvalid  : in  std_logic;
+    s_axis_tuser   : in  std_logic_vector(0 downto 0);
+    s_axis_tlast   : in  std_logic;
+    s_axis_tready  : out std_logic;
 
     -- AXI-Stream video master
-    m_axis_tdata_o   : out std_logic_vector(DATA_WIDTH-1 downto 0);
-    m_axis_tvalid_o  : out std_logic;
-    m_axis_tuser_o   : out std_logic_vector(0 downto 0);
-    m_axis_tlast_o   : out std_logic;
-    m_axis_tready_i  : in  std_logic
+    m_axis_aclk    : in std_logic;
+    m_axis_tdata   : out std_logic_vector(DATA_WIDTH-1 downto 0);
+    m_axis_tvalid  : out std_logic;
+    m_axis_tuser   : out std_logic_vector(0 downto 0);
+    m_axis_tlast   : out std_logic;
+    m_axis_tready  : in  std_logic
   );
 end piano_overlay;
   
@@ -74,7 +75,7 @@ begin
 -- FSM Next State Logic (asynchronous, no clock)
 -- Include all state change triggering signals in the sensitivity list
 -- The only signal getting assigned in this process should be next_state
-next_state_logic : process(curr_state, fsync_i, col_counter_tc, active_video_i, hsync_i, key_counter_tc)
+next_state_logic : process(curr_state, fsync, col_counter_tc, active_video, hsync, key_counter_tc)
 -- ++++ Add necessary signals to the sensitivity list above ++++
 -- ++++ Modify next state logic to match your paper design ++++
 begin
@@ -85,15 +86,15 @@ begin
 	-- Use a case statement to switch between states
 	case curr_state is	
         when Idle =>
-            if (fsync_i = "1") then     -- wait until start of new frame
+            if (fsync = "1") then     -- wait until start of new frame
                 next_state <= Blank1;
             end if;
         when Blank1 =>
-            if (active_video_i = '1') then     -- wait until video is active
+            if (active_video = '1') then     -- wait until video is active
                 next_state <= ActiveRow;
             end if;
         when ActiveRow =>    
-            if (active_video_i = '0') then     -- if no more active video
+            if (active_video = '0') then     -- if no more active video
                 next_state <= Blank2;
             elsif (key_counter_tc = '1') then
                 next_state <= IncrKey;
@@ -104,7 +105,7 @@ begin
             else next_state <= ActiveRow;
             end if;
         when Blank2 =>
-            if (hsync_i = '1') then     -- wait until start of new frame
+            if (hsync = '1') then     -- wait until start of new frame
                 next_state <= Blank1;
             end if; 
         when others => -- this is like the "else" part of an if/else statement, but shouldn't reached
@@ -138,30 +139,30 @@ end process fsm_output_logic;
 
 ----------------------------------------------------------------------------
 -- FSM State Update Process (synchronous, clocked)
-state_update : process (clk_i)
+state_update : process (s_axis_aclk)
 begin
-	if (rising_edge(clk_i)) then
+	if (rising_edge(s_axis_aclk)) then
 		curr_state <= next_state; 		-- update current state on rising edge of the clock
 	end if;
 end process state_update;
 
 
 -- Latch key_state on vsync
-current_keys_reg : process(clk_i)
+current_keys_reg : process(s_axis_aclk)
 begin
-  if rising_edge(clk_i) then
+  if rising_edge(s_axis_aclk) then
     if resetn_i = '0' then
       current_keys <= (others => '0');
-    elsif (fsync_i = "1") then
+    elsif (fsync = "1") then
       current_keys <= key_state_i;
     end if;
   end if;
 end process current_keys_reg;
 
 -- Column Index Counter
-column_index_counter : process(clk_i)
+column_index_counter : process(s_axis_aclk)
 begin
-  if rising_edge(clk_i) then
+  if rising_edge(s_axis_aclk) then
     if resetn_i = '0' then
       column_index <= 0;   -- reset
     elsif incr_col_index = '1' then
@@ -175,9 +176,9 @@ begin
 end process column_index_counter;
 
 -- Key Length Counter
-key_length_counter : process(clk_i)
+key_length_counter : process(s_axis_aclk)
 begin
-  if rising_edge(clk_i) then
+  if rising_edge(s_axis_aclk) then
     if resetn_i = '0' then
       key_length <= (others => '0');   -- reset
     elsif key_counter_tc = '1' then
@@ -192,20 +193,20 @@ key_counter_tc <='1' when key_length = COLUMN_WIDTH - 1 else '0';
 col_counter_tc <='1' when column_index = KEY_NUM - 1 else '0';
 
 -- Key Override Process to output red instead of default key color (black or white)
-key_override : process (s_axis_tdata_i, current_keys, column_index, output_en)
+key_override : process (s_axis_tdata, current_keys, column_index, output_en)
 begin
   if output_en = '1' then
     if current_keys(column_index) = '1' then
       m_axis_tdata_sig <= x"FF0000";  -- Pure red (R=255, G=0, B=0)
-    else m_axis_tdata_sig <= s_axis_tdata_i;
+    else m_axis_tdata_sig <= s_axis_tdata;
     end if;
-  else m_axis_tdata_sig <= s_axis_tdata_i;
+  else m_axis_tdata_sig <= s_axis_tdata;
   end if;
 end process key_override;
 
-m_axis_tdata_o <= m_axis_tdata_sig;   
-m_axis_tvalid_o <= s_axis_tvalid_i;
-m_axis_tuser_o <= s_axis_tuser_i;
-m_axis_tlast_o <= s_axis_tlast_i;
-s_axis_tready_o <= m_axis_tready_i;
+m_axis_tdata <= m_axis_tdata_sig;   
+m_axis_tvalid <= s_axis_tvalid;
+m_axis_tuser <= s_axis_tuser;
+m_axis_tlast <= s_axis_tlast;
+s_axis_tready <= m_axis_tready;
 end Behavioral;

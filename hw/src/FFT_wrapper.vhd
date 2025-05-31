@@ -104,7 +104,7 @@ process(s00_axis_aclk)
     variable re_sq      : unsigned(9 downto 0);    -- 5×5 = 10 bits 
     variable im_sq      : unsigned(9 downto 0);
     variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
-    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(465, 10); -- 
+    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(450, 10); -- 
     constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(350, 10); --
 begin
     -- Extract signed MSBs
