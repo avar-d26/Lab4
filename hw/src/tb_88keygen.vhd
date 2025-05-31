@@ -20,6 +20,7 @@ architecture sim of tb_create_88key is
   
   -- clock period
   constant CLK_PERIOD : time := 10 ns;
+  constant anotherclkperiod : time := 7.46 ns;
 
 begin
 
@@ -32,7 +33,7 @@ begin
 
   process
   begin
-    wait for CLK_PERIOD / 2;
+    wait for anotherclkperiod / 2;
     clkb <= not clkb;
   end process;
 
