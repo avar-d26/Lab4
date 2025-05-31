@@ -87,7 +87,7 @@ signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 
-signal re_mag_dbg, im_mag_dbg : signed(23 downto 0); -- debug signals
+signal re_FFT_output, im_FFT_output : std_logic_vector(23 downto 0); -- debug signals
 signal mag_sq_dbg : unsigned(47 downto 0);
 
 type statetype is (init, countOutputs, waiting);
@@ -97,7 +97,8 @@ begin
 
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
-
+re_FFT_output <= fft_data_out(47 downto 24);
+im_FFT_output <= fft_data_out(23 downto 0);
 process(s00_axis_aclk)
     variable re_top     : signed(4 downto 0);      -- 5-bit signed
     variable im_top     : signed(4 downto 0);      -- 5-bit signed
