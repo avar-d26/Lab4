@@ -122,7 +122,7 @@ begin
         threshold_dbg_o <= std_logic_vector(THRESHOLD_HIGH);
     
         -- Compare
-        if mag_sum > THRESHOLD_HIGH then
+        if ((mag_sum > THRESHOLD_HIGH) and tvalid_sig_1 = '0') then
             fft_data_o_sig <= '1';
         elsif mag_sum < THRESHOLD_LOW then
             fft_data_o_sig <= '0';

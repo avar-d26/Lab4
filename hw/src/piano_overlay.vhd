@@ -44,8 +44,15 @@ entity piano_overlay is
     m_axis_tvalid  : out std_logic;
     m_axis_tuser   : out std_logic_vector(0 downto 0);
     m_axis_tlast   : out std_logic;
-    m_axis_tready  : in  std_logic
-  );
+    m_axis_tready  : in  std_logic;
+    
+    -- debug signals
+    m_axis_tdata_dbg_o: out std_logic_vector(DATA_WIDTH-1 downto 0);
+    m_axis_tvalid_dbg_o : out std_logic;
+    s_axis_tready_dbg_o : out std_logic;
+    output_en_dbg_o : out std_logic;
+    incr_col_index_dgb_o : out std_logic
+    );
 end piano_overlay;
   
 architecture Behavioral of piano_overlay is
@@ -208,5 +215,13 @@ m_axis_tdata <= m_axis_tdata_sig;
 m_axis_tvalid <= s_axis_tvalid;
 m_axis_tuser <= s_axis_tuser;
 m_axis_tlast <= s_axis_tlast;
-s_axis_tready <= m_axis_tready;
+s_axis_tready <= '1';
+
+-- debug signals
+m_axis_tdata_dbg_o <= m_axis_tdata_sig; 
+m_axis_tvalid_dbg_o <= s_axis_tvalid; 
+s_axis_tready_dbg_o <= '1';
+output_en_dbg_o <= output_en;
+incr_col_index_dgb_o <= incr_col_index;
+
 end Behavioral;
