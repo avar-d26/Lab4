@@ -20,12 +20,12 @@ entity piano_overlay is
     resetn_i            : in  std_logic; -- active low reset
 
     -- Video timing
-    active_video   : in  std_logic;
-    hblank         : in  std_logic;
-    hsync          : in  std_logic;
-    vblank         : in  std_logic;
-    vsync          : in  std_logic;
-    fsync          : in std_logic_vector (0 downto 0);
+    vid_io_in_active_video   : in  std_logic;
+    vid_io_in_hblank         : in  std_logic;
+    vid_io_in_hsync          : in  std_logic;
+    vid_io_in_vblank         : in  std_logic;
+    vid_io_in_vsync          : in  std_logic;
+    vid_io_in_fsync          : in std_logic_vector (0 downto 0);
 
     -- Key frame input
     key_state_i      : in  std_logic_vector(KEY_NUM-1 downto 0);
@@ -68,6 +68,10 @@ signal key_counter_tc, key_count_en, col_counter_tc : std_logic := '0';
 signal m_axis_tdata_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
 signal output_en, incr_col_index : std_logic := '0';
 
+-- double flop signals
+signal active_video_intermediate, active_video, hsync_intermediate, hsync: std_logic := '0';
+signal fsync_intermediate, fsync : std_logic_vector(0 downto 0);
+
 -- FSM signals
 type statetype is (Idle, Blank1, ActiveRow, IncrKey, Blank2);
 signal curr_state, next_state : statetype := Idle;
@@ -93,15 +97,15 @@ begin
 	-- Use a case statement to switch between states
 	case curr_state is	
         when Idle =>
-            if (fsync = "1") then     -- wait until start of new frame
+            if (vid_io_in_fsync = "1") then     -- wait until start of new frame
                 next_state <= Blank1;
             end if;
         when Blank1 =>
-            if (active_video = '1') then     -- wait until video is active
+            if (vid_io_in_active_video = '1') then     -- wait until video is active
                 next_state <= ActiveRow;
             end if;
         when ActiveRow =>    
-            if (active_video = '0') then     -- if no more active video
+            if (vid_io_in_active_video = '0') then     -- if no more active video
                 next_state <= Blank2;
             elsif (key_counter_tc = '1') then
                 next_state <= IncrKey;
@@ -112,7 +116,7 @@ begin
             else next_state <= ActiveRow;
             end if;
         when Blank2 =>
-            if (hsync = '1') then     -- wait until start of new frame
+            if (vid_io_in_hsync = '1') then     -- wait until start of new frame
                 next_state <= Blank1;
             end if; 
         when others => -- this is like the "else" part of an if/else statement, but shouldn't reached
@@ -216,6 +220,21 @@ m_axis_tvalid <= s_axis_tvalid;
 m_axis_tuser <= s_axis_tuser;
 m_axis_tlast <= s_axis_tlast;
 s_axis_tready <= '1';
+
+-- double flops for time domain crossing
+double_flop : process (s_axis_aclk)
+begin
+if rising_edge (s_axis_aclk) then
+    active_video_intermediate <= vid_io_in_active_video;
+    active_video <= active_video_intermediate;
+    
+    hsync_intermediate <= vid_io_in_hsync;
+    hsync <= hsync_intermediate;
+    
+    fsync_intermediate <= vid_io_in_fsync;
+    fsync <= fsync_intermediate;
+end if;
+end process double_flop;
 
 -- debug signals
 m_axis_tdata_dbg_o <= m_axis_tdata_sig; 
