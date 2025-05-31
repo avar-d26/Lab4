@@ -87,7 +87,7 @@ signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 
-signal re_FFT_output, im_FFT_output : std_logic_vector(23 downto 0); -- debug signals
+signal re_FFT_output, im_FFT_output : std_logic_vector(23 downto 0) := (others => '0'); -- debug signals
 signal mag_sq_dbg : unsigned(47 downto 0);
 
 type statetype is (init, countOutputs, waiting);
