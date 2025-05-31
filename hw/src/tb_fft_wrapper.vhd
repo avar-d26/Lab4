@@ -87,7 +87,7 @@ architecture Behavioral of tb_fft_wrapper is
   constant CLOCK_PERIOD   : time := 10 ns;
   constant FAST_CLK_PER   : time := 7.46 ns;
   constant SINE_AMPL      : real := 8388607.0;  -- 24-bit signed max
-  constant SINE_FREQ      : real := 123.0;      -- 123 Hz test tone
+  constant SINE_FREQ      : real := 580.0;      -- 123 Hz test tone
   constant T_SAMPLE       : real := 1.0/48000.0;-- Sample period for 48kHz
   constant AUDIO_DATA_WIDTH : integer := 24;
 

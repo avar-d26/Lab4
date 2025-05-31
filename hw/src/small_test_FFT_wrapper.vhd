@@ -104,8 +104,8 @@ process(s00_axis_aclk)
     variable re_sq      : unsigned(9 downto 0);    -- 5×5 = 10 bits 
     variable im_sq      : unsigned(9 downto 0);
     variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
-    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(445, 10); -- 
-    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(350, 10); --
+    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(400, 10); -- 
+    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(300, 10); --
 begin
     -- Extract signed MSBs
     re_top := signed(fft_data_out(47 downto 43));  -- bits [47:43] = 5 bits
@@ -122,7 +122,7 @@ begin
         threshold_dbg_o <= std_logic_vector(THRESHOLD_HIGH);
     
         -- Compare
-        if ((mag_sum > THRESHOLD_HIGH) and tvalid_sig_1 = '0') then
+        if ((mag_sum > THRESHOLD_HIGH) and tvalid_sig_1 = '1') then
             fft_data_o_sig <= '1';
         elsif mag_sum < THRESHOLD_LOW then
             fft_data_o_sig <= '0';
@@ -162,14 +162,13 @@ uut : xfft_1 PORT MAP(
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
-    fft_data_o <= fft_data_o_sig;
     tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(5)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
     bin_addr_o <= bin_addr_o_sig(4 downto 0); -- 12 bits for 0 to 4095
 end if;
 end process;
 
 tvalid_o <= tvalid_sig;
-
+fft_data_o <= fft_data_o_sig;
 -------------------------------------------------------------------------------
 -- LOGIC TO DETERMINE WHEN THE FFT IS DONE AND READY TO BE PROCESSED
 -- FINITE STATE MACHINE
