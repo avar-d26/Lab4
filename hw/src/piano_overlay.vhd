@@ -18,14 +18,16 @@ entity piano_overlay is
     COLUMN_WIDTH : integer := 13);
   Port (
     resetn_i            : in  std_logic; -- active low reset
+    
+    pixel_clk_i         : in std_logic; -- run on the pixel clock
 
     -- Video timing
-    vid_io_in_active_video   : in  std_logic;
-    vid_io_in_hblank         : in  std_logic;
-    vid_io_in_hsync          : in  std_logic;
-    vid_io_in_vblank         : in  std_logic;
-    vid_io_in_vsync          : in  std_logic;
-    vid_io_in_fsync          : in std_logic_vector (0 downto 0);
+    active_video_i   : in  std_logic;
+    hblank_i         : in  std_logic;
+    hsync_i          : in  std_logic;
+    vblank_i         : in  std_logic;
+    vsync_i          : in  std_logic;
+    fsync_i          : in std_logic_vector (0 downto 0);
 
     -- Key frame input
     key_state_i      : in  std_logic_vector(KEY_NUM-1 downto 0);
@@ -48,8 +50,8 @@ entity piano_overlay is
     
     -- debug signals
     m_axis_tdata_dbg_o: out std_logic_vector(DATA_WIDTH-1 downto 0);
-    m_axis_tvalid_dbg_o : out std_logic;
-    s_axis_tready_dbg_o : out std_logic;
+    key_counter_tc_dbg_o : out std_logic;
+    col_counter_tc_dbg_o : out std_logic;
     output_en_dbg_o : out std_logic;
     incr_col_index_dgb_o : out std_logic
     );
@@ -68,9 +70,6 @@ signal key_counter_tc, key_count_en, col_counter_tc : std_logic := '0';
 signal m_axis_tdata_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
 signal output_en, incr_col_index : std_logic := '0';
 
--- double flop signals
-signal active_video_intermediate, active_video, hsync_intermediate, hsync: std_logic := '0';
-signal fsync_intermediate, fsync : std_logic_vector(0 downto 0);
 
 -- FSM signals
 type statetype is (Idle, Blank1, ActiveRow, IncrKey, Blank2);
@@ -86,7 +85,7 @@ begin
 -- FSM Next State Logic (asynchronous, no clock)
 -- Include all state change triggering signals in the sensitivity list
 -- The only signal getting assigned in this process should be next_state
-next_state_logic : process(curr_state, fsync, col_counter_tc, active_video, hsync, key_counter_tc)
+next_state_logic : process(curr_state, fsync_i, col_counter_tc, active_video_i, hsync_i, key_counter_tc)
 -- ++++ Add necessary signals to the sensitivity list above ++++
 -- ++++ Modify next state logic to match your paper design ++++
 begin
@@ -97,15 +96,15 @@ begin
 	-- Use a case statement to switch between states
 	case curr_state is	
         when Idle =>
-            if (vid_io_in_fsync = "1") then     -- wait until start of new frame
+            if (fsync_i = "1") then     -- wait until start of new frame
                 next_state <= Blank1;
             end if;
         when Blank1 =>
-            if (vid_io_in_active_video = '1') then     -- wait until video is active
+            if (active_video_i = '1') then     -- wait until video is active
                 next_state <= ActiveRow;
             end if;
         when ActiveRow =>    
-            if (vid_io_in_active_video = '0') then     -- if no more active video
+            if (active_video_i = '0') then     -- if no more active video
                 next_state <= Blank2;
             elsif (key_counter_tc = '1') then
                 next_state <= IncrKey;
@@ -116,7 +115,7 @@ begin
             else next_state <= ActiveRow;
             end if;
         when Blank2 =>
-            if (vid_io_in_hsync = '1') then     -- wait until start of new frame
+            if (hsync_i = '1') then     -- wait until start of new frame
                 next_state <= Blank1;
             end if; 
         when others => -- this is like the "else" part of an if/else statement, but shouldn't reached
@@ -150,30 +149,30 @@ end process fsm_output_logic;
 
 ----------------------------------------------------------------------------
 -- FSM State Update Process (synchronous, clocked)
-state_update : process (s_axis_aclk)
+state_update : process (pixel_clk_i)
 begin
-	if (rising_edge(s_axis_aclk)) then
+	if (rising_edge(pixel_clk_i)) then
 		curr_state <= next_state; 		-- update current state on rising edge of the clock
 	end if;
 end process state_update;
 
 
 -- Latch key_state on vsync
-current_keys_reg : process(s_axis_aclk)
+current_keys_reg : process(pixel_clk_i)
 begin
-  if rising_edge(s_axis_aclk) then
+  if rising_edge(pixel_clk_i) then
     if resetn_i = '0' then
       current_keys <= (others => '0');
-    elsif (fsync = "1") then
+    elsif (fsync_i = "1") then
       current_keys <= key_state_i;
     end if;
   end if;
 end process current_keys_reg;
 
 -- Column Index Counter
-column_index_counter : process(s_axis_aclk)
+column_index_counter : process(pixel_clk_i)
 begin
-  if rising_edge(s_axis_aclk) then
+  if rising_edge(pixel_clk_i) then
     if resetn_i = '0' then
       column_index <= 0;   -- reset
     elsif incr_col_index = '1' then
@@ -187,9 +186,9 @@ begin
 end process column_index_counter;
 
 -- Key Length Counter
-key_length_counter : process(s_axis_aclk)
+key_length_counter : process(pixel_clk_i)
 begin
-  if rising_edge(s_axis_aclk) then
+  if rising_edge(pixel_clk_i) then
     if resetn_i = '0' then
       key_length <= (others => '0');   -- reset
     elsif key_counter_tc = '1' then
@@ -209,9 +208,9 @@ begin
   if output_en = '1' then
     if current_keys(column_index) = '1' then
       m_axis_tdata_sig <= x"FF0000";  -- Pure red (R=255, G=0, B=0)
-    else m_axis_tdata_sig <= s_axis_tdata;
+    else m_axis_tdata_sig <= x"FFFFFF"; -- white as default
     end if;
-  else m_axis_tdata_sig <= s_axis_tdata;
+  else m_axis_tdata_sig <= x"FFFFFF"; -- white as default;
   end if;
 end process key_override;
 
@@ -221,25 +220,12 @@ m_axis_tuser <= s_axis_tuser;
 m_axis_tlast <= s_axis_tlast;
 s_axis_tready <= '1';
 
--- double flops for time domain crossing
-double_flop : process (s_axis_aclk)
-begin
-if rising_edge (s_axis_aclk) then
-    active_video_intermediate <= vid_io_in_active_video;
-    active_video <= active_video_intermediate;
-    
-    hsync_intermediate <= vid_io_in_hsync;
-    hsync <= hsync_intermediate;
-    
-    fsync_intermediate <= vid_io_in_fsync;
-    fsync <= fsync_intermediate;
-end if;
-end process double_flop;
+
 
 -- debug signals
 m_axis_tdata_dbg_o <= m_axis_tdata_sig; 
-m_axis_tvalid_dbg_o <= s_axis_tvalid; 
-s_axis_tready_dbg_o <= '1';
+key_counter_tc_dbg_o <= key_counter_tc; 
+col_counter_tc_dbg_o <= col_counter_tc;
 output_en_dbg_o <= output_en;
 incr_col_index_dgb_o <= incr_col_index;
 
