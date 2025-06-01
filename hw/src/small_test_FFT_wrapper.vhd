@@ -44,6 +44,8 @@ entity small_test_FFT_wrapper is
     mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
     threshold_dbg_o      : out std_logic_vector(9 downto 0);
     fft_data_o_dbg_o     : out std_logic;
+    re_FFT_output_dbg  : out std_logic_vector(23 downto 0);
+    im_FFT_output_dbg  : out std_logic_vector(23 downto 0);
 
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
@@ -87,18 +89,22 @@ signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 
-signal re_FFT_output, im_FFT_output : std_logic_vector(23 downto 0) := (others => '0'); -- debug signals
 signal mag_sq_dbg : unsigned(47 downto 0);
 
 type statetype is (init, countOutputs, waiting);
 signal current_state, next_state : statetype := init;
 signal cnt_rst : std_logic := '0';
+  attribute keep : string;
+  attribute keep of re_FFT_output_dbg : signal is "true";
+  attribute keep of im_FFT_output_dbg : signal is "true";
+  
+  
 begin
 
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
-re_FFT_output <= fft_data_out(47 downto 24);
-im_FFT_output <= fft_data_out(23 downto 0);
+re_FFT_output_dbg <= fft_data_out(47 downto 24);
+im_FFT_output_dbg <= fft_data_out(23 downto 0);
 process(s00_axis_aclk)
     variable re_top     : signed(4 downto 0);      -- 5-bit signed
     variable im_top     : signed(4 downto 0);      -- 5-bit signed

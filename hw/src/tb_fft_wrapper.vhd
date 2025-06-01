@@ -75,6 +75,11 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tstrb    : in std_logic_vector((INPUT_DATA_WIDTH/8)-1 downto 0);
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
+        mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
+        threshold_dbg_o      : out std_logic_vector(9 downto 0);
+        fft_data_o_dbg_o     : out std_logic;
+        re_FFT_output_dbg  : out std_logic_vector(23 downto 0);
+        im_FFT_output_dbg  : out std_logic_vector(23 downto 0);
       tvalid_o          : out std_logic;
       fft_data_o        : out std_logic;
       fft_done_o        : out std_logic;
@@ -128,6 +133,7 @@ architecture Behavioral of tb_fft_wrapper is
   signal sine_data_tx     : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
   signal bit_count        : integer := AUDIO_DATA_WIDTH-1;
   signal data_in          : std_logic := '0';  -- Added missing signal
+  signal re_FFT_output, im_FFT_output : std_logic_vector(23 downto 0);
 
 begin
   -- Clock generation (unchanged)
@@ -205,6 +211,8 @@ begin
       s00_axis_tstrb   => fifo_tstrb,
       s00_axis_tlast   => fifo_tlast,
       s00_axis_tvalid  => fifo_tvalid,
+        re_FFT_output_dbg  => re_FFT_output,
+        im_FFT_output_dbg  => im_FFT_output,
       tvalid_o         => fft_valid,
       fft_data_o       => fft_data,
       fft_done_o       => fft_done,
