@@ -40,6 +40,8 @@ entity small_test_FFT_wrapper is
     s00_axis_tlast    :  in std_logic;
     s00_axis_tvalid   :  in std_logic;
     
+    fifo_full         : in std_logic;
+    
     -- debugs
     mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
     threshold_dbg_o      : out std_logic_vector(9 downto 0);
@@ -88,10 +90,11 @@ signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := 
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
+signal FFT_en, s00_axis_tready_sig : std_logic := '0';
 
 signal mag_sq_dbg : unsigned(47 downto 0);
 
-type statetype is (init, countOutputs, waiting);
+type statetype is (init, countOutputs, waiting, fullFifo);
 signal current_state, next_state : statetype := init;
 signal cnt_rst : std_logic := '0';
   attribute keep : string;
@@ -149,7 +152,7 @@ uut : xfft_1 PORT MAP(
     
     s_axis_data_tdata => fft_data_in,
     s_axis_data_tvalid => s00_axis_tvalid,
-    s_axis_data_tready => s00_axis_tready,
+    s_axis_data_tready => s00_axis_tready_sig,
     s_axis_data_tlast => s00_axis_tlast,
     
     m_axis_data_tdata => fft_data_out,
@@ -165,6 +168,8 @@ uut : xfft_1 PORT MAP(
     event_data_in_channel_halt => open,
     event_data_out_channel_halt => open);
     
+s00_axis_tready <= s00_axis_tready_sig and FFT_en;
+
     
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
@@ -186,12 +191,16 @@ end if;
 end process;
 
 
-next_state_logic : process(current_state, output_counter) begin
+next_state_logic : process(current_state, output_counter, fifo_full) begin
 next_state <= current_state;
 
 case current_state is 
     when init => 
-        next_state <= countOutputs;
+        next_state <= fullFIFO;
+    when fullFIFO =>
+        if fifo_full = '1' then
+            next_state <= countOutputs;
+        end if;
     when countOutputs =>
         if (output_counter = to_unsigned(ADDR_LENGTH + 4, 14)) then -- give it a few clock cycles
             next_state <= waiting;
@@ -207,14 +216,17 @@ end process;
 output_logic : process(current_state) begin
 cnt_rst <= '0';
 fft_done_o <= '0';
+FFT_en <= '0';
 case current_state is 
     when init => 
         cnt_rst <= '1';
+    when fullFIFO =>
+        FFT_en <= '1';
     when countOutputs =>
-
+        FFT_en <= '1';
     when waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
-
+        FFT_en <= '1';
     when others => null;
 end case;
 end process;

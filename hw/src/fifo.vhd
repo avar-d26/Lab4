@@ -15,7 +15,7 @@ use IEEE.NUMERIC_STD.ALL;
 -- Entity definition
 entity fifo is
 Generic (
-    FIFO_DEPTH : integer := 1024;
+    FIFO_DEPTH : integer := 64;
     DATA_WIDTH : integer := 32);
 Port ( 
     clk_i       : in std_logic;

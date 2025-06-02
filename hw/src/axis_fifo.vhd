@@ -13,7 +13,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity axis_fifo is
 	generic (
 		DATA_WIDTH	: integer	:= 32;
-		FIFO_DEPTH	: integer	:= 1024
+		FIFO_DEPTH	: integer	:= 64
 	);
 	port (
 	
@@ -25,6 +25,8 @@ entity axis_fifo is
 		s00_axis_tstrb    :  in std_logic_vector((DATA_WIDTH/8)-1 downto 0); -- dont care
 		s00_axis_tlast    :  in std_logic;
 		s00_axis_tvalid   :  in std_logic;
+		
+		fifo_full         : out std_logic;
 
 		-- Ports of Axi Controller Bus Interface M00_AXIS -- Transmitter
 		m00_axis_aclk     :  in std_logic; -- dont care
@@ -118,7 +120,7 @@ if rising_edge(s00_axis_aclk) then
 end if;
 end process;
 
-
+fifo_full <= full;
 
 
     

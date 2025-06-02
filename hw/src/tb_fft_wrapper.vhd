@@ -50,6 +50,7 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tstrb    : in std_logic_vector((DATA_WIDTH/8)-1 downto 0);
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
+      fifo_full         : out std_logic;
       m00_axis_aclk     : in std_logic;
       m00_axis_aresetn  : in std_logic;
       m00_axis_tvalid   : out std_logic;
@@ -75,6 +76,7 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tstrb    : in std_logic_vector((INPUT_DATA_WIDTH/8)-1 downto 0);
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
+      fifo_full         : in std_logic;
         mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
         threshold_dbg_o      : out std_logic_vector(9 downto 0);
         fft_data_o_dbg_o     : out std_logic;
@@ -125,7 +127,7 @@ architecture Behavioral of tb_fft_wrapper is
   signal fft_tready       : std_logic := '0';
   signal fft_valid        : std_logic := '0';
   signal fft_data         : std_logic := '0';
-  signal fft_done         : std_logic := '0';
+  signal fft_done, fifo_full         : std_logic := '0';
   signal fft_bin_addr     : std_logic_vector(4 downto 0) := (others => '0');
 
   -- Audio generation signals
@@ -192,6 +194,7 @@ begin
       s00_axis_tstrb   => m_axis_tstrb,
       s00_axis_tlast   => m_axis_tlast,
       s00_axis_tvalid  => m_axis_tvalid,
+      fifo_full        => fifo_full,
       m00_axis_aclk    => clk_100MHz,
       m00_axis_aresetn => rstn,
       m00_axis_tvalid  => fifo_tvalid,
@@ -211,6 +214,7 @@ begin
       s00_axis_tstrb   => fifo_tstrb,
       s00_axis_tlast   => fifo_tlast,
       s00_axis_tvalid  => fifo_tvalid,
+      fifo_full => fifo_full,
         re_FFT_output_dbg  => re_FFT_output,
         im_FFT_output_dbg  => im_FFT_output,
       tvalid_o         => fft_valid,
