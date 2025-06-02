@@ -15,7 +15,7 @@ entity piano_overlay is
   Generic (
     KEY_NUM : integer := 88;
     DATA_WIDTH : integer := 24;
-    COLUMN_WIDTH : integer := 13);
+    COLUMN_WIDTH : integer := 6); -- for 7 pixel width
   Port (
     resetn_i            : in  std_logic; -- active low reset
     
@@ -32,28 +32,15 @@ entity piano_overlay is
     -- Key frame input
     key_state_i      : in  std_logic_vector(KEY_NUM-1 downto 0);
 
-    -- AXI-Stream video slave
-    s_axis_aclk    : in std_logic;
-    s_axis_tdata   : in  std_logic_vector(DATA_WIDTH-1 downto 0);
-    s_axis_tvalid  : in  std_logic;
-    s_axis_tuser   : in  std_logic_vector(0 downto 0);
-    s_axis_tlast   : in  std_logic;
-    s_axis_tready  : out std_logic;
-
-    -- AXI-Stream video master
-    m_axis_aclk    : in std_logic;
-    m_axis_tdata   : out std_logic_vector(DATA_WIDTH-1 downto 0);
-    m_axis_tvalid  : out std_logic;
-    m_axis_tuser   : out std_logic_vector(0 downto 0);
-    m_axis_tlast   : out std_logic;
-    m_axis_tready  : in  std_logic;
+    RGB_data_o   : out std_logic_vector(DATA_WIDTH-1 downto 0);
     
-    -- debug signals
-    m_axis_tdata_dbg_o: out std_logic_vector(DATA_WIDTH-1 downto 0);
+    -- debug signals);
     key_counter_tc_dbg_o : out std_logic;
     col_counter_tc_dbg_o : out std_logic;
     output_en_dbg_o : out std_logic;
-    incr_col_index_dgb_o : out std_logic
+    key_state_dbg_o : out std_logic_vector(KEY_NUM-1 downto 0);
+    hsync_dbg_o : out std_logic;
+    current_keys_dbg_o : out std_logic_vector(KEY_NUM-1 downto 0)
     );
 end piano_overlay;
   
@@ -67,7 +54,7 @@ signal horizontal_pos: integer := 0; -- horizontal position counter
 signal column_index  : integer range 0 to KEY_NUM - 1;
 signal key_length : unsigned(3 downto 0) := (others => '0');
 signal key_counter_tc, key_count_en, col_counter_tc : std_logic := '0';
-signal m_axis_tdata_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
+signal RGB_data_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
 signal output_en, incr_col_index : std_logic := '0';
 
 
@@ -115,7 +102,7 @@ begin
             else next_state <= ActiveRow;
             end if;
         when Blank2 =>
-            if (hsync_i = '1') then     -- wait until start of new frame
+            if (hsync_i = '0') then     -- wait until start of new frame (hsync is active low on the lab computers)
                 next_state <= Blank1;
             end if; 
         when others => -- this is like the "else" part of an if/else statement, but shouldn't reached
@@ -203,30 +190,26 @@ key_counter_tc <='1' when key_length = COLUMN_WIDTH - 1 else '0';
 col_counter_tc <='1' when column_index = KEY_NUM - 1 else '0';
 
 -- Key Override Process to output red instead of default key color (black or white)
-key_override : process (s_axis_tdata, current_keys, column_index, output_en)
+key_override : process (current_keys, column_index, output_en)
 begin
   if output_en = '1' then
     if current_keys(column_index) = '1' then
-      m_axis_tdata_sig <= x"FF0000";  -- Pure red (R=255, G=0, B=0)
-    else m_axis_tdata_sig <= x"FFFFFF"; -- white as default
+      RGB_data_sig <= x"FF0000";  -- Pure red (R=255, G=0, B=0)
+    else RGB_data_sig <= x"FFFFFF"; -- white as default
     end if;
-  else m_axis_tdata_sig <= x"FFFFFF"; -- white as default;
+  else RGB_data_sig <= x"FFFFFF"; -- white as default;
   end if;
 end process key_override;
 
-m_axis_tdata <= m_axis_tdata_sig;   
-m_axis_tvalid <= s_axis_tvalid;
-m_axis_tuser <= s_axis_tuser;
-m_axis_tlast <= s_axis_tlast;
-s_axis_tready <= '1';
 
-
+RGB_data_o <= RGB_data_sig;
 
 -- debug signals
-m_axis_tdata_dbg_o <= m_axis_tdata_sig; 
 key_counter_tc_dbg_o <= key_counter_tc; 
 col_counter_tc_dbg_o <= col_counter_tc;
 output_en_dbg_o <= output_en;
-incr_col_index_dgb_o <= incr_col_index;
+key_state_dbg_o <= key_state_i;
+current_keys_dbg_o <= current_keys;
+hsync_dbg_o <= hsync_i;
 
 end Behavioral;
