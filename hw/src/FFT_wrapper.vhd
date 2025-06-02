@@ -52,7 +52,7 @@ entity FFT_wrapper is
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
     fft_done_o        : out std_logic;
-    bin_addr_o        : out std_logic_vector(4 downto 0)
+    bin_addr_o        : out std_logic_vector(11 downto 0)
     );
 end FFT_wrapper;
 
@@ -88,7 +88,7 @@ END COMPONENT;
 signal fft_data_in, fft_data_out : std_logic_vector(47 downto 0) := (others => '0');
 signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := (others => '0');
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
-signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
+signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 signal FFT_en, s00_axis_tready_sig : std_logic := '0';
 signal s00_axis_tvalid_sig : std_logic := '0';
@@ -110,14 +110,19 @@ fft_data_in <= "000000000000000000000000" & (not s00_axis_tdata(30)) & s00_axis_
 debug <= (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
 re_FFT_output_dbg <= fft_data_out(47 downto 24);
 im_FFT_output_dbg <= fft_data_out(23 downto 0);
+
+
+
+-- Calculate magnitude threshold of FFT output
+
 process(s00_axis_aclk)
     variable re_top     : signed(4 downto 0);      -- 5-bit signed
     variable im_top     : signed(4 downto 0);      -- 5-bit signed
     variable re_sq      : unsigned(9 downto 0);    -- 5�-5 = 10 bits 
     variable im_sq      : unsigned(9 downto 0);
     variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
-    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(400, 10); -- 
-    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(300, 10); --
+    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(300, 10); -- 
+    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(250, 10); --
 begin
     -- Extract signed MSBs
     re_top := signed(fft_data_out(47 downto 43));  -- bits [47:43] = 5 bits
@@ -176,8 +181,8 @@ s00_axis_tvalid_sig <= (s00_axis_tvalid and FFT_en and (not FFT_tvalid_delay));
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
-    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(5)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
-    bin_addr_o <= bin_addr_o_sig(4 downto 0); -- 12 bits for 0 to 4095
+    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(12)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
+    bin_addr_o <= bin_addr_o_sig(11 downto 0); -- 12 bits for 0 to 4095
 end if;
 end process;
 

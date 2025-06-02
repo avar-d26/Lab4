@@ -56,6 +56,7 @@ signal key_length : unsigned(3 downto 0) := (others => '0');
 signal key_counter_tc, key_count_en, col_counter_tc : std_logic := '0';
 signal RGB_data_sig   :  std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
 signal output_en, incr_col_index : std_logic := '0';
+signal pianokey_1, key_state_sig : std_logic_vector(KEY_NUM - 1 downto 0) := (others => '0');
 
 
 -- FSM signals
@@ -63,7 +64,13 @@ type statetype is (Idle, Blank1, ActiveRow, IncrKey, Blank2);
 signal curr_state, next_state : statetype := Idle;
 
 begin
-
+-- double flopper
+floppa : process(pixel_clk_i) begin
+if rising_edge(pixel_clk_i) then
+    pianokey_1 <= key_state_i;
+    key_state_sig <= pianokey_1;
+end if;
+end process;
 
 ----------------------------------------------------------------------------
 -- State machine
@@ -151,7 +158,7 @@ begin
     if resetn_i = '0' then
       current_keys <= (others => '0');
     elsif (fsync_i = "1") then
-      current_keys <= key_state_i;
+      current_keys <= key_state_sig;
     end if;
   end if;
 end process current_keys_reg;
@@ -208,7 +215,7 @@ RGB_data_o <= RGB_data_sig;
 key_counter_tc_dbg_o <= key_counter_tc; 
 col_counter_tc_dbg_o <= col_counter_tc;
 output_en_dbg_o <= output_en;
-key_state_dbg_o <= key_state_i;
+key_state_dbg_o <= key_state_sig;
 current_keys_dbg_o <= current_keys;
 hsync_dbg_o <= hsync_i;
 
