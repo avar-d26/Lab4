@@ -51,6 +51,7 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
       fifo_full         : out std_logic;
+      fifo_empty        : out std_logic;
       m00_axis_aclk     : in std_logic;
       m00_axis_aresetn  : in std_logic;
       m00_axis_tvalid   : out std_logic;
@@ -77,6 +78,7 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
       fifo_full         : in std_logic;
+      fifo_empty        : in std_logic;
         mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
         threshold_dbg_o      : out std_logic_vector(9 downto 0);
         fft_data_o_dbg_o     : out std_logic;
@@ -94,7 +96,7 @@ architecture Behavioral of tb_fft_wrapper is
   constant CLOCK_PERIOD   : time := 10 ns;
   constant FAST_CLK_PER   : time := 7.46 ns;
   constant SINE_AMPL      : real := 8388607.0;  -- 24-bit signed max
-  constant SINE_FREQ      : real := 580.0;      -- 123 Hz test tone
+  constant SINE_FREQ      : real := 1880.0;      -- 123 Hz test tone
   constant T_SAMPLE       : real := 1.0/48000.0;-- Sample period for 48kHz
   constant AUDIO_DATA_WIDTH : integer := 24;
 
@@ -127,7 +129,7 @@ architecture Behavioral of tb_fft_wrapper is
   signal fft_tready       : std_logic := '0';
   signal fft_valid        : std_logic := '0';
   signal fft_data         : std_logic := '0';
-  signal fft_done, fifo_full         : std_logic := '0';
+  signal fft_done, fifo_full, fifo_empty         : std_logic := '0';
   signal fft_bin_addr     : std_logic_vector(4 downto 0) := (others => '0');
 
   -- Audio generation signals
@@ -184,7 +186,7 @@ begin
   fifo_inst : axis_fifo
     generic map (
       DATA_WIDTH => AXI_WIDTH,
-      FIFO_DEPTH => 1024
+      FIFO_DEPTH => 64
     )
     port map (
       s00_axis_aclk    => clk_100MHz,
@@ -195,6 +197,7 @@ begin
       s00_axis_tlast   => m_axis_tlast,
       s00_axis_tvalid  => m_axis_tvalid,
       fifo_full        => fifo_full,
+      fifo_empty => fifo_empty,
       m00_axis_aclk    => clk_100MHz,
       m00_axis_aresetn => rstn,
       m00_axis_tvalid  => fifo_tvalid,
@@ -215,6 +218,7 @@ begin
       s00_axis_tlast   => fifo_tlast,
       s00_axis_tvalid  => fifo_tvalid,
       fifo_full => fifo_full,
+      fifo_empty => fifo_empty,
         re_FFT_output_dbg  => re_FFT_output,
         im_FFT_output_dbg  => im_FFT_output,
       tvalid_o         => fft_valid,

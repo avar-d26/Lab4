@@ -41,7 +41,7 @@ entity small_test_FFT_wrapper is
     s00_axis_tvalid   :  in std_logic;
     
     fifo_full         : in std_logic;
-    
+    fifo_empty        : in std_logic;
     -- debugs
     mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
     threshold_dbg_o      : out std_logic_vector(9 downto 0);
@@ -61,7 +61,7 @@ architecture Behavioral of small_test_FFT_wrapper is
 COMPONENT xfft_1 IS
   PORT (
     aclk : IN STD_LOGIC;
-    s_axis_config_tdata : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
     s_axis_config_tvalid : IN STD_LOGIC;
     s_axis_config_tready : OUT STD_LOGIC;
     
@@ -91,21 +91,23 @@ signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(7 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 signal FFT_en, s00_axis_tready_sig : std_logic := '0';
+signal s00_axis_tvalid_sig : std_logic := '0';
+signal FFT_tvalid_delay : std_logic := '0';
 
 signal mag_sq_dbg : unsigned(47 downto 0);
 
-type statetype is (init, countOutputs, waiting, fullFifo);
+type statetype is (init, countOutputs, waiting, fullFifo, enFFT, waitFFT);
 signal current_state, next_state : statetype := init;
 signal cnt_rst : std_logic := '0';
-  attribute keep : string;
-  attribute keep of re_FFT_output_dbg : signal is "true";
-  attribute keep of im_FFT_output_dbg : signal is "true";
+signal debug : std_logic_vector(23 downto 0);
+
   
   
 begin
 
 -- zero-pad the imaginary part
-fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
+fft_data_in <= "000000000000000000000000" & (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
+debug <= (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
 re_FFT_output_dbg <= fft_data_out(47 downto 24);
 im_FFT_output_dbg <= fft_data_out(23 downto 0);
 process(s00_axis_aclk)
@@ -151,7 +153,7 @@ uut : xfft_1 PORT MAP(
     s_axis_config_tready => open,
     
     s_axis_data_tdata => fft_data_in,
-    s_axis_data_tvalid => s00_axis_tvalid,
+    s_axis_data_tvalid => s00_axis_tvalid_sig,
     s_axis_data_tready => s00_axis_tready_sig,
     s_axis_data_tlast => s00_axis_tlast,
     
@@ -169,7 +171,7 @@ uut : xfft_1 PORT MAP(
     event_data_out_channel_halt => open);
     
 s00_axis_tready <= s00_axis_tready_sig and FFT_en;
-
+s00_axis_tvalid_sig <= (s00_axis_tvalid and FFT_en and (not FFT_tvalid_delay));
     
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
@@ -191,14 +193,19 @@ end if;
 end process;
 
 
-next_state_logic : process(current_state, output_counter, fifo_full) begin
+next_state_logic : process(current_state, output_counter, fifo_full, fifo_empty) begin
 next_state <= current_state;
 
 case current_state is 
     when init => 
-        next_state <= fullFIFO;
-    when fullFIFO =>
+        
         if fifo_full = '1' then
+            next_state <= fullFIFO;
+        end if;
+    when fullFIFO => next_state <= waitFFT;
+    when waitFFT => next_state <= enFFT;
+    when enFFT =>
+        if fifo_empty = '1' then
             next_state <= countOutputs;
         end if;
     when countOutputs =>
@@ -217,16 +224,18 @@ output_logic : process(current_state) begin
 cnt_rst <= '0';
 fft_done_o <= '0';
 FFT_en <= '0';
+FFT_tvalid_delay <= '0';
 case current_state is 
     when init => 
         cnt_rst <= '1';
-    when fullFIFO =>
+    when waitFFT =>
+        FFT_en <= '1';
+        FFT_tvalid_delay <= '1';
+    when enFFT =>
         FFT_en <= '1';
     when countOutputs =>
-        FFT_en <= '1';
     when waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
-        FFT_en <= '1';
     when others => null;
 end case;
 end process;

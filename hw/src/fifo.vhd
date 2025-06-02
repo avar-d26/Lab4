@@ -114,7 +114,7 @@ end process read_write;
 -- Full/empty flags
 full_empty : process(data_count)
 begin
-    if data_count = FIFO_DEPTH-1 then
+    if data_count = FIFO_DEPTH then
         full_sig <= '1';
     else
         full_sig <= '0';

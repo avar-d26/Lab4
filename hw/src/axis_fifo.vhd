@@ -27,6 +27,7 @@ entity axis_fifo is
 		s00_axis_tvalid   :  in std_logic;
 		
 		fifo_full         : out std_logic;
+		fifo_empty        : out std_logic;
 
 		-- Ports of Axi Controller Bus Interface M00_AXIS -- Transmitter
 		m00_axis_aclk     :  in std_logic; -- dont care
@@ -48,7 +49,7 @@ signal empty_reg: std_logic := '0';
 component fifo is
 
 Generic (
-    FIFO_DEPTH : integer := 1024;
+    FIFO_DEPTH : integer := 64;
     DATA_WIDTH : integer := 32);
 Port ( 
     clk_i       : in std_logic;
@@ -121,7 +122,7 @@ end if;
 end process;
 
 fifo_full <= full;
-
+fifo_empty <= empty;
 
     
 end Behavioral;
