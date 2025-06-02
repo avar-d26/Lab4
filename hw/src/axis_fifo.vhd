@@ -13,7 +13,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity axis_fifo is
 	generic (
 		DATA_WIDTH	: integer	:= 32;
-		FIFO_DEPTH	: integer	:= 64
+		FIFO_DEPTH	: integer	:= 8192
 	);
 	port (
 	
@@ -49,7 +49,7 @@ signal empty_reg: std_logic := '0';
 component fifo is
 
 Generic (
-    FIFO_DEPTH : integer := 64;
+    FIFO_DEPTH : integer := 8192;
     DATA_WIDTH : integer := 32);
 Port ( 
     clk_i       : in std_logic;

@@ -56,12 +56,12 @@ entity FFT_wrapper is
     );
 end FFT_wrapper;
 
-architecture Behavioral of small_test_FFT_wrapper is
+architecture behavioral of FFT_wrapper is
 
-COMPONENT xfft_1 IS
+COMPONENT xfft_0 IS
   PORT (
     aclk : IN STD_LOGIC;
-    s_axis_config_tdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     s_axis_config_tvalid : IN STD_LOGIC;
     s_axis_config_tready : OUT STD_LOGIC;
     
@@ -74,7 +74,7 @@ COMPONENT xfft_1 IS
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tready : IN STD_LOGIC;
     m_axis_data_tlast : OUT STD_LOGIC;
-    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
     
     event_frame_started : OUT STD_LOGIC;
     event_tlast_unexpected : OUT STD_LOGIC;
@@ -113,7 +113,7 @@ im_FFT_output_dbg <= fft_data_out(23 downto 0);
 process(s00_axis_aclk)
     variable re_top     : signed(4 downto 0);      -- 5-bit signed
     variable im_top     : signed(4 downto 0);      -- 5-bit signed
-    variable re_sq      : unsigned(9 downto 0);    -- 5Ã-5 = 10 bits 
+    variable re_sq      : unsigned(9 downto 0);    -- 5ï¿½-5 = 10 bits 
     variable im_sq      : unsigned(9 downto 0);
     variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
     constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(400, 10); -- 
@@ -146,7 +146,7 @@ end process;
 
 -- FFT INSTANTIATION
 
-uut : xfft_1 PORT MAP(
+uut : xfft_0 PORT MAP(
     aclk => s00_axis_aclk,
     s_axis_config_tdata => (others => '0'),
     s_axis_config_tvalid => '1',
