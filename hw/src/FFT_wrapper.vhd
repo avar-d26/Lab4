@@ -165,8 +165,6 @@ end process;
 tvalid_o <= tvalid_sig;
 fft_data_o <= fft_data_o_sig;
 
-
-
 -- counter for how many outputs have come out of the FFT
 counter : process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then
@@ -181,17 +179,16 @@ end process;
 
 -------------------------------------------------------------------------------
 -- LOGIC TO DETERMINE WHEN THE FFT IS DONE AND READY TO BE PROCESSED
--- FINITE STATE MACHINE
-stateupdate: process(s00_axis_aclk) begin
-if rising_edge(s00_axis_aclk) then 
-    current_state <= next_state;
-end if;
-end process;
 
-
+----------------------------------------------------------------------------
+-- State machine
+----------------------------------------------------------------------------
+  
+-- FSM Next State Logic (asynchronous, no clock)
+-- Include all state change triggering signals in the sensitivity list
+-- The only signal getting assigned in this process should be next_state
 next_state_logic : process(current_state, output_counter, fifo_full_i, fifo_empty_i) begin
 next_state <= current_state;
-
 case current_state is 
     when init => 
         
@@ -215,7 +212,11 @@ case current_state is
     when others => next_state <= Init;
 end case;
 end process;
-
+	
+----------------------------------------------------------------------------
+-- FSM Output Logic Process (asynchronous, no clock)
+-- Only the current state signal (curr_state) should be in the sensitivity list
+-- FSM "outputs" are simply signals or ports that are assigned by the FSM state logic
 output_logic : process(current_state) begin
 cnt_rst <= '0';
 fft_done_o <= '0';
@@ -236,8 +237,12 @@ case current_state is
 end case;
 end process;
 
-        
+----------------------------------------------------------------------------
+-- FSM State Update Process (synchronous, clocked)
+stateupdate: process(s00_axis_aclk) begin
+if rising_edge(s00_axis_aclk) then 
+    current_state <= next_state;
+end if;
+end process;        
             
-
-
 end Behavioral;
