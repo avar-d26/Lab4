@@ -78,7 +78,6 @@ begin
     );
 
   -- Simulation control
-  -- Simulation control
   stim_proc : process
   begin
     -- Wait for global reset
