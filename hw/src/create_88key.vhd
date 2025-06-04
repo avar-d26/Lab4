@@ -28,12 +28,12 @@ end create_88key;
 
 architecture Behavioral of create_88key is
 signal load_enable_reg, load_enable : std_logic := '0';
-signal address_counter, counterdelay1, address_counter_delayed : unsigned(8 downto 0) := (others => '0');
+signal address_counter, counter_delay1, address_counter_delayed : unsigned(8 downto 0) := (others => '0');
 signal piano : std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0) := (others => '0');
 
-type statetype is (Init, CountAddress, CountWait1, CountWait2, CreatePiano, SendPiano);
+type statetype is (Init, CountAddress, CountWait1, CountWait2, CountWait3, SendPiano);
 signal current_state, next_state : statetype := init;
-signal count_en, buildbinreg_en, count_tc, counttc_delay1, count_tc_delayed, createpiano_en, rst : std_logic := '0';
+signal count_en, build_bin_reg_en, count_tc, count_tc_delay1, count_tc_delayed, rst : std_logic := '0';
 --signal bin_reg : std_logic_vector(4095 downto 0) := (others => '0');
 signal addr : integer := 0;
 signal piano_done_sig : std_logic := '0';
@@ -50,10 +50,10 @@ end process;
 -- delay address counter by two clock cycles because of 2 cycle BRAM read latency
 delayer : process(clkb_i) begin
 if rising_edge(clkb_i) then
-    counterdelay1 <= address_counter;
-    address_counter_delayed <= counterdelay1;
-    counttc_delay1 <= count_tc;
-    count_tc_delayed <= counttc_delay1;
+    counter_delay1 <= address_counter;
+    address_counter_delayed <= counter_delay1;
+    count_tc_delay1 <= count_tc;
+    count_tc_delayed <= count_tc_delay1;
 end if;
 end process;
 
@@ -98,7 +98,7 @@ begin
     if rising_edge(clkb_i) then
         if (rst = '1') then
             piano <= (others => '0');
-        elsif (buildbinreg_en = '1') then
+        elsif (build_bin_reg_en = '1') then
             -- Default: keep previous state
             piano <= piano;
             
@@ -204,63 +204,57 @@ begin
 end process;
 
 
-
-
-
-        
 ------------------------FSM-----------------
-stateupdate: process(clkb_i) begin
+state_update: process(clkb_i) begin
 if rising_edge(clkb_i) then 
     current_state <= next_state;
 end if;
 end process;
 
-nextstate : process(current_state, load_enable, count_tc) begin
+next_state : process(current_state, load_enable, count_tc) begin
 next_state <= current_state;
 
 case current_state is
-    when init =>
+    when Init =>
         if (load_enable = '1') then
-            next_state <= countAddress;
+            next_state <= CountAddress;
         end if;
         
-    when countAddress =>
+    when CountAddress =>
         if (count_tc = '1') then
-            next_state <= countWait1;
+            next_state <= CountWait1;
         end if;
-    when countWait1 =>
-        next_state <= countWait2;
-    when countWait2 =>
-        next_state <= createpiano;
-    when createpiano => 
-        next_state <= sendpiano;
-    when sendpiano => 
+    when CountWait1 =>
+        next_state <= CountWait2;
+    when CountWait2 =>
+        next_state <= CreatePiano;
+    when CountWait3 => 
+        next_state <= SendPiano;
+    when SendPiano => 
         if (load_enable = '0') then
-            next_state <= init;
+            next_state <= Init;
         end if;
-    when others => next_state <= init;
+    when others => next_state <= Init;
 end case;
 end process;
             
-outputlogic : process(current_state) begin
+output_logic : process(current_state) begin
 count_en <= '0';
-createpiano_en <= '0';
 piano_done_o <= '0';
 rst <= '0';
 piano_done_sig <= '0';
-buildbinreg_en <= '0';
+build_bin_reg_en <= '0';
      case current_state is
     when Init =>
         rst <= '1';
     when CountAddress =>
         count_en <= '1';
-        buildbinreg_en <= '1';
+        build_bin_reg_en <= '1';
     when CountWait1 =>
-        buildbinreg_en <= '1';
+        build_bin_reg_en <= '1';
     when CountWait2 =>
-        buildbinreg_en <= '1';
-    when CreatePiano => 
-        createpiano_en <= '1';
+        build_bin_reg_en <= '1';
+    when CountWait3 => 
     when SendPiano => 
         piano_done_o <= '1';
         piano_done_sig <= '1';
