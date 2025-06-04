@@ -82,8 +82,6 @@ signal fft_tvalid_delay, fft_tvalid_delay_2 : std_logic := '0';
 type statetype is (Init, CountOutputs, Waiting, FullFifo, EnFFT, WaitFFT);
 signal current_state, next_state : statetype := Init;
 signal cnt_rst : std_logic := '0';
-signal debug : std_logic_vector(23 downto 0);
-
   
   
 begin
