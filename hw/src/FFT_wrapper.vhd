@@ -88,9 +88,6 @@ begin
 
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
---fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
-
-
 
 
 -- Calculate magnitude threshold of FFT output
@@ -168,6 +165,20 @@ end process;
 tvalid_o <= tvalid_sig;
 fft_data_o <= fft_data_o_sig;
 
+
+
+-- counter for how many outputs have come out of the FFT
+counter : process(s00_axis_aclk) begin
+if rising_edge(s00_axis_aclk) then
+    if (cnt_rst = '1') then
+        output_counter <= (others => '0');
+    elsif (tvalid_sig_1 = '1') then
+        output_counter <= output_counter + 1;
+    end if;
+end if;
+end process;
+
+
 -------------------------------------------------------------------------------
 -- LOGIC TO DETERMINE WHEN THE FFT IS DONE AND READY TO BE PROCESSED
 -- FINITE STATE MACHINE
@@ -225,16 +236,6 @@ case current_state is
 end case;
 end process;
 
-
-counter : process(s00_axis_aclk) begin
-if rising_edge(s00_axis_aclk) then
-    if (cnt_rst = '1') then
-        output_counter <= (others => '0');
-    elsif (tvalid_sig_1 = '1') then
-        output_counter <= output_counter + 1;
-    end if;
-end if;
-end process;
         
             
 

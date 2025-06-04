@@ -14,7 +14,7 @@ entity tb_create_88key is
 end tb_create_88key;
 
 architecture sim of tb_create_88key is
-  signal clka, clkb         : std_logic := '0';
+  signal clka         : std_logic := '0';
   signal wea                : std_logic := '0';
   signal addra              : std_logic_vector(11 downto 0) := (others => '0');
   signal dina               : std_logic := '0';
@@ -28,7 +28,21 @@ architecture sim of tb_create_88key is
   
   -- clock period
   constant CLK_PERIOD : time := 10 ns;
-  constant anotherclkperiod : time := 7.46 ns;
+  
+  component create_88key is
+    generic (
+        PIANO_DATA_LENGTH : integer := 88
+    );
+    port(
+        clkb_i : in std_logic;
+        data_i : in std_logic;
+        en_i : in std_logic;
+        
+        r_addr_o : out std_logic_vector(8 downto 0);
+        piano_data_o : out std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0);
+        piano_done_o : out std_logic
+        );
+end component;
 
 begin
 
@@ -39,11 +53,6 @@ begin
     clka <= not clka;
   end process;
 
-  process
-  begin
-    wait for anotherclkperiod / 2;
-    clkb <= not clkb;
-  end process;
 
   -- Instantiate BRAM wrapper
   DUT_BRAM : entity work.BRAM_wrapper
@@ -52,20 +61,20 @@ begin
       wea    => wea,
       addra  => addra,
       dina   => dina,
-      clkb   => clkb,
+      clkb   => clka,
       addrb  => r_addr_o,
       doutb  => doutb
     );
 
   -- Instantiate create_88key
-  DUT_PIANO : entity work.create_88key
+  DUT_PIANO : create_88key
     port map (
-      clkb_i        => clkb,
+      clkb_i        => clka,
       data_i        => doutb,
       en_i          => en_i,
       r_addr_o      => r_addr_o,
-      paino_data_o  => paino_data_o,
-      paino_done_o  => paino_done_o
+      piano_data_o  => paino_data_o,
+      piano_done_o  => paino_done_o
     );
 
   -- Simulation control
@@ -75,8 +84,8 @@ begin
     -- Wait for global reset
     wait for 50 ns;
 
-    -- Write 4096 values, only index 0 and 500 get '1', others get '0'
-    for i in 0 to 4095 loop
+    -- Write 512 values, only index 0 and 500 get '1', others get '0'
+    for i in 0 to 511 loop
       -- Longer pause for wea = '0'
       if i = 1024 then
         wea <= '0';  -- Temporarily disable write
@@ -90,7 +99,7 @@ begin
 
       wea    <= '1';
       addra  <= std_logic_vector(to_unsigned(i, 12));
-      if (i = 50 or i = 500 or i = 1 or i = 4095) then
+      if (i = 50 or i = 200 or i = 1 or i = 511) then
         dina <= '1';
       else
         dina <= '0';
@@ -101,13 +110,8 @@ begin
     -- Stop writing
     wea <= '0';
 
-    -- Let FSM run for a while
-    wait for 3000 ns;
-
-    -- Stop simulation
     wait;
   end process;
-
 
 
 end sim;

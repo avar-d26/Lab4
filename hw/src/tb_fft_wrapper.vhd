@@ -36,13 +36,7 @@ architecture testbench of tb_fft_wrapper is
       ac_adc_data_i    : in  std_logic;
       ac_adc_lrclk_o   : out std_logic;
       lrclk_unbuff_o   : out std_logic;
---      s00_axis_aclk    : in std_logic;
---      s00_axis_aresetn : in std_logic;
---      s00_axis_tready  : out std_logic;
---      s00_axis_tdata   : in  std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
---      s00_axis_tstrb   : in  std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
---      s00_axis_tlast   : in  std_logic;
---      s00_axis_tvalid  : in  std_logic;
+
       m00_axis_aclk    : in std_logic;
       m00_axis_aresetn : in std_logic;
       m00_axis_tvalid  : out std_logic;
@@ -68,8 +62,8 @@ architecture testbench of tb_fft_wrapper is
       s00_axis_tvalid   : in std_logic;
       m00_axis_aclk     : in std_logic;
       m00_axis_aresetn  : in std_logic;
-        fifo_full         : out std_logic;
-        fifo_empty        : out std_logic;
+        fifo_full_o         : out std_logic;
+        fifo_empty_o        : out std_logic;
       m00_axis_tvalid   : out std_logic;
       m00_axis_tdata    : out std_logic_vector(DATA_WIDTH-1 downto 0);
       m00_axis_tstrb    : out std_logic_vector((DATA_WIDTH/8)-1 downto 0);
@@ -94,8 +88,8 @@ architecture testbench of tb_fft_wrapper is
       s00_axis_tstrb    : in std_logic_vector((INPUT_DATA_WIDTH/8)-1 downto 0);
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
-        fifo_full         : in std_logic;
-        fifo_empty        : in std_logic;
+        fifo_full_i         : in std_logic;
+        fifo_empty_i        : in std_logic;
       tvalid_o          : out std_logic;
       fft_data_o        : out std_logic;
       fft_done_o        : out std_logic;
@@ -243,8 +237,8 @@ begin
       s00_axis_tstrb   => (others => '1'),
       s00_axis_tlast   => '0',
       s00_axis_tvalid  => m_axis_tvalid,
-      fifo_full => fifo_full,
-      fifo_empty => fifo_empty,
+      fifo_full_o => fifo_full,
+      fifo_empty_o => fifo_empty,
       m00_axis_aclk    => clk_100MHz,
       m00_axis_aresetn => rstn,
       m00_axis_tvalid  => fifo_tvalid,
@@ -263,8 +257,8 @@ begin
       s00_axis_tdata   => fifo_tdata,
       s00_axis_tstrb   => (others => '1'),
       s00_axis_tlast   => fifo_tlast,
-      fifo_full => fifo_full,
-      fifo_empty => fifo_empty,
+      fifo_full_i => fifo_full,
+      fifo_empty_i => fifo_empty,
       s00_axis_tvalid  => fifo_tvalid,
       tvalid_o         => fft_valid,
       fft_data_o       => fft_data,

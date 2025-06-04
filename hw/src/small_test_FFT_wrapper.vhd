@@ -4,7 +4,7 @@
 --  ENGS 128 Spring 2025
 --	Author: Brandon Zhao
 ----------------------------------------------------------------------------
---	Description: Small test FFT Wrapper, not actually used in design
+--	Description: FOR TESTING ONLY: Small test FFT Wrapper, not actually used in design
 ----------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
