@@ -11,7 +11,8 @@
 !Zybo-Z7-10-HDMI/src/
 !Zybo-Z7-10-HDMI/src/**
 
-!sdk
+!sdk/
+!sdk/**
 
 # Keep .gitignore itself
 !.gitignore
