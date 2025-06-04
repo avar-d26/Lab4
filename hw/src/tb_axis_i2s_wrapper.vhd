@@ -69,10 +69,10 @@ component axis_i2s_wrapper is
 		
         ----------------------------------------------------------------------------
         -- I2S audio codec ports		
-		-- User controls
-		ac_mute_en_i : in STD_LOGIC;
+	-- User controls
+	ac_mute_en_i : in STD_LOGIC;
 		
-		-- Audio Codec I2S controls
+	-- Audio Codec I2S controls
         ac_bclk_o : out STD_LOGIC;
         ac_mclk_o : out STD_LOGIC;
         ac_mute_n_o : out STD_LOGIC;	-- Active Low
@@ -157,7 +157,7 @@ begin
 	clk <= '0';				-- start low
 	wait for CLOCK_PERIOD/2;		-- wait for half a clock period
 	loop							-- toggle, and loop
-	  clk <= not(clk);
+	     clk <= not(clk);
 	  wait for CLOCK_PERIOD/2;
 	end loop;
 end process clock_gen_process;
