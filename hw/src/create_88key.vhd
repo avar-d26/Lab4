@@ -34,7 +34,6 @@ signal piano : std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0) := (others => '0
 type statetype is (Init, CountAddress, CountWait1, CountWait2, CountWait3, SendPiano);
 signal current_state, next_state : statetype := init;
 signal count_en, build_bin_reg_en, count_tc, count_tc_delay1, count_tc_delayed, rst : std_logic := '0';
---signal bin_reg : std_logic_vector(4095 downto 0) := (others => '0');
 signal addr : integer := 0;
 signal piano_done_sig : std_logic := '0';
 begin
