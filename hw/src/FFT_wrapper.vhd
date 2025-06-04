@@ -1,23 +1,11 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 05/20/2025 03:56:53 PM
--- Design Name: 
--- Module Name: FFT_wrapper - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------
+--  Final Project: Video & Audio Streaming
+----------------------------------------------------------------------------
+--  ENGS 128 Spring 2025
+--	Author: Brandon Zhao
+----------------------------------------------------------------------------
+--	Description: FFT wrapper that takes in sine input and outputs 1 or 0 depending on if frequency bin meets threshold
+----------------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -40,15 +28,9 @@ entity FFT_wrapper is
     s00_axis_tlast    :  in std_logic;
     s00_axis_tvalid   :  in std_logic;
     
-    fifo_full         : in std_logic;
-    fifo_empty        : in std_logic;
-    -- debugs
-    mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
-    threshold_dbg_o      : out std_logic_vector(9 downto 0);
-    fft_input_dbg     : out std_logic_vector(23 downto 0);
-    FFT_output_dbg  : out std_logic_vector(47 downto 0);
-    s00_axis_tready_dbg : out std_logic;
-    fft_en_dbg      : out std_logic;
+    fifo_full_i         : in std_logic;
+    fifo_empty_i        : in std_logic;
+
     
     
     tvalid_o          : out std_logic; 
@@ -92,15 +74,13 @@ signal m00_axis_tdata_sig : std_logic_vector(OUTPUT_DATA_WIDTH - 1 downto 0) := 
 signal tvalid_sig, tvalid_sig_1, fft_data_o_sig : std_logic := '0';
 signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
-signal FFT_en, s00_axis_tready_sig : std_logic := '0';
+signal fft_en, s00_axis_tready_sig : std_logic := '0';
 signal s00_axis_tvalid_sig : std_logic := '0';
-signal FFT_tvalid_delay, fft_tvalid_delay_2 : std_logic := '0';
-signal re_FFT_output_dbg, im_FFT_output_dbg : std_logic_vector(23 downto 0);
+signal fft_tvalid_delay, fft_tvalid_delay_2 : std_logic := '0';
 
-signal mag_sq_dbg : unsigned(47 downto 0);
 
-type statetype is (init, countOutputs, waiting, fullFifo, enFFT, waitFFT);
-signal current_state, next_state : statetype := init;
+type statetype is (Init, CountOutputs, Waiting, FullFifo, EnFFT, WaitFFT);
+signal current_state, next_state : statetype := Init;
 signal cnt_rst : std_logic := '0';
 signal debug : std_logic_vector(23 downto 0);
 
@@ -111,10 +91,7 @@ begin
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
 --fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
-fft_input_dbg <= (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
 
-re_FFT_output_dbg <= fft_data_out(47 downto 24);
-im_FFT_output_dbg <= fft_data_out(23 downto 0);
 
 
 
@@ -139,11 +116,7 @@ begin
     mag_sum := resize(re_sq, 10) + resize(im_sq, 10);
     
     if rising_edge(s00_axis_aclk) then
-    
-        mag_sum_dbg_o <= std_logic_vector(mag_sum);
-        threshold_dbg_o <= std_logic_vector(THRESHOLD_HIGH);
-    
-        -- Compare
+        -- Compare against high and low threshold
         if ((mag_sum > THRESHOLD_HIGH) and tvalid_sig_1 = '1') then
             fft_data_o_sig <= '1';
         elsif mag_sum < THRESHOLD_LOW then
@@ -180,13 +153,10 @@ uut : xfft_0 PORT MAP(
     event_data_in_channel_halt => open,
     event_data_out_channel_halt => open);
     
-FFT_output_dbg <= fft_data_out;
+
+-- Drive the tready and tvalid signals with custom FFT_en signal 
 s00_axis_tready <= s00_axis_tready_sig and FFT_en;
 s00_axis_tvalid_sig <= (FFT_en and (not FFT_tvalid_delay) and (not FFT_tvalid_delay_2));
---s00_axis_tvalid_sig <= (s00_axis_tvalid and FFT_en and (not FFT_tvalid_delay));
-
-s00_axis_tready_dbg <= s00_axis_tready_sig;
-FFT_en_dbg <= fft_en;
     
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
@@ -199,6 +169,7 @@ end process;
 
 tvalid_o <= tvalid_sig;
 fft_data_o <= fft_data_o_sig;
+
 -------------------------------------------------------------------------------
 -- LOGIC TO DETERMINE WHEN THE FFT IS DONE AND READY TO BE PROCESSED
 -- FINITE STATE MACHINE
@@ -209,48 +180,48 @@ end if;
 end process;
 
 
-next_state_logic : process(current_state, output_counter, fifo_full, fifo_empty) begin
+next_state_logic : process(current_state, output_counter, fifo_full_i, fifo_empty_i) begin
 next_state <= current_state;
 
 case current_state is 
     when init => 
         
-        if fifo_full = '1' then
-            next_state <= fullFIFO;
+        if fifo_full_i = '1' then
+            next_state <= FullFIFO;
         end if;
-    when fullFIFO => next_state <= waitFFT;
-    when waitFFT => next_state <= enFFT;
-    when enFFT =>
-        if fifo_empty = '1' then
+    when FullFIFO => next_state <= WaitFFT;
+    when WaitFFT => next_state <= EnFFT;
+    when EnFFT =>
+        if fifo_empty_i = '1' then
             next_state <= countOutputs;
         end if;
-    when countOutputs =>
+    when CountOutputs =>
         if (output_counter = to_unsigned(ADDR_LENGTH + 4, 14)) then -- give it a few clock cycles
             next_state <= waiting;
         end if;
-    when waiting => 
+    when Waiting => 
         if (output_counter = to_unsigned(FFT_WIDTH, 14)) then
             next_state <= init;
         end if;
-    when others => next_state <= init;
+    when others => next_state <= Init;
 end case;
 end process;
 
 output_logic : process(current_state) begin
 cnt_rst <= '0';
 fft_done_o <= '0';
-FFT_en <= '0';
-FFT_tvalid_delay <= '0';
+fft_en <= '0';
+fft_tvalid_delay <= '0';
 case current_state is 
-    when init => 
+    when Init => 
         cnt_rst <= '1';
-    when waitFFT =>
-        FFT_en <= '1';
-        FFT_tvalid_delay <= '1';
-    when enFFT =>
-        FFT_en <= '1';
-    when countOutputs =>
-    when waiting => 
+    when WaitFFT =>
+        fft_en <= '1';
+        fft_tvalid_delay <= '1';
+    when EnFFT =>
+        fft_en <= '1';
+    when CountOutputs =>
+    when Waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
     when others => null;
 end case;
@@ -261,7 +232,6 @@ counter : process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then
     if (cnt_rst = '1') then
         output_counter <= (others => '0');
-        -- Potential ISSUE with tvalid_sig  = 1 only going up to 4095, changed to tvalid_sig_1
     elsif (tvalid_sig_1 = '1') then
         output_counter <= output_counter + 1;
     end if;

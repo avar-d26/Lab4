@@ -1,12 +1,20 @@
+----------------------------------------------------------------------------
+--  Final Project: Video & Audio Streaming
+----------------------------------------------------------------------------
+--  ENGS 128 Spring 2025
+--	Author: Brandon Zhao
+----------------------------------------------------------------------------
+--	Description: Testbench for I2S-> FFT -> BRAM -> Create 88 key
+----------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use IEEE.MATH_REAL.ALL;
 
-entity tb_passthru is
-end tb_passthru;
+entity tb_fft_wrapper is
+end tb_fft_wrapper;
 
-architecture testbench of tb_passthru is
+architecture testbench of tb_fft_wrapper is
 
   -- COMPONENTS
   component axis_i2s_wrapper is

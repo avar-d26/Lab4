@@ -1,10 +1,10 @@
 ----------------------------------------------------------------------------
---  Lab 3: Streaming Audio DSP
+--  Final Project: Video & Audio Streaming
 ----------------------------------------------------------------------------
 --  ENGS 128 Spring 2025
--- Author: Brandon Zhao
+--	Author: Ava Rosenbaum
 ----------------------------------------------------------------------------
--- Description: AXI Stream Wrapper for generic FIFO
+--	Description: AXI Stream FIFO Wrapper
 ----------------------------------------------------------------------------
 
 library IEEE;
@@ -26,8 +26,8 @@ entity axis_fifo is
 		s00_axis_tlast    :  in std_logic;
 		s00_axis_tvalid   :  in std_logic;
 		
-		fifo_full         : out std_logic;
-		fifo_empty        : out std_logic;
+		fifo_full_o         : out std_logic;
+		fifo_empty_o        : out std_logic;
 
 		-- Ports of Axi Controller Bus Interface M00_AXIS -- Transmitter
 		m00_axis_aclk     :  in std_logic; -- dont care
@@ -122,8 +122,8 @@ if rising_edge(s00_axis_aclk) then
 end if;
 end process;
 
-fifo_full <= full;
-fifo_empty <= empty;
+fifo_full_o <= full;
+fifo_empty_o <= empty;
 
     
 end Behavioral;

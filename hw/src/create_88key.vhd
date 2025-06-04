@@ -1,4 +1,11 @@
---
+----------------------------------------------------------------------------
+--  Final Project: Video & Audio Streaming
+----------------------------------------------------------------------------
+--  ENGS 128 Spring 2025
+--	Author: Ava Rosenbaum
+----------------------------------------------------------------------------
+--	Description: This creates the 88 key piano vector from the BRAM data
+----------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 USE ieee.numeric_std.ALL;
@@ -13,9 +20,6 @@ port(
     data_i : in std_logic;
     en_i : in std_logic;
     
-    -- debugs
-    addr_dbg_o : out std_logic_vector(8 downto 0);
-    paino_dbg_o : out std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0);
     r_addr_o : out std_logic_vector(8 downto 0);
     paino_data_o : out std_logic_vector(PIANO_DATA_LENGTH - 1 downto 0);
     paino_done_o : out std_logic
@@ -32,6 +36,7 @@ signal current_state, next_state : statetype := init;
 signal count_en, buildbinreg_en, count_tc, counttc_delay1, count_tc_delayed, createPaino_en, rst : std_logic := '0';
 --signal bin_reg : std_logic_vector(4095 downto 0) := (others => '0');
 signal addr : integer := 0;
+signal paino_done_sig : std_logic := '0';
 begin
 
 -- double flop synchronizer
@@ -76,20 +81,18 @@ r_addr_o <= std_logic_vector(address_counter);
 
 
         
--- UPDATE the piano
+-- UPDATE the piano vector continuously every time createpaino_en is high
 update: process(clkb_i) begin
 if rising_edge(clkb_i) then
-    if (createPaino_en = '1') then
+    if (paino_done_sig = '1') then
         paino_data_o <= paino;
     end if;
 end if;
 end process;        
 
 
----- MAP BINS TO PIANO KEYS
+---- MAP BINS TO PIANO KEYS through a big lookup table
 addr <= to_integer(address_counter_delayed);
-addr_dbg_o <= std_logic_vector(address_counter_delayed);
-paino_dbg_o <= paino;
 mapp : process(clkb_i)
 begin
     if rising_edge(clkb_i) then
@@ -244,6 +247,7 @@ count_en <= '0';
 createPaino_en <= '0';
 paino_done_o <= '0';
 rst <= '0';
+paino_done_sig <= '0';
 buildbinreg_en <= '0';
      case current_state is
     when init =>
@@ -259,6 +263,7 @@ buildbinreg_en <= '0';
         createPaino_en <= '1';
     when sendPaino => 
         paino_done_o <= '1';
+        paino_done_sig <= '1';
     when others => null;
 end case;
 end process;   
