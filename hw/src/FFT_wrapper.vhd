@@ -28,8 +28,8 @@ entity FFT_wrapper is
 	generic (
 		INPUT_DATA_WIDTH	: integer	:= 32;
 		OUTPUT_DATA_WIDTH   : integer   := 8;
-		FFT_WIDTH           : integer := 8192;
-		ADDR_LENGTH         : integer := 4096
+		FFT_WIDTH           : integer := 1024;
+		ADDR_LENGTH         : integer := 512
 	);
     PORT (
     s00_axis_aclk     :  in std_logic; --
@@ -45,14 +45,16 @@ entity FFT_wrapper is
     -- debugs
     mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
     threshold_dbg_o      : out std_logic_vector(9 downto 0);
-    fft_data_o_dbg_o     : out std_logic;
-    re_FFT_output_dbg  : out std_logic_vector(23 downto 0);
-    im_FFT_output_dbg  : out std_logic_vector(23 downto 0);
-
+    fft_input_dbg     : out std_logic_vector(23 downto 0);
+    FFT_output_dbg  : out std_logic_vector(47 downto 0);
+    s00_axis_tready_dbg : out std_logic;
+    fft_en_dbg      : out std_logic;
+    
+    
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
     fft_done_o        : out std_logic;
-    bin_addr_o        : out std_logic_vector(11 downto 0)
+    bin_addr_o        : out std_logic_vector(8 downto 0)
     );
 end FFT_wrapper;
 
@@ -61,7 +63,7 @@ architecture behavioral of FFT_wrapper is
 COMPONENT xfft_0 IS
   PORT (
     aclk : IN STD_LOGIC;
-    s_axis_config_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
     s_axis_config_tvalid : IN STD_LOGIC;
     s_axis_config_tready : OUT STD_LOGIC;
     
@@ -92,7 +94,8 @@ signal bin_addr_o_sig : std_logic_vector(15 downto 0) := (others => '0');
 signal output_counter : unsigned(13 downto 0) := (others => '0');
 signal FFT_en, s00_axis_tready_sig : std_logic := '0';
 signal s00_axis_tvalid_sig : std_logic := '0';
-signal FFT_tvalid_delay : std_logic := '0';
+signal FFT_tvalid_delay, fft_tvalid_delay_2 : std_logic := '0';
+signal re_FFT_output_dbg, im_FFT_output_dbg : std_logic_vector(23 downto 0);
 
 signal mag_sq_dbg : unsigned(47 downto 0);
 
@@ -107,7 +110,9 @@ begin
 
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
-debug <= (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
+--fft_data_in <= "000000000000000000000000" & s00_axis_tdata(30 downto 7) ;
+fft_input_dbg <= (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
+
 re_FFT_output_dbg <= fft_data_out(47 downto 24);
 im_FFT_output_dbg <= fft_data_out(23 downto 0);
 
@@ -121,8 +126,8 @@ process(s00_axis_aclk)
     variable re_sq      : unsigned(9 downto 0);    -- 5�-5 = 10 bits 
     variable im_sq      : unsigned(9 downto 0);
     variable mag_sum    : unsigned(9 downto 0);    -- max possible sum = 512, so needs 10 bits
-    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(300, 10); -- 
-    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(250, 10); --
+    constant THRESHOLD_HIGH : unsigned(9 downto 0) := to_unsigned(395, 10); -- 
+    constant THRESHOLD_LOW  : unsigned(9 downto 0) := to_unsigned(120, 10); --
 begin
     -- Extract signed MSBs
     re_top := signed(fft_data_out(47 downto 43));  -- bits [47:43] = 5 bits
@@ -175,14 +180,20 @@ uut : xfft_0 PORT MAP(
     event_data_in_channel_halt => open,
     event_data_out_channel_halt => open);
     
+FFT_output_dbg <= fft_data_out;
 s00_axis_tready <= s00_axis_tready_sig and FFT_en;
-s00_axis_tvalid_sig <= (s00_axis_tvalid and FFT_en and (not FFT_tvalid_delay));
+s00_axis_tvalid_sig <= (FFT_en and (not FFT_tvalid_delay) and (not FFT_tvalid_delay_2));
+--s00_axis_tvalid_sig <= (s00_axis_tvalid and FFT_en and (not FFT_tvalid_delay));
+
+s00_axis_tready_dbg <= s00_axis_tready_sig;
+FFT_en_dbg <= fft_en;
     
 -- Apply registers to the output for more robust timing
 reg: process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then 
-    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(12)); -- from 0 to 4095 addrs are good, but once it hits 4096 then tvalid no longer goes high;;
-    bin_addr_o <= bin_addr_o_sig(11 downto 0); -- 12 bits for 0 to 4095
+    fft_tvalid_delay_2 <= fft_tvalid_delay;
+    tvalid_sig <= tvalid_sig_1 and (not bin_addr_o_sig(9)); -- from 0 to 511 addrs are good, but once it hits 512 then tvalid no longer goes high;;
+    bin_addr_o <= bin_addr_o_sig(8 downto 0); -- 0 to 511
 end if;
 end process;
 

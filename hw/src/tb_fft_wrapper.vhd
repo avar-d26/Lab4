@@ -3,11 +3,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use IEEE.MATH_REAL.ALL;
 
-entity tb_fft_wrapper is
-end tb_fft_wrapper;
+entity tb_passthru is
+end tb_passthru;
 
-architecture Behavioral of tb_fft_wrapper is
-  -- COMPONENT DECLARATIONS (unchanged from your original)
+architecture testbench of tb_passthru is
+
+  -- COMPONENTS
   component axis_i2s_wrapper is
     generic (
       C_AXI_STREAM_DATA_WIDTH : integer := 32;
@@ -27,6 +28,13 @@ architecture Behavioral of tb_fft_wrapper is
       ac_adc_data_i    : in  std_logic;
       ac_adc_lrclk_o   : out std_logic;
       lrclk_unbuff_o   : out std_logic;
+--      s00_axis_aclk    : in std_logic;
+--      s00_axis_aresetn : in std_logic;
+--      s00_axis_tready  : out std_logic;
+--      s00_axis_tdata   : in  std_logic_vector(C_AXI_STREAM_DATA_WIDTH-1 downto 0);
+--      s00_axis_tstrb   : in  std_logic_vector((C_AXI_STREAM_DATA_WIDTH/8)-1 downto 0);
+--      s00_axis_tlast   : in  std_logic;
+--      s00_axis_tvalid  : in  std_logic;
       m00_axis_aclk    : in std_logic;
       m00_axis_aresetn : in std_logic;
       m00_axis_tvalid  : out std_logic;
@@ -37,7 +45,7 @@ architecture Behavioral of tb_fft_wrapper is
     );
   end component;
 
-  component axis_fifo is
+  component axis_fifo1 is
     generic (
       DATA_WIDTH : integer;
       FIFO_DEPTH : integer
@@ -50,10 +58,10 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tstrb    : in std_logic_vector((DATA_WIDTH/8)-1 downto 0);
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
-      fifo_full         : out std_logic;
-      fifo_empty        : out std_logic;
       m00_axis_aclk     : in std_logic;
       m00_axis_aresetn  : in std_logic;
+        fifo_full         : out std_logic;
+        fifo_empty        : out std_logic;
       m00_axis_tvalid   : out std_logic;
       m00_axis_tdata    : out std_logic_vector(DATA_WIDTH-1 downto 0);
       m00_axis_tstrb    : out std_logic_vector((DATA_WIDTH/8)-1 downto 0);
@@ -62,12 +70,13 @@ architecture Behavioral of tb_fft_wrapper is
     );
   end component;
 
-  component small_test_FFT_wrapper is
+  component FFT_wrapper is
     generic (
       INPUT_DATA_WIDTH  : integer := 32;
       OUTPUT_DATA_WIDTH : integer := 1;
-      FFT_WIDTH        : integer := 64;
-      ADDR_LENGTH      : integer := 32
+        FFT_WIDTH           : integer := 1024;
+        ADDR_LENGTH         : integer := 512
+      
     );
     port (
       s00_axis_aclk     : in std_logic;
@@ -77,74 +86,97 @@ architecture Behavioral of tb_fft_wrapper is
       s00_axis_tstrb    : in std_logic_vector((INPUT_DATA_WIDTH/8)-1 downto 0);
       s00_axis_tlast    : in std_logic;
       s00_axis_tvalid   : in std_logic;
-      fifo_full         : in std_logic;
-      fifo_empty        : in std_logic;
-        mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
-        threshold_dbg_o      : out std_logic_vector(9 downto 0);
-        fft_data_o_dbg_o     : out std_logic;
-        re_FFT_output_dbg  : out std_logic_vector(23 downto 0);
-        im_FFT_output_dbg  : out std_logic_vector(23 downto 0);
+        fifo_full         : in std_logic;
+        fifo_empty        : in std_logic;
       tvalid_o          : out std_logic;
       fft_data_o        : out std_logic;
       fft_done_o        : out std_logic;
-      bin_addr_o        : out std_logic_vector(4 downto 0)
+      bin_addr_o        : out std_logic_vector(8 downto 0)
     );
   end component;
 
-  -- CONSTANTS
+  component BRAM_wrapper is
+  PORT (
+    clka : IN STD_LOGIC;
+    wea : IN STD_LOGIC;
+    addra : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
+    dina : IN STD_LOGIC;
+
+    clkb : IN STD_LOGIC;
+    addrb : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
+    doutb : OUT STD_LOGIC
+  );
+  end component;
+
+  component create_88key is
+    port (
+      clkb_i         : in std_logic;
+      data_i         : in std_logic;
+      en_i           : in std_logic;
+      r_addr_o       : out std_logic_vector(8 downto 0);
+      paino_data_o   : out std_logic_vector(87 downto 0);
+      paino_done_o   : out std_logic
+    );
+  end component;
+
+  -- CONSTANTS & SIGNALS
   constant AXI_WIDTH      : integer := 32;
   constant CLOCK_PERIOD   : time := 10 ns;
   constant FAST_CLK_PER   : time := 7.46 ns;
-  constant SINE_AMPL      : real := 8388607.0;  -- 24-bit signed max
-  constant SINE_FREQ      : real := 1880.0;      -- 123 Hz test tone
-  constant T_SAMPLE       : real := 1.0/48000.0;-- Sample period for 48kHz
-  constant AUDIO_DATA_WIDTH : integer := 24;
+  constant AMP            : real := 8388607.0;
+  constant FS             : real := 48000.0;
 
-  -- SIGNAL DECLARATIONS (corrected and complete)
   signal clk_100MHz       : std_logic := '0';
   signal clk_134MHz       : std_logic := '0';
   signal rstn             : std_logic := '0';
 
-  -- I2S signals
   signal bclk             : std_logic := '0';
-  signal lrclk            : std_logic := '0';
   signal ac_adc_data_i    : std_logic := '0';
-  signal ac_dac_data_o    : std_logic := '0';
-  
-  -- AXI Stream signals
-  signal m_axis_tvalid    : std_logic := '0';
-  signal m_axis_tdata     : std_logic_vector(31 downto 0) := (others => '0');
-  signal m_axis_tready    : std_logic := '0';
-  signal m_axis_tstrb     : std_logic_vector(3 downto 0) := (others => '0');
-  signal m_axis_tlast     : std_logic := '0';
-  
-  -- FIFO signals
-  signal fifo_tvalid      : std_logic := '0';
-  signal fifo_tdata       : std_logic_vector(31 downto 0) := (others => '0');
-  signal fifo_tready      : std_logic := '0';
-  signal fifo_tstrb       : std_logic_vector(3 downto 0) := (others => '0');
-  signal fifo_tlast       : std_logic := '0';
-  
-  -- FFT signals
-  signal fft_tready       : std_logic := '0';
-  signal fft_valid        : std_logic := '0';
-  signal fft_data         : std_logic := '0';
-  signal fft_done, fifo_full, fifo_empty         : std_logic := '0';
-  signal fft_bin_addr     : std_logic_vector(4 downto 0) := (others => '0');
 
-  -- Audio generation signals
-  signal sine_data        : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
-  signal sine_data_tx     : std_logic_vector(AUDIO_DATA_WIDTH-1 downto 0) := (others => '0');
-  signal bit_count        : integer := AUDIO_DATA_WIDTH-1;
-  signal data_in          : std_logic := '0';  -- Added missing signal
-  signal re_FFT_output, im_FFT_output : std_logic_vector(23 downto 0);
+  signal m_axis_tvalid    : std_logic;
+  signal m_axis_tdata     : std_logic_vector(31 downto 0);
+
+  signal fifo_empty, fifo_full  : std_logic := '0';
+  signal fifo_tvalid      : std_logic;
+  signal fifo_tdata       : std_logic_vector(31 downto 0);
+  signal fifo_tready      : std_logic;
+
+  signal fft_tready       : std_logic;
+  signal fft_valid        : std_logic;
+  signal fft_data         : std_logic;
+  signal fft_done         : std_logic;
+  signal fft_bin_addr     : std_logic_vector(8 downto 0);
+
+  signal bram_doutb       : std_logic;
+  signal bram_addrb       : std_logic_vector(8 downto 0);
+  signal piano_out        : std_logic_vector(87 downto 0);
+  signal piano_done, fifo_tlast       : std_logic;
+
+  signal adc_bit_cnt      : integer := 23;
+  signal current_sample   : std_logic_vector(23 downto 0) := (others => '0');
+  signal sample_ready     : boolean := false;
+  
+  signal ac_dac_data_o    : std_logic := '0';
+signal sine_data         : std_logic_vector(23 downto 0) := (others => '0');
+signal sine_data_tx      : std_logic_vector(23 downto 0) := (others => '0');
+signal data_in           : std_logic := '0';
+signal bit_count         : integer := 23;
+signal lrclk            : std_logic := '0';
+
+-- Constants for sine wave generation
+constant SINE_AMPL       : real := 8388607.0;  -- 2^23-1
+constant SINE_FREQ       : real := 1000.0;     -- 1 kHz sine wave
+constant T_SAMPLE        : real := 1.0/48000.0; -- Sample period for 48kHz
+constant MATH_2_PI       : real := 2.0 * MATH_PI;
+constant AUDIO_DATA_WIDTH : integer := 24;
 
 begin
-  -- Clock generation (unchanged)
-  clk_100MHz <= not clk_100MHz after CLOCK_PERIOD/2;
-  clk_134MHz <= not clk_134MHz after FAST_CLK_PER/2;
 
-  -- Reset generation (unchanged)
+  -- Clocks
+  clk_100MHz <= not clk_100MHz after CLOCK_PERIOD/2;
+  clk_134MHz <= not clk_134MHz after CLOCK_PERIOD/2;
+
+  -- Reset
   process
   begin
     rstn <= '0';
@@ -153,7 +185,7 @@ begin
     wait;
   end process;
 
-  -- I2S Wrapper instance (corrected signal connections)
+  -- I2S Wrapper
   i2s_inst : axis_i2s_wrapper
     generic map (
       C_AXI_STREAM_DATA_WIDTH => AXI_WIDTH,
@@ -170,64 +202,91 @@ begin
       ac_mute_n_o      => open,
       ac_dac_data_o    => ac_dac_data_o,
       ac_dac_lrclk_o   => open,
-      ac_adc_data_i    => data_in,  -- Connected to data_in from process
+      ac_adc_data_i    => data_in,
       ac_adc_lrclk_o   => lrclk,
       lrclk_unbuff_o   => open,
+--      s00_axis_aclk    => clk_100MHz,
+--      s00_axis_aresetn => rstn,
+--      s00_axis_tready  => open,
+--      s00_axis_tdata   => (others => '0'),
+--      s00_axis_tstrb   => (others => '1'),
+--      s00_axis_tlast   => '0',
+--      s00_axis_tvalid  => '0',
       m00_axis_aclk    => clk_100MHz,
       m00_axis_aresetn => rstn,
       m00_axis_tvalid  => m_axis_tvalid,
       m00_axis_tdata   => m_axis_tdata,
-      m00_axis_tstrb   => m_axis_tstrb,
-      m00_axis_tlast   => m_axis_tlast,
-      m00_axis_tready  => m_axis_tready
+      m00_axis_tstrb   => open,
+      m00_axis_tlast   => open,
+      m00_axis_tready  => fifo_tready
     );
 
-  -- FIFO instance (corrected signal connections)
-  fifo_inst : axis_fifo
+  -- FIFO
+  fifo_inst : axis_fifo1
     generic map (
       DATA_WIDTH => AXI_WIDTH,
-      FIFO_DEPTH => 64
+      FIFO_DEPTH => 1024
     )
     port map (
       s00_axis_aclk    => clk_100MHz,
       s00_axis_aresetn => rstn,
-      s00_axis_tready  => m_axis_tready,
+      s00_axis_tready  => fifo_tready,
       s00_axis_tdata   => m_axis_tdata,
-      s00_axis_tstrb   => m_axis_tstrb,
-      s00_axis_tlast   => m_axis_tlast,
+      s00_axis_tstrb   => (others => '1'),
+      s00_axis_tlast   => '0',
       s00_axis_tvalid  => m_axis_tvalid,
-      fifo_full        => fifo_full,
+      fifo_full => fifo_full,
       fifo_empty => fifo_empty,
       m00_axis_aclk    => clk_100MHz,
       m00_axis_aresetn => rstn,
       m00_axis_tvalid  => fifo_tvalid,
       m00_axis_tdata   => fifo_tdata,
-      m00_axis_tstrb   => fifo_tstrb,
+      m00_axis_tstrb   => open,
       m00_axis_tlast   => fifo_tlast,
-      m00_axis_tready  => fifo_tready
+      m00_axis_tready  => fft_tready
     );
 
-  -- FFT instance (corrected signal connections)
-  fft_inst : small_test_FFT_wrapper
+  -- FFT
+  fft_inst : FFT_wrapper
     port map (
       s00_axis_aclk    => clk_100MHz,
       s00_axis_aresetn => rstn,
-      s00_axis_tready  => fifo_tready,
+      s00_axis_tready  => fft_tready,
       s00_axis_tdata   => fifo_tdata,
-      s00_axis_tstrb   => fifo_tstrb,
+      s00_axis_tstrb   => (others => '1'),
       s00_axis_tlast   => fifo_tlast,
-      s00_axis_tvalid  => fifo_tvalid,
       fifo_full => fifo_full,
       fifo_empty => fifo_empty,
-        re_FFT_output_dbg  => re_FFT_output,
-        im_FFT_output_dbg  => im_FFT_output,
+      s00_axis_tvalid  => fifo_tvalid,
       tvalid_o         => fft_valid,
       fft_data_o       => fft_data,
       fft_done_o       => fft_done,
       bin_addr_o       => fft_bin_addr
     );
 
-  -- Audio generation process (unchanged logic, just fixed signal names)
+  -- BRAM
+  bram_inst : BRAM_wrapper
+    port map (
+      clka   => clk_100MHz,
+      wea    => fft_valid,
+      addra  => fft_bin_addr,
+      dina   => fft_data,
+      clkb   => clk_134MHz,
+      addrb  => bram_addrb,
+      doutb  => bram_doutb
+    );
+
+  -- Create88key
+  piano_inst : create_88key
+    port map (
+      clkb_i        => clk_134MHz,
+      en_i          => fft_done,
+      data_i        => bram_doutb,
+      r_addr_o      => bram_addrb,
+      paino_data_o  => piano_out,
+      paino_done_o  => piano_done
+    );
+
   generate_audio_data: process
     variable t : real := 0.0;
   begin
@@ -263,4 +322,5 @@ begin
     end loop;
   end process generate_audio_data;
 
-end Behavioral;
+
+end testbench;

@@ -2,8 +2,8 @@ import math
 
 # Constants
 FS = 48000                   # Sample rate (Hz)
-FFT_SIZE = 8192              # FFT points
-BIN_WIDTH = FS / FFT_SIZE    # 5.859375 Hz/bin
+FFT_SIZE = 1024              # FFT points (changed from 8192 to 1024)
+BIN_WIDTH = FS / FFT_SIZE    # Now 46.875 Hz/bin (was 5.859375 Hz/bin)
 
 def piano_freq(n):
     """Calculate frequency for piano key n (1-88) using equal temperament tuning"""
@@ -52,7 +52,7 @@ def generate_key_map():
             cents_error = 1200 * math.log2(actual_freq/ideal_freq) if actual_freq > 0 else 0
             key_map.append((key, bin_num, ideal_freq, actual_freq, cents_error))
         else:
-            # Shouldn't happen with proper min_bin/max_bin
+            # With 1024-point FFT, some higher keys might not get assigned
             print(f"Warning: Key {key} not assigned a bin")
     
     return key_map
@@ -91,7 +91,7 @@ def generate_vhdl_case_statement(key_map):
     return vhdl_code
 
 if __name__ == "__main__":
-    print("Generating piano key mapping (1 bin per key)...")
+    print("Generating piano key mapping (1 bin per key) for 1024-point FFT...")
     key_map = generate_key_map()
     
     print("\nGenerating VHDL case statement:")

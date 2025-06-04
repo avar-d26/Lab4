@@ -13,7 +13,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity axis_fifo is
 	generic (
 		DATA_WIDTH	: integer	:= 32;
-		FIFO_DEPTH	: integer	:= 8192
+		FIFO_DEPTH	: integer	:= 1024
 	);
 	port (
 	
@@ -36,7 +36,7 @@ entity axis_fifo is
 		m00_axis_tdata    : out std_logic_vector(DATA_WIDTH-1 downto 0); -- our data
 		m00_axis_tstrb    : out std_logic_vector((DATA_WIDTH/8)-1 downto 0); -- dont care
 		m00_axis_tlast    : out std_logic;
-		m00_axis_tready   :  in std_logic
+		m00_axis_tready   :  in std_logic -- the problemmm
 	);
 end axis_fifo;
 architecture Behavioral of axis_fifo is
@@ -49,7 +49,7 @@ signal empty_reg: std_logic := '0';
 component fifo is
 
 Generic (
-    FIFO_DEPTH : integer := 8192;
+    FIFO_DEPTH : integer := 1024;
     DATA_WIDTH : integer := 32);
 Port ( 
     clk_i       : in std_logic;
@@ -80,6 +80,7 @@ reset <= not s00_axis_aresetn;
 s00_axis_tready <= s00_tready_sig;
 m00_axis_tdata <= m00_tdata_sig;
 m00_axis_tvalid <= m00_tvalid_sig;
+
 
 
 
