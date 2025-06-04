@@ -1,24 +1,11 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 05/20/2025 03:56:53 PM
--- Design Name: 
--- Module Name: FFT_wrapper - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
+----------------------------------------------------------------------------
+--  Final Project: Video & Audio Streaming
+----------------------------------------------------------------------------
+--  ENGS 128 Spring 2025
+--	Author: Brandon Zhao
+----------------------------------------------------------------------------
+--	Description: Small test FFT Wrapper, not actually used in design
+----------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
@@ -40,8 +27,8 @@ entity small_test_FFT_wrapper is
     s00_axis_tlast    :  in std_logic;
     s00_axis_tvalid   :  in std_logic;
     
-    fifo_full         : in std_logic;
-    fifo_empty        : in std_logic;
+    fifo_full_i         : in std_logic;
+    fifo_empty_i      : in std_logic;
     -- debugs
     mag_sum_dbg_o        : out std_logic_vector(9 downto 0);
     threshold_dbg_o      : out std_logic_vector(9 downto 0);
@@ -193,48 +180,48 @@ end if;
 end process;
 
 
-next_state_logic : process(current_state, output_counter, fifo_full, fifo_empty) begin
+next_state_logic : process(current_state, output_counter, fifo_full_i, fifo_empty_i) begin
 next_state <= current_state;
 
 case current_state is 
-    when init => 
+    when Init => 
         
-        if fifo_full = '1' then
+        if fifo_full_i = '1' then
             next_state <= fullFIFO;
         end if;
-    when fullFIFO => next_state <= waitFFT;
-    when waitFFT => next_state <= enFFT;
-    when enFFT =>
-        if fifo_empty = '1' then
-            next_state <= countOutputs;
+    when FullFIFO => next_state <= WaitFFT;
+    when WaitFFT => next_state <= EnFFT;
+    when EnFFT =>
+        if fifo_empty_i = '1' then
+            next_state <= CountOutputs;
         end if;
-    when countOutputs =>
+    when CountOutputs =>
         if (output_counter = to_unsigned(ADDR_LENGTH + 4, 14)) then -- give it a few clock cycles
-            next_state <= waiting;
+            next_state <= Waiting;
         end if;
-    when waiting => 
+    when Waiting => 
         if (output_counter = to_unsigned(FFT_WIDTH, 14)) then
-            next_state <= init;
+            next_state <= Init;
         end if;
-    when others => next_state <= init;
+    when others => next_state <= Init;
 end case;
 end process;
 
 output_logic : process(current_state) begin
 cnt_rst <= '0';
 fft_done_o <= '0';
-FFT_en <= '0';
-FFT_tvalid_delay <= '0';
+fft_en <= '0';
+fft_tvalid_delay <= '0';
 case current_state is 
-    when init => 
+    when Init => 
         cnt_rst <= '1';
-    when waitFFT =>
-        FFT_en <= '1';
-        FFT_tvalid_delay <= '1';
+    when WaitFFT =>
+        fft_en <= '1';
+        fft_tvalid_delay <= '1';
     when enFFT =>
-        FFT_en <= '1';
-    when countOutputs =>
-    when waiting => 
+        fft_en <= '1';
+    when CountOutputs =>
+    when Waiting => 
         fft_done_o <= '1'; -- high for the other half to have a very long done signal, to CDC into create88key.vhd
     when others => null;
 end case;
@@ -245,7 +232,6 @@ counter : process(s00_axis_aclk) begin
 if rising_edge(s00_axis_aclk) then
     if (cnt_rst = '1') then
         output_counter <= (others => '0');
-        -- Potential ISSUE with tvalid_sig  = 1 only going up to 4095, changed to tvalid_sig_1
     elsif (tvalid_sig_1 = '1') then
         output_counter <= output_counter + 1;
     end if;
