@@ -30,8 +30,6 @@ entity FFT_wrapper is
     
     fifo_full_i         : in std_logic;
     fifo_empty_i        : in std_logic;
-
-    
     
     tvalid_o          : out std_logic; 
     fft_data_o        : out std_logic; -- our data\
@@ -89,7 +87,6 @@ begin
 -- zero-pad the imaginary part
 fft_data_in <= "000000000000000000000000" & (not s00_axis_tdata(30)) & s00_axis_tdata(29 downto 7) ;
 
-
 -- Calculate magnitude threshold of FFT output
 
 process(s00_axis_aclk)
@@ -120,10 +117,7 @@ begin
     end if;
 end process;
 
-
-
 -- FFT INSTANTIATION
-
 uut : xfft_0 PORT MAP(
     aclk => s00_axis_aclk,
     s_axis_config_tdata => (others => '0'),
@@ -148,7 +142,6 @@ uut : xfft_0 PORT MAP(
     event_data_in_channel_halt => open,
     event_data_out_channel_halt => open);
     
-
 -- Drive the tready and tvalid signals with custom FFT_en signal 
 s00_axis_tready <= s00_axis_tready_sig and FFT_en;
 s00_axis_tvalid_sig <= (FFT_en and (not FFT_tvalid_delay) and (not FFT_tvalid_delay_2));
